@@ -15,7 +15,7 @@ final class TestResultAssembly: Assembly {
         }
         
         let networkClient = NetworkClient()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
+        let databaseService = DatabaseService(networkClient: networkClient)
         
         let tableViewManager = TestResultTableViewManager()
         let dataConverter = TestResultDataConverter()

@@ -1,5 +1,5 @@
 //
-//  FBDatabaseService.swift
+//  DatabaseService.swift
 //  Questionnaire
 //
 //  Created by Ilya Turin on 11.12.2021.
@@ -8,16 +8,24 @@
 import Foundation
 import FirebaseDatabase
 
-protocol FBDatabaseServiceInput: AnyObject {
-    func getData<Model: Decodable>(_ key: FBDatabasePath, model: Model.Type, completion: @escaping (Result<Model, ErrorModel>) -> Void)
+protocol DatabaseServiceInput: AnyObject {
+    func getData<Model: Decodable>(_ key: DatabasePath, modelType: Model.Type, completion: @escaping (Result<Model, ErrorModel>) -> Void)
     func saveNewUser(_ newUser: NewUserModel, completion: @escaping (Result<String, ErrorModel>) -> Void)
 }
 
-final class FBDatabaseService {
+final class DatabaseService {
+    
+    // MARK: - Types
+    
+    private enum DatabaseReference {
+        
+        static let realtime = Bundle.main.object(forInfoDictionaryKey: "DatabaseReference")
+    }
+    
     
     // MARK: - Properties
     
-    private let databaseReference = Database.database(url: FBDatabaseReference.realtime.rawValue).reference()
+    private let databaseReference = Database.database(url: DatabaseReference.realtime as! String).reference()
     private let networkClient: NetworkClientInput
     
     
@@ -31,21 +39,26 @@ final class FBDatabaseService {
 
 
 // MARK: - FirebaseDatabaseServiceProtocol
-extension FBDatabaseService: FBDatabaseServiceInput {
+extension DatabaseService: DatabaseServiceInput {
     
-    func getData<Model: Decodable>(_ key: FBDatabasePath,
-                                   model: Model.Type,
+    func getData<Model: Decodable>(_ key: DatabasePath,
+                                   modelType: Model.Type,
                                    completion: @escaping (Result<Model, ErrorModel>) -> Void) {
         
         globalQueue {
             
             self.databaseReference.child(key.stringPath).getData { [weak self] error, data in
+                
                 guard let dataValue = data.value, error == nil else {
-                    completion(.failure(.serverError))
+                    
+                    mainQueue {
+                        
+                        completion(.failure(.serverError))
+                    }
                     return
                 }
                 
-                self?.networkClient.parse(rawData: dataValue, type: model) { model in
+                self?.networkClient.parse(rawData: dataValue, type: modelType) { model in
                     
                     mainQueue {
                         guard let model = model else {
@@ -56,6 +69,8 @@ extension FBDatabaseService: FBDatabaseServiceInput {
                         completion(.success(model))
                     }
                 }
+                
+                
             }
         }
         
@@ -63,14 +78,15 @@ extension FBDatabaseService: FBDatabaseServiceInput {
     
     func saveNewUser(_ newUser: NewUserModel, completion: @escaping (Result<String, ErrorModel>) -> Void) {
         
+        let uniqueToken = newUser.uniqueToken
+        let newUserDictionary = newUser.asDictionary
+        
         globalQueue {
-            let path = FBDatabasePath.user(token: newUser.uniqueToken).stringPath
-            self.databaseReference.child(path).setValue(newUser.asDictionary) { error, _ in
+            let path = DatabasePath.user(token: uniqueToken).stringPath
+            self.databaseReference.child(path).setValue(newUserDictionary) { error, _ in
                 
                 mainQueue {
-                    error != nil
-                    ? completion(.failure(.errorToSaveNewUser))
-                    : completion(.success(newUser.uniqueToken))
+                    error != nil ? completion(.failure(.errorToSaveNewUser)) : completion(.success(newUser.uniqueToken))
                 }
             }
         }

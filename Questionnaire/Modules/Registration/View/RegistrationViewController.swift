@@ -55,10 +55,10 @@ final class RegistrationViewController: UIViewController {
          
         view.backgroundColor = Colors.mainBlueColor()
         
-        firstNameTextField.type = .firstName
+        firstNameTextField.setStyle(.firstName)
         firstNameTextField.delegate = self
         
-        lastNameTextField.type = .lastName
+        lastNameTextField.setStyle(.lastName)
         lastNameTextField.delegate = self
         
         mainLabel.font = UIFont(name: MainFont.bold, size: 30)

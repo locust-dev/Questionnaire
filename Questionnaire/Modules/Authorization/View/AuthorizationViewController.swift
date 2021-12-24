@@ -57,7 +57,10 @@ final class AuthorizationViewController: UIViewController {
         navigationItem.backButtonTitle = ""
         
         loginTextField.delegate = self
+        loginTextField.setStyle(.email)
+        
         passwordTextField.delegate = self
+        passwordTextField.setStyle(.password)
         
         let stackContainer = UIView()
         stackContainer.backgroundColor = .white
@@ -86,8 +89,6 @@ final class AuthorizationViewController: UIViewController {
         subtitleLabel.font = UIFont(name: MainFont.regular, size: 16)
         subtitleLabel.textColor = .black
         subtitleLabel.numberOfLines = 0
-        
-        passwordTextField.type = .password
         
         forgotPasswordButton.setTitleColor(.black, for: .normal)
         forgotPasswordButton.titleLabel?.font = UIFont(name: MainFont.medium, size: 14)

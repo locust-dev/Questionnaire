@@ -18,14 +18,14 @@ final class AuthorizationInteractor {
     
     weak var presenter: AuthorizationInteractorOutput?
     
-    private let authorizationService: FBAuthServiceInput
-    private let databaseService: FBDatabaseServiceInput
+    private let authorizationService: AuthorizationServiceInput
+    private let databaseService: DatabaseServiceInput
     
     
     // MARK: - Init
     
-    init(authorizationService: FBAuthServiceInput,
-         databaseService: FBDatabaseServiceInput) {
+    init(authorizationService: AuthorizationServiceInput,
+         databaseService: DatabaseServiceInput) {
         
         self.authorizationService = authorizationService
         self.databaseService = databaseService
@@ -36,7 +36,7 @@ final class AuthorizationInteractor {
     
     private func checkIfUserAlreadyInDatabase(token: String) {
         
-        databaseService.getData(.user(token: token), model: ProfileModel.self) { [weak self] result in
+        databaseService.getData(.user(token: token), modelType: ProfileModel.self) { [weak self] result in
             
             switch result {
                 

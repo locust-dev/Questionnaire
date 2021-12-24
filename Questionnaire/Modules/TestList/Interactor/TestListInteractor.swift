@@ -21,15 +21,15 @@ final class TestListInteractor {
     private var allowedTests: [String]?
     private var tests: [Test]?
     
-    private let databaseService: FBDatabaseServiceInput
-    private let authService: FBAuthServiceInput
+    private let databaseService: DatabaseServiceInput
+    private let authService: AuthorizationServiceInput
     private let dispatchGroup = DispatchGroup()
     
 
     // MARK: - Init
     
-    init(databaseService: FBDatabaseServiceInput,
-         authService: FBAuthServiceInput) {
+    init(databaseService: DatabaseServiceInput,
+         authService: AuthorizationServiceInput) {
         
         self.databaseService = databaseService
         self.authService = authService
@@ -41,9 +41,9 @@ final class TestListInteractor {
     private func getAllowedTests() {
 
         let userToken = authService.currentUserToken ?? ""
-        let path = FBDatabasePath.allowedTests(token: userToken)
+        let path = DatabasePath.allowedTests(token: userToken)
     
-        databaseService.getData(path, model: [String].self) { [weak self] result in
+        databaseService.getData(path, modelType: [String].self) { [weak self] result in
 
             switch result {
 
@@ -60,7 +60,7 @@ final class TestListInteractor {
 
     private func getTests(by categoryId: String) {
         
-        databaseService.getData(.test(categoryId: categoryId), model: TestsModel.self) { [weak self] result in
+        databaseService.getData(.test(categoryId: categoryId), modelType: TestsModel.self) { [weak self] result in
 
             switch result {
 

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>DatabaseReference</key>
+	<string>https://questionnaire-8e9bc-default-rtdb.europe-west1.firebasedatabase.app/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Regular.ttf</string>

@@ -16,14 +16,14 @@ final class RegistrationInteractor {
     
     weak var presenter: RegistrationInteractorOutput?
     
-    private let authService: FBAuthServiceInput
-    private let databaseService: FBDatabaseServiceInput
+    private let authService: AuthorizationServiceInput
+    private let databaseService: DatabaseServiceInput
     
     
     // MARK: - Init
     
-    init(authService: FBAuthServiceInput,
-         databaseService: FBDatabaseServiceInput) {
+    init(authService: AuthorizationServiceInput,
+         databaseService: DatabaseServiceInput) {
         
         self.authService = authService
         self.databaseService = databaseService

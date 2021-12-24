@@ -1,11 +1,11 @@
 //
-//  FBDatabaseRequestKey.swift
+//  DatabaseRequestKey.swift
 //  Questionnaire
 //
 //  Created by Ilya Turin on 11.12.2021.
 //
 
-enum FBDatabasePath {
+enum DatabasePath {
    
     case categories
     case rightAnswers(testId: String)

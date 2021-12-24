@@ -1,5 +1,5 @@
 //
-//  FBAuthService.swift
+//  AuthorizationService.swift
 //  Questionnaire
 //
 //  Created by Ilya Turin on 10.12.2021.
@@ -7,7 +7,7 @@
 
 import FirebaseAuth
 
-protocol FBAuthServiceInput {
+protocol AuthorizationServiceInput {
     
     var isAuthorized: Bool { get }
     var currentUserToken: String? { get }
@@ -17,13 +17,13 @@ protocol FBAuthServiceInput {
     func logOut()
 }
 
-final class FBAuthService {
+final class AuthorizationService {
     
     // MARK: - Types
     
-    private enum UserDefaultsKey: String {
+    private enum UserDefaultsKey {
         
-        case userId
+        static let userId = "userId"
     }
     
     
@@ -35,14 +35,14 @@ final class FBAuthService {
 
 
 // MARK: - FirebaseAuthServiceProtocol
-extension FBAuthService: FBAuthServiceInput {
+extension AuthorizationService: AuthorizationServiceInput {
     
     var isAuthorized: Bool {
-        userDefaults.value(forKey: UserDefaultsKey.userId.rawValue) != nil
+        userDefaults.value(forKey: UserDefaultsKey.userId) != nil
     }
     
     var currentUserToken: String? {
-        userDefaults.value(forKey: UserDefaultsKey.userId.rawValue) as? String
+        userDefaults.value(forKey: UserDefaultsKey.userId) as? String
     }
     
     func signIn(email: String, password: String, completion: @escaping (Result<String?, ErrorModel>) -> Void) {
@@ -51,16 +51,14 @@ extension FBAuthService: FBAuthServiceInput {
             FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { result, error in
                 
                 mainQueue {
-                    error != nil
-                        ? completion(.failure(.userNotFound))
-                        : completion(.success(result?.user.uid))
+                    error != nil ? completion(.failure(.userNotFound)) : completion(.success(result?.user.uid))
                 }
             }
         }
     }
     
     func setCurrentUserToken(_ token: String?) {
-        userDefaults.set(token, forKey: UserDefaultsKey.userId.rawValue)
+        userDefaults.set(token, forKey: UserDefaultsKey.userId)
     }
     
     func logOut() {

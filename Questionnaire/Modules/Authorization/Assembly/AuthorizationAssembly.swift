@@ -17,8 +17,8 @@ final class AuthorizationAssembly: Assembly {
         }
         
         let networkClient = NetworkClient()
-        let authService = FBAuthService()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
+        let authService = AuthorizationService()
+        let databaseService = DatabaseService(networkClient: networkClient)
         
         let view = AuthorizationViewController()
         let router = AuthorizationRouter(transition: view)

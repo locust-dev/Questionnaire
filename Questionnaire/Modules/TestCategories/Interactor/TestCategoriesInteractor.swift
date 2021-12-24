@@ -20,14 +20,14 @@ final class TestCategoriesInteractor {
     
     weak var presenter: TestCategoriesInteractorOutput?
 
-    private let databaseService: FBDatabaseService
-    private let authService: FBAuthService
+    private let databaseService: DatabaseService
+    private let authService: AuthorizationService
     
 
     // MARK: - Init
     
-    init(databaseService: FBDatabaseService,
-         authService: FBAuthService) {
+    init(databaseService: DatabaseService,
+         authService: AuthorizationService) {
         
         self.databaseService = databaseService
         self.authService = authService
@@ -45,7 +45,7 @@ extension TestCategoriesInteractor: TestCategoriesInteractorInput {
     
     func getCategories() {
         
-        databaseService.getData(.categories, model: [TestCategoryModel].self) { [weak self] result in
+        databaseService.getData(.categories, modelType: [TestCategoryModel].self) { [weak self] result in
             
             switch result {
 

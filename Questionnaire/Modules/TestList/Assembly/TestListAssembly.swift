@@ -15,8 +15,8 @@ final class TestListAssembly: Assembly {
         }
         
         let networkClient = NetworkClient()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
-        let authService = FBAuthService()
+        let databaseService = DatabaseService(networkClient: networkClient)
+        let authService = AuthorizationService()
         
         let tableViewManager = TestListTableViewManager()
         let dataConverter = TestListDataConverter()

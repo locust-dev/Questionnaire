@@ -17,8 +17,8 @@ final class ProfileAssembly: Assembly {
         }
         
         let networkClient = NetworkClient()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
-        let authService = FBAuthService()
+        let databaseService = DatabaseService(networkClient: networkClient)
+        let authService = AuthorizationService()
         
         let dataConverter = ProfileDataConverter()
         let tableViewManager = ProfileTableViewManager()

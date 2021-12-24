@@ -17,12 +17,12 @@ final class TestResultInteractor {
     
     weak var presenter: TestResultInteractorOutput?
     
-    private let databaseService: FBDatabaseServiceInput
+    private let databaseService: DatabaseServiceInput
     
     
     // MARK: - Init
  
-    init(databaseService: FBDatabaseServiceInput) {
+    init(databaseService: DatabaseServiceInput) {
         self.databaseService = databaseService
     }
     
@@ -34,7 +34,7 @@ extension TestResultInteractor: TestResultInteractorInput {
     
     func getRightAnswers(by testId: String) {
         
-        databaseService.getData(.rightAnswers(testId: testId), model: [Int].self) { [weak self] result in
+        databaseService.getData(.rightAnswers(testId: testId), modelType: [Int].self) { [weak self] result in
             
             switch result {
                 

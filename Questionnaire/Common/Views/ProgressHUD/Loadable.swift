@@ -20,9 +20,7 @@ extension Loadable where Self: UIViewController {
     // MARK: - Properties
     
     private var firstWindowScene: UIWindow? {
-        UIApplication
-            .shared
-            .connectedScenes
+        UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
             .first { $0.isKeyWindow }

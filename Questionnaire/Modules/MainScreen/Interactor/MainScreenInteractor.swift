@@ -22,14 +22,14 @@ final class MainScreenInteractor {
     
     weak var presenter: MainScreenInteractorOutput?
     
-    private let databaseService: FBDatabaseService
-    private let authService: FBAuthService
+    private let databaseService: DatabaseService
+    private let authService: AuthorizationService
     
     
     // MARK: - Init
     
-    init(databaseService: FBDatabaseService,
-         authService: FBAuthService) {
+    init(databaseService: DatabaseService,
+         authService: AuthorizationService) {
         
         self.databaseService = databaseService
         self.authService = authService
@@ -55,7 +55,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
             return
         }
         
-        databaseService.getData(.user(token: userToken), model: ProfileModel.self) { [weak self] result in
+        databaseService.getData(.user(token: userToken), modelType: ProfileModel.self) { [weak self] result in
             
             switch result {
                 

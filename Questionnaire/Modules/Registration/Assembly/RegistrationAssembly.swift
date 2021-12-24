@@ -14,9 +14,9 @@ final class RegistrationAssembly: Assembly {
             fatalError("Wrong model for Registration module")
         }
         
-        let authService = FBAuthService()
+        let authService = AuthorizationService()
         let networkClient = NetworkClient()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
+        let databaseService = DatabaseService(networkClient: networkClient)
         
         let view = RegistrationViewController()
         let router = RegistrationRouter(transition: view)

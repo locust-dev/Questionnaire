@@ -16,9 +16,9 @@ final class TestCategoriesAssembly: Assembly {
             fatalError("Wrong model for TestCategoriesModule")
         }
         
-        let authService = FBAuthService()
+        let authService = AuthorizationService()
         let networkClient = NetworkClient()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
+        let databaseService = DatabaseService(networkClient: networkClient)
     
         let dataConverter = TestCategoriesDataConverter()
         let tableViewManager = TestCategoriesTableViewManager()

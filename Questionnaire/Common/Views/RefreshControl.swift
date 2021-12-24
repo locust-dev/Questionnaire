@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol RefreshControlModuleInput: AnyObject {
     
-    func setupWith(view: UIView, moduleOutput: RefreshControlModuleOutput?)
+    func setupWith(view: UIScrollView, moduleOutput: RefreshControlModuleOutput?)
     func finishedLoading()
 }
 
@@ -35,7 +36,7 @@ extension RefreshControl: RefreshControlModuleInput {
         outputModule?.didRefresh()
     }
     
-    func setupWith(view: UIView, moduleOutput: RefreshControlModuleOutput?) {
+    func setupWith(view: UIScrollView, moduleOutput: RefreshControlModuleOutput?) {
         outputModule = moduleOutput
         view.addSubview(self)
         addTarget(self, action: #selector(RefreshControl.didRefresh), for: .valueChanged)

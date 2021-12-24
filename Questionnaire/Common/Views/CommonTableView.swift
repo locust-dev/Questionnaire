@@ -107,13 +107,13 @@ final class CommonTableView: UITableView {
             emptyLabel.autoCenterInSuperview()
             emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
             emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
+            
+            mainQueue(delay: 0.5) {
+                self.emptyLabel.isHidden = false
+            }
     
         } else {
             emptyLabel.removeFromSuperview()
-        }
-
-        mainQueue(delay: 0.5) {
-            self.emptyLabel.isHidden = false
         }
     }
 

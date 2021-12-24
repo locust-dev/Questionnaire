@@ -42,7 +42,6 @@ final class ProgressHUD: SVIndefiniteAnimatedView {
     private func drawSelf() {
         radius = size.radius
         strokeThickness = size.stroke
-        strokeColor = color
     }
     
 }

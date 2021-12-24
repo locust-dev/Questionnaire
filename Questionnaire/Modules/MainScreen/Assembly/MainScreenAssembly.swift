@@ -11,8 +11,8 @@ final class MainScreenAssembly: Assembly {
     static func assembleModule() -> Module {
         
         let networkClient = NetworkClient()
-        let authService = FBAuthService()
-        let databaseService = FBDatabaseService(networkClient: networkClient)
+        let authService = AuthorizationService()
+        let databaseService = DatabaseService(networkClient: networkClient)
         
         let view = MainScreenViewController()
         let presenter = MainScreenPresenter()

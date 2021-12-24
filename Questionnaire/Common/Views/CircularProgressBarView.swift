@@ -55,27 +55,9 @@ final class CircularProgressBarView: NLView {
         self.duration = duration
         self.percentage = percentage
         
-        let delay = duration / (percentage * 100)
-        let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        progressAnimation.duration = duration
-        progressAnimation.fromValue = 0
-        progressAnimation.toValue = percentage
-        progressAnimation.fillMode = .forwards
-        progressAnimation.isRemovedOnCompletion = false
-        circleForegroundLayer.add(progressAnimation, forKey: "progressAnim")
+        createMainAnimation()
+        createTimer()
         animatePulsatingLayer()
-        
-        timer = Timer.scheduledTimer(
-            timeInterval: delay,
-            target: self,
-            selector: #selector(updateLabel),
-            userInfo: nil,
-            repeats: true
-        )
-        
-        if let timer = timer {
-            RunLoop.current.add(timer, forMode: .common)
-        }
     }
     
     
@@ -133,6 +115,18 @@ final class CircularProgressBarView: NLView {
         self.layer.addSublayer(pulsatingLayer)
     }
     
+    private func createMainAnimation() {
+        
+        let progressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        progressAnimation.duration = duration
+        progressAnimation.fromValue = 0
+        progressAnimation.toValue = percentage
+        progressAnimation.fillMode = .forwards
+        progressAnimation.isRemovedOnCompletion = false
+        circleForegroundLayer.add(progressAnimation, forKey: "progressAnim")
+    }
+    
+    
     private func animatePulsatingLayer() {
         
         let animation = CABasicAnimation(keyPath: "transform.scale")
@@ -142,6 +136,23 @@ final class CircularProgressBarView: NLView {
         animation.autoreverses = true
         animation.repeatCount = Float.infinity
         pulsatingLayer.add(animation, forKey: "pulsing")
+    }
+    
+    private func createTimer() {
+        
+        let delay = duration / (percentage * 100)
+        
+        timer = Timer.scheduledTimer(
+            timeInterval: delay,
+            target: self,
+            selector: #selector(updateLabel),
+            userInfo: nil,
+            repeats: true
+        )
+        
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .common)
+        }
     }
     
     
