@@ -51,6 +51,6 @@ extension TestQuestionTitleCell: Configurable {
     
     func configure(with model: Model) {
         
-        titleLabel.text = "Харрис назвала неправильными утверждения, что ВОЗ лицензирует препараты исключительно западного производства?"
+        titleLabel.text = model.title
     }
 }

@@ -19,7 +19,8 @@ final class TestQuestionPresenter {
     
     var router: TestQuestionRouterInput?
 
-    private var userAnswers: [Int: Int] = [:]
+    private var userAnswers: [UserAnswerModel] = []
+    private var currentUserAnswers: [Int]?
     private var currentQuestionNumber = 1
     
     private let dataConverter: TestQuestionDataConverterInput
@@ -69,11 +70,16 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
     
     func didTapConfirmButton() {
         
-        guard userAnswers[currentQuestionNumber] != nil else {
+        guard let currentUserAnswers = currentUserAnswers, !currentUserAnswers.isEmpty
+        else {
             view?.showNotConfirmAlert()
             return
         }
         
+        let userAnswer = UserAnswerModel(questionNumber: currentQuestionNumber,
+                                         answers: currentUserAnswers)
+        
+        userAnswers.append(userAnswer)
         currentQuestionNumber += 1
         setQuestion()
     }
@@ -88,10 +94,9 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
 // MARK: - TestQuestionTableViewManagerDelegate
 extension TestQuestionPresenter: TestQuestionTableViewManagerDelegate {
     
-    func didSelectAnswer(by number: Int) {
-        userAnswers[currentQuestionNumber] = number
+    func didSelectAnswers(_ answers: [Int]) {
+        currentUserAnswers = answers
     }
-    
 }
 
 

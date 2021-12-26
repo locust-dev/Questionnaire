@@ -124,6 +124,7 @@
 		19861D9D276A353800D3C041 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D96276A353800D3C041 /* RegistrationInteractor.swift */; };
 		19861D9E276A353800D3C041 /* NewUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D97276A353800D3C041 /* NewUserModel.swift */; };
 		19861DAC276A627C00D3C041 /* Struct+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861DAB276A627C00D3C041 /* Struct+Dictionary.swift */; };
+		198DB1CE277881AC00856499 /* UserAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DB1CD277881AC00856499 /* UserAnswerModel.swift */; };
 		1992E7FA2771ECB50068FFFF /* TabBarPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */; };
 		1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */; };
 		1992E801277223AB0068FFFF /* ProfileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E800277223AB0068FFFF /* ProfileListCell.swift */; };
@@ -310,6 +311,7 @@
 		19861D96276A353800D3C041 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
 		19861D97276A353800D3C041 /* NewUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserModel.swift; sourceTree = "<group>"; };
 		19861DAB276A627C00D3C041 /* Struct+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+Dictionary.swift"; sourceTree = "<group>"; };
+		198DB1CD277881AC00856499 /* UserAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnswerModel.swift; sourceTree = "<group>"; };
 		1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresentable.swift; sourceTree = "<group>"; };
 		1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewManager.swift; sourceTree = "<group>"; };
 		1992E800277223AB0068FFFF /* ProfileListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListCell.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 			children = (
 				19436D2A2768A5DB00D2FA0A /* TestQuestionViewModel.swift */,
 				194E05232773254C00881D30 /* QuestionMistakeModel.swift */,
+				198DB1CD277881AC00856499 /* UserAnswerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1798,6 +1801,7 @@
 				1982B55A27635858003DAB1A /* TestCategoriesRouter.swift in Sources */,
 				19861D9D276A353800D3C041 /* RegistrationInteractor.swift in Sources */,
 				19C832DE276C92A80050747F /* String+IsNumeric.swift in Sources */,
+				198DB1CE277881AC00856499 /* UserAnswerModel.swift in Sources */,
 				19C832DA276C92A80050747F /* String+Mask.swift in Sources */,
 				19436D5B2768DD1E00D2FA0A /* TestResultViewModel.swift in Sources */,
 				1982B55C27635858003DAB1A /* TestCategoriesAssembly.swift in Sources */,

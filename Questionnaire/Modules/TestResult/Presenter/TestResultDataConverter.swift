@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TestResultDataConverterInput {
-    func convert(rightAnswers: [Int], userAnswers: [Int: Int]) -> TestResultViewModel
+    func convert(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> TestResultViewModel
 }
 
 final class TestResultDataConverter {
@@ -43,6 +43,30 @@ final class TestResultDataConverter {
         numberFormatter.numberStyle = .percent
         return numberFormatter.string(from: NSNumber(value: number))
     }
+    
+    private func calculateMatches(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> Int {
+        
+        var matches = 0
+       // var questionWithMistakes = [Int]()
+        
+        userAnswers.forEach { userAnswer in
+            
+            let rightAnswer = rightAnswers[userAnswer.questionNumber - 1]
+            
+            if rightAnswer.count == 1, rightAnswer.first == userAnswer.answers.first {
+                matches += 1
+                
+            } else if rightAnswer.count > 1 {
+                rightAnswer.forEach { answer in
+                    if userAnswer.answers.filter({ $0 == answer }).first != nil {
+                        matches += 1
+                    }
+                }
+            }
+        }
+        
+        return matches
+    }
 
 }
 
@@ -50,22 +74,14 @@ final class TestResultDataConverter {
 // MARK: - TestResultDataConverterInput
 extension TestResultDataConverter: TestResultDataConverterInput {
   
-    func convert(rightAnswers: [Int], userAnswers: [Int : Int]) -> TestResultViewModel {
+    func convert(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> TestResultViewModel {
         
-        var matches = 0
-        var questionWithMistakes = [Int]()
-        
-        userAnswers.forEach { (questionNumber, userAnswer) in
-            if rightAnswers[questionNumber - 1] == userAnswer {
-                matches += 1
-            } else {
-                questionWithMistakes.append(questionNumber)
-            }
-        }
-        
-        let cirlceProgressRow = createCircleProgressRow(progressPercent: (Double(matches) / Double(rightAnswers.count)))
-        let mistakesRow = createMistakesRow(mistakesNumbers: questionWithMistakes)
-        let rows = [cirlceProgressRow, mistakesRow]
+        let allAnswers = rightAnswers.flatMap { $0 }
+        let matches = calculateMatches(rightAnswers: rightAnswers, userAnswers: userAnswers)
+        let progressPercent = Double(matches) / Double(allAnswers.count)
+        let cirlceProgressRow = createCircleProgressRow(progressPercent: progressPercent)
+      //  let mistakesRow = createMistakesRow(mistakesNumbers: questionWithMistakes)
+        let rows = [cirlceProgressRow]
         
         return TestResultViewModel(rows: rows, finishButtonTitle: "Завершить тест")
     }

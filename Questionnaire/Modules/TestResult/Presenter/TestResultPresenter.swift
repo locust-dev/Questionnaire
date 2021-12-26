@@ -12,7 +12,7 @@ protocol TestResultViewOutput: ViewOutput {
 }
 
 protocol TestResultInteractorOutput: AnyObject {
-    func didSuccessObtainAnswers(_ answers: [Int])
+    func didSuccessObtainAnswers(_ answers: [[Int]])
     func didFailObtainAnswers(error: ErrorModel)
 }
 
@@ -29,11 +29,11 @@ final class TestResultPresenter {
     var router: TestResultRouterInput?
     var interactor: TestResultInteractorInput?
     
-    private var rightAnswers: [Int]?
+    private var rightAnswers: [[Int]]?
 
     private let moduleOutput: TestResultModuleOutput?
     private let dataConverter: TestResultDataConverterInput
-    private let userAnswers: [Int: Int]
+    private let userAnswers: [UserAnswerModel]
     private let testId: String
     
     
@@ -41,7 +41,7 @@ final class TestResultPresenter {
     
     init(moduleOutput: TestResultModuleOutput?,
          dataConverter: TestResultDataConverterInput,
-         userAnswers: [Int: Int],
+         userAnswers: [UserAnswerModel],
          testId: String) {
         
         self.moduleOutput = moduleOutput
@@ -76,7 +76,7 @@ extension TestResultPresenter: TestResultViewOutput {
 // MARK: - TestResultInteractorOutput
 extension TestResultPresenter: TestResultInteractorOutput {
     
-    func didSuccessObtainAnswers(_ answers: [Int]) {
+    func didSuccessObtainAnswers(_ answers: [[Int]]) {
         view?.hideHUD()
         rightAnswers = answers
         let viewModel = dataConverter.convert(rightAnswers: answers, userAnswers: userAnswers)
@@ -96,15 +96,15 @@ extension TestResultPresenter: TestResultTableViewManagerDelegate {
     
     func didSelectQuestionWithMistake(by number: Int) {
         
-        guard let wrongAnswer = userAnswers[number],
-              let rightAnswer = rightAnswers?[safe: number - 1]
-        else {
-            return
-        }
-        
-        moduleOutput?.didTapMistakeQuestion(by: number,
-                                             wrongAnswer: wrongAnswer,
-                                             rightAnswer: rightAnswer)
+//        guard let wrongAnswer = userAnswers[number],
+//              let rightAnswer = rightAnswers?[safe: number - 1]
+//        else {
+//            return
+//        }
+//
+//        moduleOutput?.didTapMistakeQuestion(by: number,
+//                                             wrongAnswer: wrongAnswer,
+//                                             rightAnswer: rightAnswer)
     }
     
 }

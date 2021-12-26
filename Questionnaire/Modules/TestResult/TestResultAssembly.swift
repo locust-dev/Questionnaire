@@ -51,7 +51,7 @@ extension TestResultAssembly {
     struct Model: TransitionModel {
         
         weak var moduleOutput: TestResultModuleOutput?
-        let userAnswers: [Int: Int]
+        let userAnswers: [UserAnswerModel]
         let testId: String
     }
     

@@ -13,6 +13,8 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
     
     var delegate: AnyObject?
     
+    private var selectedAnswers: [Int] = []
+    
     private let answersStack = UIStackView()
  
     
@@ -60,11 +62,29 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
     
     // MARK: - Actions
     
-    @objc private func selectAnswer(_ sender: UIButton) {
+    @objc private func selectOneAnswer(_ sender: UIButton) {
         setAllButtonsUnselected()
         sender.isSelected = true
-        (delegate as? TestQuestionTableViewManagerDelegate)?.didSelectAnswer(by: sender.tag)
+        (delegate as? TestQuestionTableViewManagerDelegate)?.didSelectAnswers([sender.tag])
     }
+    
+    @objc private func selectMultipleAnswers(_ sender: UIButton) {
+        
+        if sender.isSelected {
+            guard let index = selectedAnswers.firstIndex(of: sender.tag) else {
+                return
+            }
+            selectedAnswers.remove(at: index)
+            sender.isSelected = false
+            
+        } else {
+            selectedAnswers.append(sender.tag)
+            sender.isSelected = true
+        }
+        
+        (delegate as? TestQuestionTableViewManagerDelegate)?.didSelectAnswers(selectedAnswers)
+    }
+    
 }
 
 
@@ -74,6 +94,7 @@ extension TestAnswersCounterCell: Configurable {
     struct Model {
         
         let answers: [String]
+        let isMultipleAnswers: Bool
     }
     
     func configure(with model: Model) {
@@ -86,7 +107,13 @@ extension TestAnswersCounterCell: Configurable {
             let answerButton = AnswerButton(title: "\(answerCount). \(title)")
             answerButton.style = .shadow
             answerButton.tag = answerCount
-            answerButton.addTarget(self, action: #selector(selectAnswer), for: .touchUpInside)
+            
+            if model.isMultipleAnswers {
+                answerButton.addTarget(self, action: #selector(selectMultipleAnswers(_:)), for: .touchUpInside)
+            } else {
+                answerButton.addTarget(self, action: #selector(selectOneAnswer(_:)), for: .touchUpInside)
+            }
+            
             answersStack.addArrangedSubview(answerButton)
         }
     }

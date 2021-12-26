@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TestQuestionTableViewManagerDelegate: AnyObject {
-    func didSelectAnswer(by number: Int)
+    func didSelectAnswers(_ answers: [Int])
 }
 
 protocol TestQuestionTableViewManagerInput {

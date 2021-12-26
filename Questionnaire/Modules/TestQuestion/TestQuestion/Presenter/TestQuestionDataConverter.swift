@@ -26,8 +26,8 @@ final class TestQuestionDataConverter {
         return .title(configurator)
     }
     
-    private func createAnswerCounterRow(answers: [String]) -> TestQuestionViewModel.Row {
-        let model = TestAnswersCounterCell.Model(answers: answers)
+    private func createAnswerCounterRow(answers: [String], isMultipleAnswers: Bool) -> TestQuestionViewModel.Row {
+        let model = TestAnswersCounterCell.Model(answers: answers, isMultipleAnswers: isMultipleAnswers)
         let configurator = AnswerCounterCellConfigurator(item: model)
         return .answerCounter(configurator)
     }
@@ -41,11 +41,14 @@ extension TestQuestionDataConverter: TestQuestionDataConverterInput {
     func convert(question: Question, currentQuestionNumber: Int, questionsCount: Int) -> TestQuestionViewModel {
         
         let titleRow = createTitleRow(title: question.text)
-        let answersCounterRow = createAnswerCounterRow(answers: question.answers)
+        let answersCounterRow = createAnswerCounterRow(answers: question.answers,
+                                                       isMultipleAnswers: question.isMultipleAnswers)
         
         let rows = [titleRow, answersCounterRow]
         
-        return TestQuestionViewModel(rows: rows, currentQuestionNumber: currentQuestionNumber, questionsCount: questionsCount)
+        return TestQuestionViewModel(rows: rows,
+                                     currentQuestionNumber: currentQuestionNumber,
+                                     questionsCount: questionsCount)
     }
     
 }

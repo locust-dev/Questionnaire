@@ -9,4 +9,5 @@ struct Question: Decodable {
     
     let text: String
     let answers: [String]
+    let isMultipleAnswers: Bool
 }
