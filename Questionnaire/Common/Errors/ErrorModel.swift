@@ -17,6 +17,8 @@ enum ErrorModel: Error {
     // Users
     case userNotFound
     case userNotAuthorized
+    case userNotFoundInDatabase
+    case errorToRegisterNewUser
     case errorToSaveNewUser
     case errorToLoadUserInfo
     
@@ -43,8 +45,14 @@ enum ErrorModel: Error {
         case .userNotAuthorized:
             return "Не можем авторизовать"
             
+        case .userNotFoundInDatabase:
+            return "Мы не нашли вас в базе.\nСоздали аккаунт пол умолчанию"
+            
+        case .errorToRegisterNewUser:
+            return "Не смогли зарегестрировать нового пользователя"
+            
         case .errorToSaveNewUser:
-            return "К сожалению, мы не смогли вас зарегистрировать, попробуйте позже."
+            return "Не смогли сохранить пользователя в базе"
             
         case .errorToLoadUserInfo:
             return "Не можем загрузить информацию о профиле"

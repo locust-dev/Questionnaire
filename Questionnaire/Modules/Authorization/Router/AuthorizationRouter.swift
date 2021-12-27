@@ -7,7 +7,7 @@
 //
 
 protocol AuthorizationRouterInput {
-    func openRegistration(userToken: String, moduleOutput: RegistrationModuleOutput?)
+    func openRegistration(email: String?, moduleOutput: RegistrationModuleOutput?)
 }
 
 final class AuthorizationRouter {
@@ -29,8 +29,8 @@ final class AuthorizationRouter {
 // MARK: - AuthorizationRouterInput
 extension AuthorizationRouter: AuthorizationRouterInput {
     
-    func openRegistration(userToken: String, moduleOutput: RegistrationModuleOutput?) {
-        let model = RegistrationAssembly.Model(moduleOutput: moduleOutput, token: userToken)
+    func openRegistration(email: String?, moduleOutput: RegistrationModuleOutput?) {
+        let model = RegistrationAssembly.Model(moduleOutput: moduleOutput, email: email)
         transition.push(with: model, openModuleType: RegistrationAssembly.self)
     }
     

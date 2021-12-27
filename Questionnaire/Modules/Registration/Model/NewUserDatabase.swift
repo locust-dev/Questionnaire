@@ -1,5 +1,5 @@
 //
-//  NewUserModel.swift
+//  NewUserDatabase.swift
 //  Questionnaire
 //
 //  Created Ilya Turin on 15.12.2021.
@@ -8,9 +8,10 @@
 
 import Foundation
 
-struct NewUserModel: DictionaryConvertor {
+struct NewUserDatabase: Encodable {
     
     let uniqueToken: String
     let firstName: String
     let lastName: String
+    let allowedTests: [String]
 }

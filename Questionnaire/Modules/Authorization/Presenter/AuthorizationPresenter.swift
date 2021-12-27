@@ -11,8 +11,10 @@ protocol AuthorizationViewOutput: ViewOutput {
 }
 
 protocol AuthorizationInteractorOutput: AnyObject {
-    func didSuccessAuthorize(userToken: String?)
-    func didFailAuthorize(error: ErrorModel)
+    func didSuccessAuthorize()
+    func didFailAuthorize(email: String?, error: ErrorModel)
+    func didSuccessToSaveNewUser()
+    func didFailToSaveNewUser(error: ErrorModel)
 }
 
 protocol AuthorizationModuleOutput: AnyObject {
@@ -20,6 +22,15 @@ protocol AuthorizationModuleOutput: AnyObject {
 }
 
 final class AuthorizationPresenter {
+    
+    // MARK: - Locals
+    
+    private enum Locals {
+        
+        static let tempUserName = "Default"
+        static let tempUserSurname = "Username"
+        static let defaultAllowedTest = "GCD1"
+    }
     
     // MARK: - Properties
     
@@ -36,6 +47,26 @@ final class AuthorizationPresenter {
     init(moduleOutput: AuthorizationModuleOutput?) {
         self.moduleOutput = moduleOutput
     }
+    
+    
+    // MARK: - Private methods
+    
+    private func createDefaultUser() {
+        
+        view?.showHUD()
+        
+        guard let userToken = interactor?.currentUserToken else {
+            return
+        }
+        
+        let defaultUserTemplate = NewUserDatabase(uniqueToken: userToken,
+                                                  firstName: Locals.tempUserName,
+                                                  lastName: Locals.tempUserSurname,
+                                                  allowedTests: [Locals.defaultAllowedTest])
+        
+        interactor?.writeNewUserInDatabase(defaultUserTemplate)
+    }
+    
 }
 
 
@@ -60,20 +91,34 @@ extension AuthorizationPresenter: AuthorizationViewOutput {
 // MARK: AuthorizationInteractorOutput
 extension AuthorizationPresenter: AuthorizationInteractorOutput {
     
-    func didFailAuthorize(error: ErrorModel) {
-        view?.hideHUD()
-        view?.showErrorAlert(message: error.description)
-    }
-    
-    func didSuccessAuthorize(userToken: String?) {
+    func didFailAuthorize(email: String?, error: ErrorModel) {
+        
         view?.hideHUD()
         
-        guard let userToken = userToken else {
-            moduleOutput?.didSuccessAuthorized()
-            return
+        if error == .userNotFound {
+            router?.openRegistration(email: email, moduleOutput: moduleOutput as? RegistrationModuleOutput)
+            
+        } else if error == .userNotFoundInDatabase {
+            createDefaultUser()
+            
+        } else {
+            view?.showErrorAlert(message: error.description)
         }
-
-        router?.openRegistration(userToken: userToken, moduleOutput: moduleOutput as? RegistrationModuleOutput)
+    }
+    
+    func didSuccessAuthorize() {
+        view?.hideHUD()
+        moduleOutput?.didSuccessAuthorized()
+    }
+    
+    func didSuccessToSaveNewUser() {
+        view?.hideHUD()
+        moduleOutput?.didSuccessAuthorized()
+    }
+    
+    func didFailToSaveNewUser(error: ErrorModel) {
+        view?.hideHUD()
+        view?.showErrorAlert(message: error.description)
     }
     
 }

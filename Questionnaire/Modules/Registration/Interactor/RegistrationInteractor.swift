@@ -7,7 +7,8 @@
 //
 
 protocol RegistrationInteractorInput {
-    func writeNewUserInDatabase(_ newUser: NewUserModel)
+    func writeNewUserInDatabase(_ newUser: NewUserDatabase)
+    func registerUser(with email: String, and password: String)
 }
 
 final class RegistrationInteractor {
@@ -35,18 +36,38 @@ final class RegistrationInteractor {
 // MARK: - RegistrationInteractorInput
 extension RegistrationInteractor: RegistrationInteractorInput {
     
-    func writeNewUserInDatabase(_ newUser: NewUserModel) {
+    func writeNewUserInDatabase(_ newUser: NewUserDatabase) {
         
         databaseService.saveNewUser(newUser) { [weak self] result in
             
             switch result {
                 
-            case .success(let token):
-                self?.authService.setCurrentUserToken(token)
+            case .success(_):
                 self?.presenter?.didSuccessToSaveNewUser()
                 
             case .failure(let error):
                 self?.presenter?.didFailToSaveNewUser(error: error)
+            }
+        }
+    }
+    
+    func registerUser(with email: String, and password: String) {
+        
+        authService.registerUser(with: email, and: password) { [weak self] result in
+            
+            switch result {
+                
+            case .success(let token):
+                guard let token = token else {
+                    self?.presenter?.didFailToRegisterNewUser(error: .serverError)
+                    return
+                }
+
+                self?.authService.setCurrentUserToken(token)
+                self?.presenter?.didSuccessToRegisterNewUser(token: token)
+                
+            case .failure(let error):
+                self?.presenter?.didFailToRegisterNewUser(error: error)
             }
         }
     }

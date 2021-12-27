@@ -123,8 +123,8 @@
 		19861D9B276A353800D3C041 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D94276A353800D3C041 /* RegistrationViewController.swift */; };
 		19861D9C276A353800D3C041 /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D95276A353800D3C041 /* RegistrationAssembly.swift */; };
 		19861D9D276A353800D3C041 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D96276A353800D3C041 /* RegistrationInteractor.swift */; };
-		19861D9E276A353800D3C041 /* NewUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D97276A353800D3C041 /* NewUserModel.swift */; };
-		19861DAC276A627C00D3C041 /* Struct+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861DAB276A627C00D3C041 /* Struct+Dictionary.swift */; };
+		19861D9E276A353800D3C041 /* NewUserDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861D97276A353800D3C041 /* NewUserDatabase.swift */; };
+		19861DAC276A627C00D3C041 /* Encodable+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19861DAB276A627C00D3C041 /* Encodable+Dictionary.swift */; };
 		198DB1CE277881AC00856499 /* UserAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198DB1CD277881AC00856499 /* UserAnswerModel.swift */; };
 		1992E7FA2771ECB50068FFFF /* TabBarPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */; };
 		1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */; };
@@ -215,6 +215,7 @@
 		19D5C9D82767538C000109F2 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9D72767538C000109F2 /* AlertAction.swift */; };
 		19D5C9DB27679F6B000109F2 /* TestCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9DA27679F6B000109F2 /* TestCategoryModel.swift */; };
 		19D5C9E12767B2D0000109F2 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9E02767B2D0000109F2 /* ErrorModel.swift */; };
+		19FD3BBB277A075B0082A102 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FD3BBA277A075B0082A102 /* RegistrationData.swift */; };
 		7F0FA2D73F5CD2AADC74B53E /* Pods_Questionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */; };
 /* End PBXBuildFile section */
 
@@ -311,8 +312,8 @@
 		19861D94276A353800D3C041 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		19861D95276A353800D3C041 /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
 		19861D96276A353800D3C041 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
-		19861D97276A353800D3C041 /* NewUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserModel.swift; sourceTree = "<group>"; };
-		19861DAB276A627C00D3C041 /* Struct+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Struct+Dictionary.swift"; sourceTree = "<group>"; };
+		19861D97276A353800D3C041 /* NewUserDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserDatabase.swift; sourceTree = "<group>"; };
+		19861DAB276A627C00D3C041 /* Encodable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Dictionary.swift"; sourceTree = "<group>"; };
 		198DB1CD277881AC00856499 /* UserAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnswerModel.swift; sourceTree = "<group>"; };
 		1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresentable.swift; sourceTree = "<group>"; };
 		1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewManager.swift; sourceTree = "<group>"; };
@@ -403,6 +404,7 @@
 		19D5C9D72767538C000109F2 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		19D5C9DA27679F6B000109F2 /* TestCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoryModel.swift; sourceTree = "<group>"; };
 		19D5C9E02767B2D0000109F2 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		19FD3BBA277A075B0082A102 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
 		3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Questionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6ABDDB1C71174B43894F241 /* Pods-Questionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Questionnaire.release.xcconfig"; path = "Target Support Files/Pods-Questionnaire/Pods-Questionnaire.release.xcconfig"; sourceTree = "<group>"; };
 		F8198A1AF1F71C4DB43D17C5 /* Pods-Questionnaire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Questionnaire.debug.xcconfig"; path = "Target Support Files/Pods-Questionnaire/Pods-Questionnaire.debug.xcconfig"; sourceTree = "<group>"; };
@@ -888,7 +890,7 @@
 			children = (
 				19D5C9D627675382000109F2 /* Alertable */,
 				1952AA8D2761003D00675931 /* ViewOutput.swift */,
-				19861DAB276A627C00D3C041 /* Struct+Dictionary.swift */,
+				19861DAB276A627C00D3C041 /* Encodable+Dictionary.swift */,
 				1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */,
 			);
 			path = Protocols;
@@ -1010,7 +1012,8 @@
 		19861D9F276A36E200D3C041 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19861D97276A353800D3C041 /* NewUserModel.swift */,
+				19861D97276A353800D3C041 /* NewUserDatabase.swift */,
+				19FD3BBA277A075B0082A102 /* RegistrationData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1862,6 +1865,7 @@
 				19304D6E2768925000EA403A /* TestListViewModel.swift in Sources */,
 				19C832CB276C92A80050747F /* UIApplication+AppVersion.swift in Sources */,
 				19C832F2276C92B40050747F /* InternetConnectionReachabilityHandler.swift in Sources */,
+				19FD3BBB277A075B0082A102 /* RegistrationData.swift in Sources */,
 				19BB7CDF2775DFB000315232 /* UITextField+Style.swift in Sources */,
 				19C832FA276C92B40050747F /* Notifications.swift in Sources */,
 				19C83226276C906D0050747F /* ButtonWithTouchArea.swift in Sources */,
@@ -1904,7 +1908,7 @@
 				19436D402768A85400D2FA0A /* TestAnswersCounterCell.swift in Sources */,
 				1952AA8E2761003D00675931 /* ViewOutput.swift in Sources */,
 				193D993727623E60004ACA7F /* MainScreenInteractor.swift in Sources */,
-				19861D9E276A353800D3C041 /* NewUserModel.swift in Sources */,
+				19861D9E276A353800D3C041 /* NewUserDatabase.swift in Sources */,
 				19780CFA27727FB5004287BC /* RefreshControl.swift in Sources */,
 				19436D342768A5DB00D2FA0A /* TestQuestionViewModel.swift in Sources */,
 				19C832D8276C92A80050747F /* String+Sizes.swift in Sources */,
@@ -1931,7 +1935,7 @@
 				19BB7CDB2775CFEA00315232 /* Fonts.swift in Sources */,
 				1982B565276398E7003DAB1A /* ProfileRouter.swift in Sources */,
 				1982B56C27639B10003DAB1A /* AuthorizedUserModel.swift in Sources */,
-				19861DAC276A627C00D3C041 /* Struct+Dictionary.swift in Sources */,
+				19861DAC276A627C00D3C041 /* Encodable+Dictionary.swift in Sources */,
 				19304D6D2768925000EA403A /* TestListAssembly.swift in Sources */,
 				19436D562768DD1E00D2FA0A /* TestResultDataConverter.swift in Sources */,
 				19C83251276C927D0050747F /* CellConfigurator.swift in Sources */,

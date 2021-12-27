@@ -20,7 +20,7 @@ final class RegistrationAssembly: Assembly {
         
         let view = RegistrationViewController()
         let router = RegistrationRouter(transition: view)
-        let presenter = RegistrationPresenter(token: model.token, moduleOutput: model.moduleOutput)
+        let presenter = RegistrationPresenter(email: model.email, moduleOutput: model.moduleOutput)
         let interactor = RegistrationInteractor(authService: authService, databaseService: databaseService)
         
         view.presenter = presenter
@@ -43,7 +43,7 @@ extension RegistrationAssembly {
     struct Model: TransitionModel {
         
         weak var moduleOutput: RegistrationModuleOutput?
-        let token: String
+        let email: String?
     }
     
 }

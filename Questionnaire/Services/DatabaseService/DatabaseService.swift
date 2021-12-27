@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 protocol DatabaseServiceInput: AnyObject {
     func getData<Model: Decodable>(_ key: DatabasePath, modelType: Model.Type, completion: @escaping (Result<Model, ErrorModel>) -> Void)
-    func saveNewUser(_ newUser: NewUserModel, completion: @escaping (Result<String, ErrorModel>) -> Void)
+    func saveNewUser(_ newUser: NewUserDatabase, completion: @escaping (Result<String, ErrorModel>) -> Void)
 }
 
 final class DatabaseService {
@@ -76,7 +76,7 @@ extension DatabaseService: DatabaseServiceInput {
         
     }
     
-    func saveNewUser(_ newUser: NewUserModel, completion: @escaping (Result<String, ErrorModel>) -> Void) {
+    func saveNewUser(_ newUser: NewUserDatabase, completion: @escaping (Result<String, ErrorModel>) -> Void) {
         
         let uniqueToken = newUser.uniqueToken
         let newUserDictionary = newUser.asDictionary

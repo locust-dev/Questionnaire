@@ -9,7 +9,11 @@
 import Foundation
 
 protocol AuthorizationInteractorInput {
+    
+    var currentUserToken: String? { get }
+    
     func tryToSignIn(email: String, password: String)
+    func writeNewUserInDatabase(_ newUser: NewUserDatabase)
 }
 
 final class AuthorizationInteractor {
@@ -42,10 +46,10 @@ final class AuthorizationInteractor {
                 
             case .success(_):
                 self?.authorizationService.setCurrentUserToken(token)
-                self?.presenter?.didSuccessAuthorize(userToken: nil)
+                self?.presenter?.didSuccessAuthorize()
                 
             case .failure(_):
-                self?.presenter?.didSuccessAuthorize(userToken: token)
+                self?.presenter?.didFailAuthorize(email: nil, error: .userNotFoundInDatabase)
             }
         }
     }
@@ -57,6 +61,10 @@ final class AuthorizationInteractor {
 // MARK: - MainScreenInteractorInput
 extension AuthorizationInteractor: AuthorizationInteractorInput {
     
+    var currentUserToken: String? {
+        authorizationService.currentUserToken
+    }
+    
     func tryToSignIn(email: String, password: String) {
         
         authorizationService.signIn(email: email, password: password) { [weak self] result in
@@ -64,14 +72,29 @@ extension AuthorizationInteractor: AuthorizationInteractorInput {
             switch result {
             case .success(let token):
                 guard let token = token else {
-                    self?.presenter?.didFailAuthorize(error: .serverError)
+                    self?.presenter?.didFailAuthorize(email: nil, error: .serverError)
                     return
                 }
                 
                 self?.checkIfUserAlreadyInDatabase(token: token)
                 
             case .failure(let error):
-                self?.presenter?.didFailAuthorize(error: error)
+                self?.presenter?.didFailAuthorize(email: email, error: error)
+            }
+        }
+    }
+    
+    func writeNewUserInDatabase(_ newUser: NewUserDatabase) {
+        
+        databaseService.saveNewUser(newUser) { [weak self] result in
+            
+            switch result {
+                
+            case .success(_):
+                self?.presenter?.didSuccessToSaveNewUser()
+                
+            case .failure(let error):
+                self?.presenter?.didFailToSaveNewUser(error: error)
             }
         }
     }

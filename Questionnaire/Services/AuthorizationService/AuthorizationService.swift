@@ -13,6 +13,7 @@ protocol AuthorizationServiceInput {
     var currentUserToken: String? { get }
     
     func signIn(email: String, password: String, completion: @escaping (Result<String?, ErrorModel>) -> Void)
+    func registerUser(with email: String, and password: String, completion: @escaping (Result<String?, ErrorModel>) -> Void)
     func setCurrentUserToken(_ token: String?)
     func logOut()
 }
@@ -52,6 +53,18 @@ extension AuthorizationService: AuthorizationServiceInput {
                 
                 mainQueue {
                     error != nil ? completion(.failure(.userNotFound)) : completion(.success(result?.user.uid))
+                }
+            }
+        }
+    }
+    
+    func registerUser(with email: String, and password: String, completion: @escaping (Result<String?, ErrorModel>) -> Void) {
+        
+        globalQueue {
+            Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                
+                mainQueue {
+                    error != nil ? completion(.failure(.errorToRegisterNewUser)) : completion(.success(result?.user.uid))
                 }
             }
         }

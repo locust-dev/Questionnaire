@@ -69,13 +69,9 @@ extension ProfilePresenter: ProfileInteractorOutput {
     }
     
     func didFailFetchUserData(error: ErrorModel) {
-    
         view?.hideHUD()
-        
-        if error == .errorToLoadUserInfo {
-            interactor?.logOut()
-            moduleOutput?.didTapLogOutButton()
-        }
+        interactor?.logOut()
+        moduleOutput?.didTapLogOutButton()
     }
     
 }

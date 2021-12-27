@@ -9,9 +9,9 @@
 import UIKit
 
 protocol RegistrationViewInput: Alertable, Loadable {
-    func showAlertNonOptionalFields()
     func showSavingAlertError(message: String)
     func showSuccessRegistrationAlert()
+    func setEmailPlaceholder(_ email: String?)
 }
 
 final class RegistrationViewController: UIViewController {
@@ -26,6 +26,8 @@ final class RegistrationViewController: UIViewController {
     private let subtitleLabel = UILabel()
     private let firstNameTextField = BottomLineTextField()
     private let lastNameTextField = BottomLineTextField()
+    private let emailTextField = BottomLineTextField()
+    private let passwordTextField = BottomLineTextField()
     private let registerButton = CommonButton()
     private let stack = UIStackView()
     private let notifitacionCenter = NotificationCenter.default
@@ -55,11 +57,15 @@ final class RegistrationViewController: UIViewController {
          
         view.backgroundColor = Colors.mainBlueColor()
         
-        firstNameTextField.setStyle(.firstName)
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         firstNameTextField.delegate = self
-        
-        lastNameTextField.setStyle(.lastName)
         lastNameTextField.delegate = self
+        
+        emailTextField.setStyle(.email)
+        passwordTextField.setStyle(.password)
+        firstNameTextField.setStyle(.firstName)
+        lastNameTextField.setStyle(.lastName)
         
         mainLabel.font = UIFont(name: MainFont.bold, size: 30)
         mainLabel.textColor = .black
@@ -85,6 +91,8 @@ final class RegistrationViewController: UIViewController {
         
         stack.addArrangedSubviews([mainLabel,
                                    subtitleLabel,
+                                   emailTextField,
+                                   passwordTextField,
                                    firstNameTextField,
                                    lastNameTextField,
                                    registerButton])
@@ -112,14 +120,34 @@ final class RegistrationViewController: UIViewController {
         
         firstNameTextField.autoSetDimension(.height, toSize: 50)
         lastNameTextField.autoSetDimension(.height, toSize: 50)
+        emailTextField.autoSetDimension(.height, toSize: 50)
+        passwordTextField.autoSetDimension(.height, toSize: 50)
     }
     
     
     // MARK: - Actions
     
     @objc private func register() {
-        presenter?.didTapRegisterButton(firstName: firstNameTextField.text,
-                                        lastName: lastNameTextField.text)
+        
+        guard let firstName = firstNameTextField.text,
+              let lastName = lastNameTextField.text,
+              let email = emailTextField.text,
+              let password = passwordTextField.text,
+              !firstName.isEmpty,
+              !lastName.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty
+        else {
+            showAlertNonOptionalFields()
+            return
+        }
+        
+        let registrationData = RegistrationData(firstName: firstName,
+                                                lastName: lastName,
+                                                email: email,
+                                                password: password)
+        
+        presenter?.didTapRegisterButton(registrationData: registrationData)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -143,15 +171,22 @@ final class RegistrationViewController: UIViewController {
         view.frame.origin.y = 0
     }
     
+    
+    // MARK: - Private methods
+    
+    private func showAlertNonOptionalFields() {
+        // TODO: - Localized
+        showAlert(title: "Ошибка!", message: "Пожалуйста, заполните все обязятельные поля.")
+    }
+    
 }
 
 
 // MARK: - RegistrationViewInput
 extension RegistrationViewController: RegistrationViewInput {
     
-    func showAlertNonOptionalFields() {
-        // TODO: - Localized
-        showAlert(title: "Ошибка!", message: "Пожалуйста, заполните все обязятельные поля.")
+    func setEmailPlaceholder(_ email: String?) {
+        emailTextField.text = email
     }
     
     func showSavingAlertError(message: String) {
