@@ -7,7 +7,11 @@
 //
 
 protocol TestQuestionDataConverterInput {
-    func convert(question: Question, currentQuestionNumber: Int, questionsCount: Int) -> TestQuestionViewModel
+    
+    func convert(question: Question,
+                 currentQuestionNumber: Int,
+                 questionsCount: Int,
+                 remainQuestionsNumbers: [Int]) -> TestQuestionViewModel
 }
 
 final class TestQuestionDataConverter {
@@ -38,7 +42,10 @@ final class TestQuestionDataConverter {
 // MARK: - TestQuestionDataConverterInput
 extension TestQuestionDataConverter: TestQuestionDataConverterInput {
     
-    func convert(question: Question, currentQuestionNumber: Int, questionsCount: Int) -> TestQuestionViewModel {
+    func convert(question: Question,
+                 currentQuestionNumber: Int,
+                 questionsCount: Int,
+                 remainQuestionsNumbers: [Int]) -> TestQuestionViewModel {
         
         let titleRow = createTitleRow(title: question.text)
         let answersCounterRow = createAnswerCounterRow(answers: question.answers,
@@ -46,9 +53,28 @@ extension TestQuestionDataConverter: TestQuestionDataConverterInput {
         
         let rows = [titleRow, answersCounterRow]
         
+        let isSkipButtonEnabled: Bool
+        let isReturnButtonEnabled: Bool
+        
+        if remainQuestionsNumbers.count == 1 {
+            isSkipButtonEnabled = false
+            isReturnButtonEnabled = false
+        } else if currentQuestionNumber == remainQuestionsNumbers.last {
+            isSkipButtonEnabled = false
+            isReturnButtonEnabled = true
+        } else if currentQuestionNumber == remainQuestionsNumbers.first {
+            isSkipButtonEnabled = true
+            isReturnButtonEnabled = false
+        } else {
+            isSkipButtonEnabled = true
+            isReturnButtonEnabled = true
+        }
+        
         return TestQuestionViewModel(rows: rows,
                                      currentQuestionNumber: currentQuestionNumber,
-                                     questionsCount: questionsCount)
+                                     questionsCount: questionsCount,
+                                     isSkipButtonEnabled: isSkipButtonEnabled,
+                                     isReturnButtonEnabled: isReturnButtonEnabled)
     }
-    
+
 }

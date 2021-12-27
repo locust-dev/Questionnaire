@@ -23,6 +23,8 @@ final class TestQuestionViewController: UIViewController {
     private let tableView = UITableView()
     private let confirmButton = CommonButton(style: .filled)
     private let finishTestButton = CommonButton(style: .filled)
+    private let skipQuestionButton = ArrowButton(direction: .right)
+    private let returnQuestionButton = ArrowButton(direction: .left)
     
     
     // MARK: - Life cycle
@@ -46,6 +48,14 @@ final class TestQuestionViewController: UIViewController {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 12
         
+        let bottomButtonsStack = UIStackView(arrangedSubviews: [returnQuestionButton,
+                                                                finishTestButton,
+                                                                skipQuestionButton])
+        bottomButtonsStack.spacing = 10
+        
+        skipQuestionButton.addTarget(self, action: #selector(skipQuestion), for: .touchUpInside)
+        returnQuestionButton.addTarget(self, action: #selector(returnQuestion), for: .touchUpInside)
+        
         confirmButton.setTitle("Подтвердить", for: .normal)
         confirmButton.addTarget(self, action: #selector(confirmTap), for: .touchUpInside)
         
@@ -55,7 +65,7 @@ final class TestQuestionViewController: UIViewController {
         tableViewManager?.setup(tableView: tableView)
         
         view.addSubview(containerView)
-        view.addSubview(finishTestButton)
+        view.addSubview(bottomButtonsStack)
         containerView.addSubview(tableView)
         containerView.addSubview(confirmButton)
         
@@ -63,9 +73,12 @@ final class TestQuestionViewController: UIViewController {
         containerView.autoPinEdgesToSuperviewSafeArea(with: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
                                                       excludingEdge: .bottom)
         
-        finishTestButton.autoPinEdge(.top, to: .bottom, of: containerView, withOffset: 10)
-        finishTestButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 20),
+        bottomButtonsStack.autoPinEdge(.top, to: .bottom, of: containerView, withOffset: 10)
+        bottomButtonsStack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 20),
                                                       excludingEdge: .top)
+        
+        skipQuestionButton.autoSetDimensions(to: CGSize(width: 30, height: 50))
+        returnQuestionButton.autoSetDimensions(to: CGSize(width: 30, height: 50))
         
         confirmButton.autoPinEdge(.top, to: .bottom, of: tableView, withOffset: 10)
         confirmButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20),
@@ -83,6 +96,14 @@ final class TestQuestionViewController: UIViewController {
         presenter?.didTapFinishButton()
     }
     
+    @objc private func skipQuestion() {
+        presenter?.didTapSkipQuestion()
+    }
+    
+    @objc private func returnQuestion() {
+        presenter?.didTapReturnQuestion()
+    }
+    
 }
 
 
@@ -90,6 +111,8 @@ final class TestQuestionViewController: UIViewController {
 extension TestQuestionViewController: TestQuestionViewInput {
     
     func update(with viewModel: TestQuestionViewModel) {
+        returnQuestionButton.isEnabled = viewModel.isReturnButtonEnabled
+        skipQuestionButton.isEnabled = viewModel.isSkipButtonEnabled
         title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
         tableViewManager?.update(with: viewModel)
     }

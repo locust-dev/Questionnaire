@@ -37,7 +37,7 @@ class CommonTableViewCell: NLTableViewCell {
         
         backgroundColor = .clear
         
-        let arrowImageView = UIImageView(image: Images.rightArrow())
+        let arrowImageView = UIImageView(image: Images.rightCellArrow())
         arrowImageView.contentMode = .scaleAspectFit
         
         let stack = UIStackView(arrangedSubviews: [nameLabel, arrowImageView])

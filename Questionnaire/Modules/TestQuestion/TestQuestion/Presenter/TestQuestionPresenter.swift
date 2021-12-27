@@ -9,6 +9,8 @@
 protocol TestQuestionViewOutput: ViewOutput {
     func didTapConfirmButton()
     func didTapFinishButton()
+    func didTapSkipQuestion()
+    func didTapReturnQuestion()
 }
 
 final class TestQuestionPresenter {
@@ -18,9 +20,10 @@ final class TestQuestionPresenter {
     weak var view: TestQuestionViewInput?
     
     var router: TestQuestionRouterInput?
-
+    
     private var userAnswers: [UserAnswerModel] = []
     private var currentUserAnswers: [Int]?
+    private var remainQuestionsNumbers: [Int] = []
     private var currentQuestionNumber = 1
     
     private let dataConverter: TestQuestionDataConverterInput
@@ -37,6 +40,8 @@ final class TestQuestionPresenter {
         self.dataConverter = dataConverter
         self.questions = questions
         self.testId = testId
+        
+        remainQuestionsNumbers = Array(1...questions.count)
     }
     
     
@@ -44,17 +49,63 @@ final class TestQuestionPresenter {
     
     private func setQuestion() {
         
-        guard let question = questions[safe: currentQuestionNumber - 1],
-              currentQuestionNumber <= questions.count
-        else {
-            router?.openResults(moduleOutput: self, userAnswers: userAnswers, testId: testId)
+        guard let question = questions[safe: currentQuestionNumber - 1] else {
             return
         }
         
+        self.currentUserAnswers = nil
+        
         let model = dataConverter.convert(question: question,
                                           currentQuestionNumber: currentQuestionNumber,
-                                          questionsCount: questions.count)
+                                          questionsCount: questions.count,
+                                          remainQuestionsNumbers: remainQuestionsNumbers)
         view?.update(with: model)
+    }
+    
+    private func navigateToNextQuestion() {
+        
+        if remainQuestionsNumbers.isEmpty {
+            router?.openResults(moduleOutput: self, userAnswers: userAnswers, testId: testId)
+            
+        } else if remainQuestionsNumbers.count == 1 {
+            currentQuestionNumber = remainQuestionsNumbers.first!
+            setQuestion()
+            
+        } else {
+            if !moveToClosedNextQuestion() {
+                moveToClosedLastQuestion()
+            }
+        }
+    }
+    
+    @discardableResult
+    private func moveToClosedNextQuestion() -> Bool {
+        
+        for questionNumber in remainQuestionsNumbers {
+            if questionNumber > currentQuestionNumber {
+                currentQuestionNumber = questionNumber
+                setQuestion()
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    @discardableResult
+    private func moveToClosedLastQuestion() -> Bool {
+        
+        let reversedNumbers = Array(remainQuestionsNumbers.reversed())
+        
+        for questionNumber in reversedNumbers {
+            if questionNumber < currentQuestionNumber {
+                currentQuestionNumber = questionNumber
+                setQuestion()
+                return true
+            }
+        }
+        
+        return false
     }
     
 }
@@ -70,7 +121,9 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
     
     func didTapConfirmButton() {
         
-        guard let currentUserAnswers = currentUserAnswers, !currentUserAnswers.isEmpty
+        guard let currentUserAnswers = currentUserAnswers,
+              let index = remainQuestionsNumbers.firstIndex(of: currentQuestionNumber),
+              !currentUserAnswers.isEmpty
         else {
             view?.showNotConfirmAlert()
             return
@@ -80,14 +133,23 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
                                          answers: currentUserAnswers)
         
         userAnswers.append(userAnswer)
-        currentQuestionNumber += 1
-        setQuestion()
+        remainQuestionsNumbers.remove(at: index)
+        navigateToNextQuestion()
     }
     
     func didTapFinishButton() {
         router?.closeModule()
         view?.showTabBar()
     }
+    
+    func didTapSkipQuestion() {
+        moveToClosedNextQuestion()
+    }
+    
+    func didTapReturnQuestion() {
+        moveToClosedLastQuestion()
+    }
+    
 }
 
 
