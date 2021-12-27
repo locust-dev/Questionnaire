@@ -66,6 +66,7 @@ final class MainScreenViewController: UITabBarController {
         view.addSubview(customTabBarView)
         view.bringSubviewToFront(tabBar)
         
+        tabBar.unselectedItemTintColor = .gray
         tabBar.backgroundImage = UIImage()
         tabBar.shadowImage = UIImage()
         tabBar.clipsToBounds = true
