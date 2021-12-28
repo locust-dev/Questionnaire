@@ -62,7 +62,7 @@ final class RegistrationPresenter {
 extension RegistrationPresenter: RegistrationViewOutput {
     
     func viewIsReady() {
-        view?.setEmailPlaceholder(email)
+        view?.updateViewLabels(email)
     }
     
     func didTapRegisterButton(registrationData: RegistrationData) {

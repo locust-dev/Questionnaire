@@ -11,7 +11,7 @@ import UIKit
 protocol RegistrationViewInput: Alertable, Loadable {
     func showSavingAlertError(message: String)
     func showSuccessRegistrationAlert()
-    func setEmailPlaceholder(_ email: String?)
+    func updateViewLabels(_ email: String?)
 }
 
 final class RegistrationViewController: UIViewController {
@@ -75,7 +75,6 @@ final class RegistrationViewController: UIViewController {
         subtitleLabel.font = UIFont(name: MainFont.regular, size: 16)
         subtitleLabel.textColor = .black
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.text = "Вы успешно авторизовались, но, для продолжения, вам необходимо зарегистрироваться"
         
         // TODO: - Localized
         registerButton.setTitle("Зарегистрироваться", for: .normal)
@@ -185,7 +184,8 @@ final class RegistrationViewController: UIViewController {
 // MARK: - RegistrationViewInput
 extension RegistrationViewController: RegistrationViewInput {
     
-    func setEmailPlaceholder(_ email: String?) {
+    func updateViewLabels(_ email: String?) {
+        subtitleLabel.text = email == nil ? email : "Вы успешно авторизовались, но, для продолжения, вам необходимо зарегистрироваться"
         emailTextField.text = email
     }
     

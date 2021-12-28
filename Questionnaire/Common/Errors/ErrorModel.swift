@@ -46,7 +46,7 @@ enum ErrorModel: Error {
             return "Не можем авторизовать"
             
         case .userNotFoundInDatabase:
-            return "Мы не нашли вас в базе.\nСоздали аккаунт пол умолчанию"
+            return "Мы не нашли вас в базе.\nСоздали аккаунт по умолчанию"
             
         case .errorToRegisterNewUser:
             return "Не смогли зарегестрировать нового пользователя"
@@ -61,7 +61,7 @@ enum ErrorModel: Error {
             return "Хм. Не смогли найти правильные ответы на этот тест!"
             
         case .userNotFound:
-            return "Пользователь не найден."
+            return "Пользователь не найден. Попробуйте зарегистрироваться."
             
         case .parseError:
             return "Ошибка парсинга JSON"

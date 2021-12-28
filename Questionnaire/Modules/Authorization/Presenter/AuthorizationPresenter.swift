@@ -8,6 +8,7 @@
 
 protocol AuthorizationViewOutput: ViewOutput {
     func didTapConfirmButton(email: String?, password: String?)
+    func didTapRegisterButton()
 }
 
 protocol AuthorizationInteractorOutput: AnyObject {
@@ -48,25 +49,6 @@ final class AuthorizationPresenter {
         self.moduleOutput = moduleOutput
     }
     
-    
-    // MARK: - Private methods
-    
-    private func createDefaultUser() {
-        
-        view?.showHUD()
-        
-        guard let userToken = interactor?.currentUserToken else {
-            return
-        }
-        
-        let defaultUserTemplate = NewUserDatabase(uniqueToken: userToken,
-                                                  firstName: Locals.tempUserName,
-                                                  lastName: Locals.tempUserSurname,
-                                                  allowedTests: [Locals.defaultAllowedTest])
-        
-        interactor?.writeNewUserInDatabase(defaultUserTemplate)
-    }
-    
 }
 
 
@@ -85,6 +67,10 @@ extension AuthorizationPresenter: AuthorizationViewOutput {
         interactor?.tryToSignIn(email: email ?? "", password: password ?? "")
     }
     
+    func didTapRegisterButton() {
+        router?.openRegistration(email: nil, moduleOutput: moduleOutput as? RegistrationModuleOutput)
+    }
+    
 }
 
 
@@ -96,10 +82,10 @@ extension AuthorizationPresenter: AuthorizationInteractorOutput {
         view?.hideHUD()
         
         if error == .userNotFound {
-            router?.openRegistration(email: email, moduleOutput: moduleOutput as? RegistrationModuleOutput)
+            view?.showErrorAlert(message: error.description)
             
         } else if error == .userNotFoundInDatabase {
-            createDefaultUser()
+            router?.openRegistration(email: email, moduleOutput: moduleOutput as? RegistrationModuleOutput)
             
         } else {
             view?.showErrorAlert(message: error.description)

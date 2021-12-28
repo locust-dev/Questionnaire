@@ -33,6 +33,7 @@ final class BottomLineTextField: NLTextField {
         setupPlaceholder()
         autocapitalizationType = .none
         autocorrectionType = .no
+        textColor = .black
     }
     
     

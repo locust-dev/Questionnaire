@@ -13,7 +13,6 @@ protocol AuthorizationInteractorInput {
     var currentUserToken: String? { get }
     
     func tryToSignIn(email: String, password: String)
-    func writeNewUserInDatabase(_ newUser: NewUserDatabase)
 }
 
 final class AuthorizationInteractor {
@@ -38,7 +37,7 @@ final class AuthorizationInteractor {
     
     // MARK: - Private methods
     
-    private func checkIfUserAlreadyInDatabase(token: String) {
+    private func checkIfUserAlreadyInDatabase(email: String, token: String) {
         
         databaseService.getData(.user(token: token), modelType: ProfileModel.self) { [weak self] result in
             
@@ -49,7 +48,7 @@ final class AuthorizationInteractor {
                 self?.presenter?.didSuccessAuthorize()
                 
             case .failure(_):
-                self?.presenter?.didFailAuthorize(email: nil, error: .userNotFoundInDatabase)
+                self?.presenter?.didFailAuthorize(email: email, error: .userNotFoundInDatabase)
             }
         }
     }
@@ -76,25 +75,10 @@ extension AuthorizationInteractor: AuthorizationInteractorInput {
                     return
                 }
                 
-                self?.checkIfUserAlreadyInDatabase(token: token)
+                self?.checkIfUserAlreadyInDatabase(email: email, token: token)
                 
             case .failure(let error):
                 self?.presenter?.didFailAuthorize(email: email, error: error)
-            }
-        }
-    }
-    
-    func writeNewUserInDatabase(_ newUser: NewUserDatabase) {
-        
-        databaseService.saveNewUser(newUser) { [weak self] result in
-            
-            switch result {
-                
-            case .success(_):
-                self?.presenter?.didSuccessToSaveNewUser()
-                
-            case .failure(let error):
-                self?.presenter?.didFailToSaveNewUser(error: error)
             }
         }
     }

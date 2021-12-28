@@ -27,6 +27,7 @@ final class AuthorizationViewController: UIViewController {
     private let loginTextField = BottomLineTextField()
     private let passwordTextField = BottomLineTextField()
     private let confirmButton = CommonButton(style: .filled)
+    private let registerButton = CommonButton(style: .shadow)
     private let forgotPasswordButton = UIButton()
     private let notifitacionCenter = NotificationCenter.default
   
@@ -75,12 +76,14 @@ final class AuthorizationViewController: UIViewController {
                                                        subtitleLabel,
                                                        loginTextField,
                                                        passwordTextField,
-                                                       confirmButton])
+                                                       confirmButton,
+                                                       registerButton])
         stackView.axis = .vertical
         stackView.spacing = 4
         stackView.setCustomSpacing(50, after: subtitleLabel)
         stackView.setCustomSpacing(20, after: loginTextField)
         stackView.setCustomSpacing(60, after: passwordTextField)
+        stackView.setCustomSpacing(10, after: confirmButton)
         
         titleLabel.font = UIFont(name: MainFont.bold, size: 30)
         titleLabel.textColor = .black
@@ -93,8 +96,10 @@ final class AuthorizationViewController: UIViewController {
         forgotPasswordButton.setTitleColor(.black, for: .normal)
         forgotPasswordButton.titleLabel?.font = UIFont(name: MainFont.medium, size: 14)
         forgotPasswordButton.titleLabel?.textAlignment = .right
+        
         forgotPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
         confirmButton.addTarget(self, action: #selector(confirmLogin), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         view.addSubview(stackContainer)
         view.addSubview(forgotPasswordButton)
@@ -127,6 +132,10 @@ final class AuthorizationViewController: UIViewController {
     
     @objc private func confirmLogin() {
         presenter?.didTapConfirmButton(email: loginTextField.text, password: passwordTextField.text)
+    }
+    
+    @objc private func register() {
+        presenter?.didTapRegisterButton()
     }
     
     @objc private func forgotPassword() {
@@ -170,6 +179,7 @@ extension AuthorizationViewController: AuthorizationViewInput {
         titleLabel.text = viewModel.mainTitle
         subtitleLabel.text = viewModel.subtitle
         confirmButton.setTitle(viewModel.confirmButtonTitle, for: .normal)
+        registerButton.setTitle("Зарегистрироваться", for: .normal)
         forgotPasswordButton.setTitle(viewModel.forgotPassButtonTitle, for: .normal)
     }
 }
