@@ -26,14 +26,6 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
     }
     
     
-    // MARK: - Life cycle
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 30, bottom: 8, right: 30))
-    }
-    
-    
     // MARK: - Drawing
     
     private func drawSelf() {
@@ -41,11 +33,9 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
         backgroundColor = .clear
         
         answersStack.axis = .vertical
-        answersStack.spacing = 20
         answersStack.distribution = .fillEqually
         
         contentView.addSubview(answersStack)
-        answersStack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0))
     }
     
     
@@ -123,11 +113,15 @@ extension TestAnswersCounterCell: Configurable {
         let isMultipleAnswers: Bool
         let rightAnswer: [Int]?
         let wrongAnswer: [Int]?
+        let stackSpacing: CGFloat
+        let stackInsets: UIEdgeInsets
     }
     
     func configure(with model: Model) {
         
+        answersStack.spacing = model.stackSpacing
         answersStack.removeAllArrangedSubviewsFully()
+        answersStack.autoPinEdgesToSuperviewEdges(with: model.stackInsets)
         
         model.answers.enumerated().forEach { (index, title) in
             

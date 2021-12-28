@@ -6,6 +6,9 @@
 //  Copyright © 2021 FINCH. All rights reserved.
 //
 
+import CoreGraphics
+import UIKit
+
 protocol TestQuestionDataConverterInput {
     
     func convert(question: Question,
@@ -16,6 +19,19 @@ protocol TestQuestionDataConverterInput {
 }
 
 final class TestQuestionDataConverter {
+    
+    // MARK: - Locals
+    
+    private enum Locals {
+        
+        enum AnswersCell {
+
+            static let stackInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            static let stackSpacing: CGFloat = 15
+            static let buttonHeight: CGFloat = 50
+        }
+    }
+    
     
     // MARK: - Typealias
     
@@ -39,10 +55,22 @@ final class TestQuestionDataConverter {
         let model = TestAnswersCounterCell.Model(answers: answers,
                                                  isMultipleAnswers: isMultipleAnswers,
                                                  rightAnswer: mistake?.rightAnswers,
-                                                 wrongAnswer: mistake?.wrongAnswers)
+                                                 wrongAnswer: mistake?.wrongAnswers,
+                                                 stackSpacing: Locals.AnswersCell.stackSpacing,
+                                                 stackInsets: Locals.AnswersCell.stackInsets)
         
-        let configurator = AnswerCounterCellConfigurator(item: model)
+        let cellHeight = calculateAnswersCellHeight(count: answers.count)
+        let configurator = AnswerCounterCellConfigurator(item: model, cellHeight: cellHeight)
         return .answerCounter(configurator)
+    }
+    
+    private func calculateAnswersCellHeight(count: Int) -> CGFloat {
+        
+        let answersCount = CGFloat(count)
+        let buttonsHeight = Locals.AnswersCell.buttonHeight * answersCount
+        let stackInsets = Locals.AnswersCell.stackInsets.top * 2
+        let spacing = Locals.AnswersCell.stackSpacing * (answersCount - 1)
+        return CGFloat(buttonsHeight + stackInsets + spacing)
     }
     
 }
