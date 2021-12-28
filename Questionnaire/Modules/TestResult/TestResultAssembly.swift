@@ -23,7 +23,7 @@ final class TestResultAssembly: Assembly {
         let interactor = TestResultInteractor(databaseService: databaseService)
         let view = TestResultViewController()
         let router = TestResultRouter(transition: view)
-        let presenter = TestResultPresenter(moduleOutput: model.moduleOutput,
+        let presenter = TestResultPresenter(questions: model.questions,
                                             dataConverter: dataConverter,
                                             userAnswers: model.userAnswers,
                                             testId: model.testId)
@@ -50,9 +50,9 @@ extension TestResultAssembly {
     
     struct Model: TransitionModel {
         
-        weak var moduleOutput: TestResultModuleOutput?
         let userAnswers: [UserAnswerModel]
         let testId: String
+        let questions: [Question]
     }
     
 }

@@ -41,4 +41,5 @@ struct TestResultViewModel {
     
     let rows: [Row]
     let finishButtonTitle: String
+    let mistakes: [QuestionMistakeModel]?
 }

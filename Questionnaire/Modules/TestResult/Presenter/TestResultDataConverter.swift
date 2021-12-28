@@ -23,18 +23,19 @@ final class TestResultDataConverter {
     
     typealias CircleProgressCellConfigurator = TableCellConfigurator<TestResultCircleProgressCell, TestResultCircleProgressCell.Model>
     typealias MistakesCellConfigurator = TableCellConfigurator<TestResultMistakesCell, TestResultMistakesCell.Model>
+    typealias Row = TestResultViewModel.Row
     
     
     // MARK: - Private methods
- 
-    private func createCircleProgressRow(progressPercent: Double) -> TestResultViewModel.Row {
+    
+    private func createCircleProgressRow(progressPercent: Double) -> Row {
         let model = TestResultCircleProgressCell.Model(progressPercent: progressPercent)
         let configurator = CircleProgressCellConfigurator(item: model)
         return .circleProgress(configurator)
     }
     
-    private func createMistakesRow(mistakesNumbers: [Int]) -> TestResultViewModel.Row {
-        let model = TestResultMistakesCell.Model(mistakesNumbers: mistakesNumbers.sorted(by: <))
+    private func createMistakesRow(mistakesCount: Int) -> Row {
+        let model = TestResultMistakesCell.Model(mistakesCount: mistakesCount)
         let configurator = MistakesCellConfigurator(item: model)
         return .mistakes(configurator)
     }
@@ -44,46 +45,83 @@ final class TestResultDataConverter {
         return numberFormatter.string(from: NSNumber(value: number))
     }
     
-    private func calculateMatches(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> Int {
+    private func findMistakes<T: Hashable>(_ userAnswers: [T], _ rightAnswers: [T]) -> [T]? {
+        
+        var wrongAnswers = [T]()
+        
+        userAnswers.forEach { number in
+            
+            if rightAnswers.first(where: { $0 == number }) == nil {
+                wrongAnswers.append(number)
+            }
+        }
+        
+        return wrongAnswers.isEmpty ? nil : wrongAnswers
+    }
+    
+    private func calculateResults(rightAnswers: [[Int]],
+                                  userAnswers: [UserAnswerModel]) -> ResultsModel {
         
         var matches = 0
-       // var questionWithMistakes = [Int]()
+        var questionWithMistakes: [QuestionMistakeModel] = []
         
         userAnswers.forEach { userAnswer in
             
             let rightAnswer = rightAnswers[userAnswer.questionNumber - 1]
             
-            if rightAnswer.count == 1, rightAnswer.first == userAnswer.answers.first {
-                matches += 1
+            if let mistakes = findMistakes(userAnswer.answers, rightAnswer) {
+                let mistakeModel = QuestionMistakeModel(
+                    rightAnswers: rightAnswer,
+                    wrongAnswers: mistakes,
+                    questionNumber: userAnswer.questionNumber
+                )
+                questionWithMistakes.append(mistakeModel)
                 
-            } else if rightAnswer.count > 1 {
-                rightAnswer.forEach { answer in
-                    if userAnswer.answers.filter({ $0 == answer }).first != nil {
-                        matches += 1
-                    }
-                }
+            } else {
+                matches += rightAnswer.count
             }
         }
         
-        return matches
+        let allAnswers = rightAnswers.flatMap { $0 }
+        let progressPercent = Double(matches) / Double(allAnswers.count)
+        let resultsModel = ResultsModel(progressPercent: progressPercent,
+                                        mistakes: questionWithMistakes)
+        
+        return resultsModel
     }
-
+    
 }
 
 
 // MARK: - TestResultDataConverterInput
 extension TestResultDataConverter: TestResultDataConverterInput {
-  
+    
     func convert(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> TestResultViewModel {
         
-        let allAnswers = rightAnswers.flatMap { $0 }
-        let matches = calculateMatches(rightAnswers: rightAnswers, userAnswers: userAnswers)
-        let progressPercent = Double(matches) / Double(allAnswers.count)
-        let cirlceProgressRow = createCircleProgressRow(progressPercent: progressPercent)
-      //  let mistakesRow = createMistakesRow(mistakesNumbers: questionWithMistakes)
-        let rows = [cirlceProgressRow]
+        var rows: [Row] = []
         
-        return TestResultViewModel(rows: rows, finishButtonTitle: "Завершить тест")
+        let resultsModel = calculateResults(rightAnswers: rightAnswers, userAnswers: userAnswers)
+        
+        let cirlceProgressRow = createCircleProgressRow(progressPercent: resultsModel.progressPercent)
+        rows.append(cirlceProgressRow)
+        
+        if !resultsModel.mistakes.isEmpty {
+            let mistakesRow = createMistakesRow(mistakesCount: resultsModel.mistakes.count)
+            rows.append(mistakesRow)
+        }
+        
+        return TestResultViewModel(rows: rows, finishButtonTitle: "Завершить тест", mistakes: resultsModel.mistakes)
+    }
+    
+}
+
+// MARK: - ResultsModel
+extension TestResultDataConverter {
+    
+    struct ResultsModel {
+        
+        let progressPercent: Double
+        let mistakes: [QuestionMistakeModel]
     }
     
 }

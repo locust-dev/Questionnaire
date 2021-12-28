@@ -16,10 +16,6 @@ protocol TestResultInteractorOutput: AnyObject {
     func didFailObtainAnswers(error: ErrorModel)
 }
 
-protocol TestResultModuleOutput: AnyObject {
-    func didTapMistakeQuestion(by number: Int, wrongAnswer: Int, rightAnswer: Int)
-}
-
 final class TestResultPresenter {
     
     // MARK: - Properties
@@ -30,21 +26,22 @@ final class TestResultPresenter {
     var interactor: TestResultInteractorInput?
     
     private var rightAnswers: [[Int]]?
+    private var mistakes: [QuestionMistakeModel]?
 
-    private let moduleOutput: TestResultModuleOutput?
     private let dataConverter: TestResultDataConverterInput
     private let userAnswers: [UserAnswerModel]
     private let testId: String
+    private let questions: [Question]
     
     
     // MARK: - Init
     
-    init(moduleOutput: TestResultModuleOutput?,
+    init(questions: [Question],
          dataConverter: TestResultDataConverterInput,
          userAnswers: [UserAnswerModel],
          testId: String) {
         
-        self.moduleOutput = moduleOutput
+        self.questions = questions
         self.dataConverter = dataConverter
         self.userAnswers = userAnswers
         self.testId = testId
@@ -80,6 +77,7 @@ extension TestResultPresenter: TestResultInteractorOutput {
         view?.hideHUD()
         rightAnswers = answers
         let viewModel = dataConverter.convert(rightAnswers: answers, userAnswers: userAnswers)
+        mistakes = viewModel.mistakes
         view?.update(with: viewModel)
     }
     
@@ -94,17 +92,14 @@ extension TestResultPresenter: TestResultInteractorOutput {
 // MARK: - TestResultTableViewManagerDelegate
 extension TestResultPresenter: TestResultTableViewManagerDelegate {
     
-    func didSelectQuestionWithMistake(by number: Int) {
+    func didTapShowMistakes() {
         
-//        guard let wrongAnswer = userAnswers[number],
-//              let rightAnswer = rightAnswers?[safe: number - 1]
-//        else {
-//            return
-//        }
-//
-//        moduleOutput?.didTapMistakeQuestion(by: number,
-//                                             wrongAnswer: wrongAnswer,
-//                                             rightAnswer: rightAnswer)
+        guard let mistakes = mistakes else {
+            // TODO: - Обработать если ошибки еще не успели загрузиться
+            return
+        }
+        
+        router?.openMistakes(mistakes: mistakes, questions: questions, testId: testId)
     }
     
 }

@@ -21,10 +21,12 @@ final class TestQuestionViewController: UIViewController {
     var tableViewManager: TestQuestionTableViewManagerInput?
     
     private let tableView = UITableView()
+    private let containerView = UIView()
     private let confirmButton = CommonButton(style: .filled)
     private let finishTestButton = CommonButton(style: .filled)
     private let skipQuestionButton = ArrowButton(direction: .right)
     private let returnQuestionButton = ArrowButton(direction: .left)
+    
     
     
     // MARK: - Life cycle
@@ -44,7 +46,6 @@ final class TestQuestionViewController: UIViewController {
         view.backgroundColor = Colors.mainBlueColor()
         navigationItem.hidesBackButton = true
         
-        let containerView = UIView()
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 12
         
@@ -52,6 +53,7 @@ final class TestQuestionViewController: UIViewController {
                                                                 finishTestButton,
                                                                 skipQuestionButton])
         bottomButtonsStack.spacing = 10
+        bottomButtonsStack.distribution = .equalCentering
         
         skipQuestionButton.addTarget(self, action: #selector(skipQuestion), for: .touchUpInside)
         returnQuestionButton.addTarget(self, action: #selector(returnQuestion), for: .touchUpInside)
@@ -104,6 +106,10 @@ final class TestQuestionViewController: UIViewController {
         presenter?.didTapReturnQuestion()
     }
     
+    @objc private func didTapCloseButton() {
+        presenter?.didTapCloseButtton()
+    }
+    
 }
 
 
@@ -111,10 +117,19 @@ final class TestQuestionViewController: UIViewController {
 extension TestQuestionViewController: TestQuestionViewInput {
     
     func update(with viewModel: TestQuestionViewModel) {
+        
+        if viewModel.isMistakesShowing {
+            
+            navigationItem.hidesBackButton = false
+            finishTestButton.isHidden = true
+            confirmButton.isHidden = true
+            tableView.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -20)
+        }
+        
         returnQuestionButton.isEnabled = viewModel.isReturnButtonEnabled
         skipQuestionButton.isEnabled = viewModel.isSkipButtonEnabled
-        title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
         tableViewManager?.update(with: viewModel)
+        title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
     }
     
     func showNotConfirmAlert() {

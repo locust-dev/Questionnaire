@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TestResultTableViewManagerDelegate: AnyObject {
-    func didSelectQuestionWithMistake(by number: Int)
+    func didTapShowMistakes()
 }
 
 protocol TestResultTableViewManagerInput {

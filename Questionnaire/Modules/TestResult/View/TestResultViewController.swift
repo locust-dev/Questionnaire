@@ -72,9 +72,9 @@ final class TestResultViewController: UIViewController {
     private func setupNavBarAppearance() {
         let navigationController = navigationController as? CommonNavigationController
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
+        navigationItem.hidesBackButton = true
         navigationItem.backButtonTitle = ""
         title = "Результаты"
-        navigationItem.hidesBackButton = true
     }
     
 }

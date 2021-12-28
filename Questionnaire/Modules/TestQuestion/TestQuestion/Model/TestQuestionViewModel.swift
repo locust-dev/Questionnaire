@@ -43,4 +43,5 @@ struct TestQuestionViewModel {
     let questionsCount: Int
     let isSkipButtonEnabled: Bool
     let isReturnButtonEnabled: Bool
+    let isMistakesShowing: Bool
 }

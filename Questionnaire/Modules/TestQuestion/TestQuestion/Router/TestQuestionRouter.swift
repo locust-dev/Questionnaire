@@ -7,8 +7,7 @@
 //
 
 protocol TestQuestionRouterInput {
-    func openResults(moduleOutput: TestResultModuleOutput, userAnswers: [UserAnswerModel], testId: String)
-    func openQuestionWithMistake(_ questionMistakeModel: QuestionMistakeModel)
+    func openResults(questions: [Question], userAnswers: [UserAnswerModel], testId: String)
     func closeModule()
 }
 
@@ -31,11 +30,11 @@ final class TestQuestionRouter {
 // MARK: - TestQuestionRouterInput
 extension TestQuestionRouter: TestQuestionRouterInput {
     
-    func openResults(moduleOutput: TestResultModuleOutput, userAnswers: [UserAnswerModel], testId: String) {
+    func openResults(questions: [Question], userAnswers: [UserAnswerModel], testId: String) {
         
-        let model = TestResultAssembly.Model(moduleOutput: moduleOutput,
-                                             userAnswers: userAnswers,
-                                             testId: testId)
+        let model = TestResultAssembly.Model(userAnswers: userAnswers,
+                                             testId: testId,
+                                             questions: questions)
         
         transition.push(with: model, openModuleType: TestResultAssembly.self)
     }
@@ -43,10 +42,5 @@ extension TestQuestionRouter: TestQuestionRouterInput {
     func closeModule() {
         transition.closeCurrentModule(animated: true)
     }
-    
-    func openQuestionWithMistake(_ questionMistakeModel: QuestionMistakeModel) {
-        let model = TestQuestionMistakeAssembly.Model(questionMistakeModel: questionMistakeModel)
-        transition.present(with: model, openModuleType: TestQuestionMistakeAssembly.self)
-    }
-    
+
 }

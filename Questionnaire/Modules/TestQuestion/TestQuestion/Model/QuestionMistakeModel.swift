@@ -7,9 +7,7 @@
 
 struct QuestionMistakeModel {
     
-    let question: Question
-    let rightAnswer: Int
-    let wrongAnswer: Int
-    let currentQuestionNumber: Int
-    let questionsCount: Int
+    let rightAnswers: [Int]
+    let wrongAnswers: [Int]
+    let questionNumber: Int
 }

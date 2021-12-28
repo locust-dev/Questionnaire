@@ -11,6 +11,7 @@ protocol TestQuestionViewOutput: ViewOutput {
     func didTapFinishButton()
     func didTapSkipQuestion()
     func didTapReturnQuestion()
+    func didTapCloseButtton()
 }
 
 final class TestQuestionPresenter {
@@ -29,19 +30,20 @@ final class TestQuestionPresenter {
     private let dataConverter: TestQuestionDataConverterInput
     private let questions: [Question]
     private let testId: String
+    private let mistakes: [QuestionMistakeModel]?
     
     
     // MARK: - Init
     
     init(dataConverter: TestQuestionDataConverterInput,
          questions: [Question],
-         testId: String) {
+         testId: String,
+         mistakes: [QuestionMistakeModel]?) {
         
         self.dataConverter = dataConverter
         self.questions = questions
         self.testId = testId
-        
-        remainQuestionsNumbers = Array(1...questions.count)
+        self.mistakes = mistakes
     }
     
     
@@ -53,19 +55,27 @@ final class TestQuestionPresenter {
             return
         }
         
-        self.currentUserAnswers = nil
+        var mistake: QuestionMistakeModel?
+        
+        if let mistakes = mistakes {
+            mistake = mistakes.first(where: { $0.questionNumber == currentQuestionNumber })
+
+        } else {
+            currentUserAnswers = nil
+        }
         
         let model = dataConverter.convert(question: question,
                                           currentQuestionNumber: currentQuestionNumber,
                                           questionsCount: questions.count,
-                                          remainQuestionsNumbers: remainQuestionsNumbers)
+                                          remainQuestionsNumbers: remainQuestionsNumbers,
+                                          mistake: mistake)
         view?.update(with: model)
     }
     
     private func navigateToNextQuestion() {
         
         if remainQuestionsNumbers.isEmpty {
-            router?.openResults(moduleOutput: self, userAnswers: userAnswers, testId: testId)
+            router?.openResults(questions: questions, userAnswers: userAnswers, testId: testId)
             
         } else if remainQuestionsNumbers.count == 1 {
             currentQuestionNumber = remainQuestionsNumbers.first!
@@ -115,8 +125,16 @@ final class TestQuestionPresenter {
 extension TestQuestionPresenter: TestQuestionViewOutput {
     
     func viewIsReady() {
-        setQuestion()
+        
+        if let mistakes = mistakes {
+            remainQuestionsNumbers = mistakes.map { $0.questionNumber }
+            currentQuestionNumber = remainQuestionsNumbers.first ?? 1
+        } else {
+            remainQuestionsNumbers = Array(1...questions.count)
+        }
+        
         view?.hideTabBar()
+        setQuestion()
     }
     
     func didTapConfirmButton() {
@@ -150,6 +168,10 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
         moveToClosedLastQuestion()
     }
     
+    func didTapCloseButtton() {
+        router?.closeModule()
+    }
+    
 }
 
 
@@ -159,25 +181,4 @@ extension TestQuestionPresenter: TestQuestionTableViewManagerDelegate {
     func didSelectAnswers(_ answers: [Int]) {
         currentUserAnswers = answers
     }
-}
-
-
-// MARK: - TestResultModuleOutput
-extension TestQuestionPresenter: TestResultModuleOutput {
-    
-    func didTapMistakeQuestion(by number: Int, wrongAnswer: Int, rightAnswer: Int) {
-        
-        guard let question = questions[safe: number - 1] else {
-            return
-        }
-        
-        let model = QuestionMistakeModel(question: question,
-                                         rightAnswer: rightAnswer,
-                                         wrongAnswer: wrongAnswer,
-                                         currentQuestionNumber: number,
-                                         questionsCount: questions.count)
-        
-        router?.openQuestionWithMistake(model)
-    }
-    
 }

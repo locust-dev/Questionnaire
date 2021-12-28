@@ -16,7 +16,7 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
     private var selectedAnswers: [Int] = []
     
     private let answersStack = UIStackView()
- 
+    
     
     // MARK: - Init
     
@@ -37,7 +37,7 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
     // MARK: - Drawing
     
     private func drawSelf() {
-    
+        
         backgroundColor = .clear
         
         answersStack.axis = .vertical
@@ -57,6 +57,32 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
                 button.isSelected = false
             }
         }
+    }
+    
+    private func createButton(answerCount: Int, title: String, model: Model) -> AnswerButton {
+        
+        let answerButton = AnswerButton(title: "\(answerCount). \(title)")
+        answerButton.style = .shadow
+        answerButton.tag = answerCount
+        
+        if let rightAnswer = model.rightAnswer, let wrongAnswer = model.wrongAnswer {
+            if (rightAnswer.first(where: { $0 == answerCount })) != nil {
+                answerButton.setRightAnswerStyle()
+                
+            } else if (wrongAnswer.first(where: { $0 == answerCount })) != nil {
+                answerButton.setWrongAnswerStyle()
+            }
+            
+        } else {
+            if model.isMultipleAnswers {
+                answerButton.addTarget(self, action: #selector(selectMultipleAnswers(_:)), for: .touchUpInside)
+                
+            } else {
+                answerButton.addTarget(self, action: #selector(selectOneAnswer(_:)), for: .touchUpInside)
+            }
+        }
+        
+        return answerButton
     }
     
     
@@ -95,6 +121,8 @@ extension TestAnswersCounterCell: Configurable {
         
         let answers: [String]
         let isMultipleAnswers: Bool
+        let rightAnswer: [Int]?
+        let wrongAnswer: [Int]?
     }
     
     func configure(with model: Model) {
@@ -103,17 +131,7 @@ extension TestAnswersCounterCell: Configurable {
         
         model.answers.enumerated().forEach { (index, title) in
             
-            let answerCount = index + 1
-            let answerButton = AnswerButton(title: "\(answerCount). \(title)")
-            answerButton.style = .shadow
-            answerButton.tag = answerCount
-            
-            if model.isMultipleAnswers {
-                answerButton.addTarget(self, action: #selector(selectMultipleAnswers(_:)), for: .touchUpInside)
-            } else {
-                answerButton.addTarget(self, action: #selector(selectOneAnswer(_:)), for: .touchUpInside)
-            }
-            
+            let answerButton = createButton(answerCount: index + 1, title: title, model: model)
             answersStack.addArrangedSubview(answerButton)
         }
     }

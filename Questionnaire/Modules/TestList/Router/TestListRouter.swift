@@ -30,7 +30,7 @@ final class TestListRouter {
 extension TestListRouter: TestListRouterInput {
     
     func openTest(with questions: [Question], testId: String) {
-        let model = TestQuestionAssembly.Model(questions: questions, testId: testId)
+        let model = TestQuestionAssembly.Model(mistakes: nil, questions: questions, testId: testId)
         transition.push(with: model, openModuleType: TestQuestionAssembly.self)
     }
 }

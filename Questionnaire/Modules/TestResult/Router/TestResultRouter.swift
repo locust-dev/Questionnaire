@@ -8,6 +8,7 @@
 
 protocol TestResultRouterInput {
     func closeModule()
+    func openMistakes(mistakes: [QuestionMistakeModel]?, questions: [Question], testId: String)
 }
 
 final class TestResultRouter {
@@ -31,5 +32,10 @@ extension TestResultRouter: TestResultRouterInput {
     
     func closeModule() {
         transition.popToRootViewController(animated: true)
+    }
+    
+    func openMistakes(mistakes: [QuestionMistakeModel]?, questions: [Question], testId: String) {
+        let model = TestQuestionAssembly.Model(mistakes: mistakes, questions: questions, testId: testId)
+        transition.push(with: model, openModuleType: TestQuestionAssembly.self)
     }
 }

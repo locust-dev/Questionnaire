@@ -14,7 +14,7 @@ final class TestResultMistakesCell: NLTableViewCell, Delegatable {
     var delegate: AnyObject?
     
     private let titleLabel = UILabel()
-    private let mistakesNumbersStack = UIStackView()
+    private let showMistakesButton = CommonButton(style: .filled)
     
     
     // MARK: - Init
@@ -32,36 +32,28 @@ final class TestResultMistakesCell: NLTableViewCell, Delegatable {
         contentView.backgroundColor = .clear
         backgroundColor = .clear
         
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        
-        mistakesNumbersStack.spacing = 10
-        
         titleLabel.textColor = .black
         titleLabel.font = UIFont(name: MainFont.regular, size: 16)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         
-        contentView.addSubview(scrollView)
-        scrollView.addSubview(mistakesNumbersStack)
+        showMistakesButton.addTarget(self, action: #selector(showMistakes), for: .touchUpInside)
+        showMistakesButton.setTitle("Показать ошибки", for: .normal)
+        
         contentView.addSubview(titleLabel)
+        contentView.addSubview(showMistakesButton)
         
         titleLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), excludingEdge: .bottom)
         
-        scrollView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20), excludingEdge: .top)
-        scrollView.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 20)
-        scrollView.autoSetDimension(.height, toSize: 50)
-        
-        mistakesNumbersStack.autoPinEdgesToSuperviewEdges()
-        
+        showMistakesButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20), excludingEdge: .top)
+        showMistakesButton.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 20)
     }
     
     
     // MARK: - Actions
     
-    @objc private func didTapMistake(_ sender: UIButton) {
-        (delegate as? TestResultTableViewManagerDelegate)?.didSelectQuestionWithMistake(by: sender.tag)
+    @objc private func showMistakes() {
+        (delegate as? TestResultTableViewManagerDelegate)?.didTapShowMistakes()
     }
     
 }
@@ -72,29 +64,19 @@ extension TestResultMistakesCell: Configurable {
     
     struct Model {
         
-        let mistakesNumbers: [Int]
+        let mistakesCount: Int
     }
     
     func configure(with model: Model) {
         
-        if model.mistakesNumbers.isEmpty {
+        if model.mistakesCount == 0 {
             titleLabel.text = "Вы не совершили ни одной ошибки."
             
         } else {
-            titleLabel.text = "Вы совершили ошибки в вопросах:"
+            // TODO: - склонить
+            titleLabel.text = "Вы совершили ошибки в \(model.mistakesCount) вопросах"
         }
         
-        
-        for mistake in model.mistakesNumbers {
-            
-            let mistakeButton = CommonButton(style: .filled)
-            mistakeButton.setTitle(String(mistake), for: .normal)
-            mistakeButton.autoSetDimensions(to: CGSize(width: 50, height: 50))
-            mistakeButton.layer.cornerRadius = 6
-            mistakeButton.tag = mistake
-            mistakeButton.addTarget(self, action: #selector(didTapMistake(_:)), for: .touchUpInside)
-            mistakesNumbersStack.addArrangedSubview(mistakeButton)
-        }
     }
     
 }
