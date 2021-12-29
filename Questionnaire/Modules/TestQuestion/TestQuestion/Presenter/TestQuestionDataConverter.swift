@@ -54,10 +54,9 @@ final class TestQuestionDataConverter {
 
         let model = TestAnswersCounterCell.Model(answers: answers,
                                                  isMultipleAnswers: isMultipleAnswers,
-                                                 rightAnswer: mistake?.rightAnswers,
-                                                 wrongAnswer: mistake?.wrongAnswers,
                                                  stackSpacing: Locals.AnswersCell.stackSpacing,
-                                                 stackInsets: Locals.AnswersCell.stackInsets)
+                                                 stackInsets: Locals.AnswersCell.stackInsets,
+                                                 questionMistakeModel: mistake)
         
         let cellHeight = calculateAnswersCellHeight(count: answers.count)
         let configurator = AnswerCounterCellConfigurator(item: model, cellHeight: cellHeight)

@@ -34,7 +34,6 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
         
         answersStack.axis = .vertical
         answersStack.distribution = .fillEqually
-        
         contentView.addSubview(answersStack)
     }
     
@@ -49,27 +48,41 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
         }
     }
     
-    private func createButton(answerCount: Int, title: String, model: Model) -> AnswerButton {
+    private func createButtonAction(_ button: AnswerButton, isMultipleAnswers: Bool) {
+        isMultipleAnswers
+            ? button.addTarget(self, action: #selector(selectMultipleAnswers(_:)), for: .touchUpInside)
+            : button.addTarget(self, action: #selector(selectOneAnswer(_:)), for: .touchUpInside)
+    }
+    
+    private func createMistakeButton(_ button: AnswerButton,
+                                     mistakeModel: QuestionMistakeModel,
+                                     answerCount: Int) {
+        
+        if (mistakeModel.selectedRightAnswers.first(where: { $0 == answerCount })) != nil {
+            button.setStyle(.selectedRight)
+            
+        } else if (mistakeModel.wrongAnswers.first(where: { $0 == answerCount })) != nil {
+            button.setStyle(.wrong)
+            
+        } else if (mistakeModel.missingRightAnswers.first(where: { $0 == answerCount })) != nil {
+            button.setStyle(.unselectedRight)
+        }
+    }
+    
+    private func createButton(answerCount: Int,
+                              title: String,
+                              mistakeModel: QuestionMistakeModel?,
+                              isMultipleAnswers: Bool) -> AnswerButton {
         
         let answerButton = AnswerButton(title: "\(answerCount). \(title)")
         answerButton.style = .shadow
         answerButton.tag = answerCount
         
-        if let rightAnswer = model.rightAnswer, let wrongAnswer = model.wrongAnswer {
-            if (rightAnswer.first(where: { $0 == answerCount })) != nil {
-                answerButton.setRightAnswerStyle()
-                
-            } else if (wrongAnswer.first(where: { $0 == answerCount })) != nil {
-                answerButton.setWrongAnswerStyle()
-            }
+        if let mistakeModel = mistakeModel {
+            createMistakeButton(answerButton, mistakeModel: mistakeModel, answerCount: answerCount)
             
         } else {
-            if model.isMultipleAnswers {
-                answerButton.addTarget(self, action: #selector(selectMultipleAnswers(_:)), for: .touchUpInside)
-                
-            } else {
-                answerButton.addTarget(self, action: #selector(selectOneAnswer(_:)), for: .touchUpInside)
-            }
+            createButtonAction(answerButton, isMultipleAnswers: isMultipleAnswers)
         }
         
         return answerButton
@@ -111,10 +124,9 @@ extension TestAnswersCounterCell: Configurable {
         
         let answers: [String]
         let isMultipleAnswers: Bool
-        let rightAnswer: [Int]?
-        let wrongAnswer: [Int]?
         let stackSpacing: CGFloat
         let stackInsets: UIEdgeInsets
+        let questionMistakeModel: QuestionMistakeModel?
     }
     
     func configure(with model: Model) {
@@ -125,7 +137,11 @@ extension TestAnswersCounterCell: Configurable {
         
         model.answers.enumerated().forEach { (index, title) in
             
-            let answerButton = createButton(answerCount: index + 1, title: title, model: model)
+            let answerButton = createButton(answerCount: index + 1,
+                                            title: title,
+                                            mistakeModel: model.questionMistakeModel,
+                                            isMultipleAnswers: model.isMultipleAnswers)
+            
             answersStack.addArrangedSubview(answerButton)
         }
     }

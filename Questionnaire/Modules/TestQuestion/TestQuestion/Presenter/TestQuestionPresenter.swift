@@ -128,6 +128,7 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
         
         if let mistakes = mistakes {
             remainQuestionsNumbers = mistakes.map { $0.questionNumber }
+            remainQuestionsNumbers.sort(by: <)
             currentQuestionNumber = remainQuestionsNumbers.first ?? 1
         } else {
             remainQuestionsNumbers = Array(1...questions.count)

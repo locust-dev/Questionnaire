@@ -45,18 +45,39 @@ final class TestResultDataConverter {
         return numberFormatter.string(from: NSNumber(value: number))
     }
     
-    private func findMistakes<T: Hashable>(_ userAnswers: [T], _ rightAnswers: [T]) -> [T]? {
+    private func findMistakesIn(userAnswers: [Int],
+                                rightAnswers: [Int],
+                                questionNumber: Int) -> QuestionMistakeModel {
         
-        var wrongAnswers = [T]()
-        
-        userAnswers.forEach { number in
+        var selectedRightAnswers = [Int]()
+        var missingRightAnswers = [Int]()
+        var wrongAnswers = [Int]()
+        let isMultiple = rightAnswers.count > 1
+
+        for change in userAnswers.difference(from: rightAnswers) {
             
-            if rightAnswers.first(where: { $0 == number }) == nil {
-                wrongAnswers.append(number)
-            }
+          switch change {
+              
+          case let .remove(_, oldElement, _):
+              missingRightAnswers.append(oldElement)
+              
+          case let .insert(_, newElement, _):
+              wrongAnswers.append(newElement)
+          }
         }
         
-        return wrongAnswers.isEmpty ? nil : wrongAnswers
+        if isMultiple {
+            rightAnswers.forEach({ answer in
+                if userAnswers.contains(answer) {
+                    selectedRightAnswers.append(answer)
+                }
+            })
+        }
+        
+        return QuestionMistakeModel(questionNumber: questionNumber,
+                                    wrongAnswers: wrongAnswers,
+                                    selectedRightAnswers: selectedRightAnswers,
+                                    missingRightAnswers: missingRightAnswers)
     }
     
     private func calculateResults(rightAnswers: [[Int]],
@@ -69,13 +90,13 @@ final class TestResultDataConverter {
             
             let rightAnswer = rightAnswers[userAnswer.questionNumber - 1]
             
-            if let mistakes = findMistakes(userAnswer.answers, rightAnswer) {
-                let mistakeModel = QuestionMistakeModel(
-                    rightAnswers: rightAnswer,
-                    wrongAnswers: mistakes,
-                    questionNumber: userAnswer.questionNumber
-                )
-                questionWithMistakes.append(mistakeModel)
+            if rightAnswer != userAnswer.answers {
+                let mistake = findMistakesIn(userAnswers: userAnswer.answers,
+                                             rightAnswers: rightAnswer,
+                                             questionNumber: userAnswer.questionNumber)
+                
+                matches += mistake.selectedRightAnswers.count
+                questionWithMistakes.append(mistake)
                 
             } else {
                 matches += rightAnswer.count

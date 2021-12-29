@@ -21,6 +21,16 @@ final class AnswerButton: CommonButton {
     private let checkmarkImageView = UIImageView()
     
     
+    // MARK: - Types
+    
+    enum AnswerStyle {
+        
+        case wrong
+        case selectedRight
+        case unselectedRight
+    }
+    
+    
     // MARK: - Init
     
     init(title: String) {
@@ -52,21 +62,28 @@ final class AnswerButton: CommonButton {
     
     // MARK: - Public methods
     
-    func setRightAnswerStyle() {
-        backgroundColor = Colors.rightAnswer()
-        mainTitleLabel.textColor = .white
-        checkmarkImageView.image = Images.deselectedCirlce()
+    func setStyle(_ style: AnswerStyle) {
+        
+        switch style {
+            
+        case .wrong:
+            backgroundColor = Colors.wrongAnswer()
+            checkmarkImageView.image = Images.selectedCirlce()
+            
+        case .selectedRight:
+            backgroundColor = Colors.rightAnswer()
+            checkmarkImageView.image = Images.selectedCirlce()
+            
+        case .unselectedRight:
+            backgroundColor = Colors.rightAnswer()
+            checkmarkImageView.image = Images.deselectedCirlce()
+        }
+        
         layer.borderWidth = 0
+        mainTitleLabel.textColor = .white
     }
     
-    func setWrongAnswerStyle() {
-        backgroundColor = Colors.wrongAnswer()
-        mainTitleLabel.textColor = .white
-        checkmarkImageView.image = Images.selectedCirlce()
-        layer.borderWidth = 0
-    }
-    
-    
+
     // MARK: - Private methods
     
     private func setStyle() {
