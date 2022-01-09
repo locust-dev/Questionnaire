@@ -8,8 +8,10 @@
 
 import UIKit
 
-protocol TestResultViewInput: Loadable, ErrorPresentable, TabBarPresentable {
+protocol TestResultViewInput: ErrorPresentable, TabBarPresentable {
     func update(with viewModel: TestResultViewModel)
+    func showLoader()
+    func hideLoader()
 }
 
 final class TestResultViewController: UIViewController {
@@ -19,7 +21,7 @@ final class TestResultViewController: UIViewController {
     var presenter: TestResultViewOutput?
     var tableViewManager: TestResultTableViewManagerInput?
     
-    private let tableView = UITableView()
+    private let tableView = CommonTableView()
     private let finishButton = CommonButton(style: .shadow)
     
     
@@ -42,7 +44,9 @@ final class TestResultViewController: UIViewController {
         
         tableViewManager?.setup(tableView: tableView)
         tableView.layer.cornerRadius = 12
+        tableView.loaderColor = Colors.mainBlueColor()
         
+        finishButton.setTitle("Завершить тест", for: .normal)
         finishButton.addTarget(self, action: #selector(finishTest), for: .touchUpInside)
         
         view.addSubview(tableView)
@@ -84,8 +88,15 @@ final class TestResultViewController: UIViewController {
 extension TestResultViewController: TestResultViewInput {
     
     func update(with viewModel: TestResultViewModel) {
-        finishButton.setTitle(viewModel.finishButtonTitle, for: .normal)
         tableViewManager?.update(with: viewModel)
+    }
+    
+    func showLoader() {
+        tableView.showLoader()
+    }
+    
+    func hideLoader() {
+        tableView.hideLoader()
     }
     
 }

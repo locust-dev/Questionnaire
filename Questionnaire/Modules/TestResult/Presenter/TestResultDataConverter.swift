@@ -131,7 +131,7 @@ extension TestResultDataConverter: TestResultDataConverterInput {
             rows.append(mistakesRow)
         }
         
-        return TestResultViewModel(rows: rows, finishButtonTitle: "Завершить тест", mistakes: resultsModel.mistakes)
+        return TestResultViewModel(rows: rows, mistakes: resultsModel.mistakes)
     }
     
 }

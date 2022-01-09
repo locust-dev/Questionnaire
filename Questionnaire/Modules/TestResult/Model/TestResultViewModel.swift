@@ -40,6 +40,5 @@ struct TestResultViewModel {
     // MARK: - Properties
     
     let rows: [Row]
-    let finishButtonTitle: String
     let mistakes: [QuestionMistakeModel]?
 }

@@ -63,7 +63,7 @@ extension TestResultPresenter: TestResultViewOutput {
     }
     
     func viewIsReady() {
-        view?.showHUD()
+        view?.showLoader()
         interactor?.getRightAnswers(by: testId)
     }
     
@@ -74,7 +74,7 @@ extension TestResultPresenter: TestResultViewOutput {
 extension TestResultPresenter: TestResultInteractorOutput {
     
     func didSuccessObtainAnswers(_ answers: [[Int]]) {
-        view?.hideHUD()
+        view?.hideLoader()
         rightAnswers = answers
         let viewModel = dataConverter.convert(rightAnswers: answers, userAnswers: userAnswers)
         mistakes = viewModel.mistakes
@@ -82,7 +82,7 @@ extension TestResultPresenter: TestResultInteractorOutput {
     }
     
     func didFailObtainAnswers(error: ErrorModel) {
-        view?.hideHUD()
+        view?.hideLoader()
         view?.showErrorPlaceholder(error)
     }
 
