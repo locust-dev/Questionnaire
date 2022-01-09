@@ -49,7 +49,7 @@ final class TestQuestionPresenter {
     
     // MARK: - Private methods
     
-    private func setQuestion() {
+    private func updateQuestion(direction: Direction) {
         
         guard let question = questions[safe: currentQuestionNumber - 1] else {
             return
@@ -65,6 +65,7 @@ final class TestQuestionPresenter {
         }
         
         let model = dataConverter.convert(question: question,
+                                          animateDirection: direction,
                                           currentQuestionNumber: currentQuestionNumber,
                                           questionsCount: questions.count,
                                           remainQuestionsNumbers: remainQuestionsNumbers,
@@ -78,8 +79,9 @@ final class TestQuestionPresenter {
             router?.openResults(questions: questions, userAnswers: userAnswers, testId: testId)
             
         } else if remainQuestionsNumbers.count == 1 {
+            let lastQuestionNumber = currentQuestionNumber
             currentQuestionNumber = remainQuestionsNumbers.first!
-            setQuestion()
+            updateQuestion(direction: lastQuestionNumber > currentQuestionNumber ? .left : .right)
             
         } else {
             if !moveToClosedNextQuestion() {
@@ -94,7 +96,7 @@ final class TestQuestionPresenter {
         for questionNumber in remainQuestionsNumbers {
             if questionNumber > currentQuestionNumber {
                 currentQuestionNumber = questionNumber
-                setQuestion()
+                updateQuestion(direction: .right)
                 return true
             }
         }
@@ -110,7 +112,7 @@ final class TestQuestionPresenter {
         for questionNumber in reversedNumbers {
             if questionNumber < currentQuestionNumber {
                 currentQuestionNumber = questionNumber
-                setQuestion()
+                updateQuestion(direction: .left)
                 return true
             }
         }
@@ -135,7 +137,7 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
         }
         
         view?.hideTabBar()
-        setQuestion()
+        updateQuestion(direction: .none)
     }
     
     func didTapConfirmButton() {

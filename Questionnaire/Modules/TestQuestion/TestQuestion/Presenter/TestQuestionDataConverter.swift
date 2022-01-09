@@ -12,6 +12,7 @@ import UIKit
 protocol TestQuestionDataConverterInput {
     
     func convert(question: Question,
+                 animateDirection: Direction,
                  currentQuestionNumber: Int,
                  questionsCount: Int,
                  remainQuestionsNumbers: [Int],
@@ -79,6 +80,7 @@ final class TestQuestionDataConverter {
 extension TestQuestionDataConverter: TestQuestionDataConverterInput {
     
     func convert(question: Question,
+                 animateDirection: Direction,
                  currentQuestionNumber: Int,
                  questionsCount: Int,
                  remainQuestionsNumbers: [Int],
@@ -91,31 +93,23 @@ extension TestQuestionDataConverter: TestQuestionDataConverterInput {
         
         let rows = [titleRow, answersCounterRow]
         
-        let isSkipButtonEnabled: Bool
-        let isReturnButtonEnabled: Bool
+        var isSkipButtonEnabled = remainQuestionsNumbers.count != 1
+        var isReturnButtonEnabled = remainQuestionsNumbers.count != 1
         
-        if remainQuestionsNumbers.count == 1 {
+        if currentQuestionNumber == remainQuestionsNumbers.last {
             isSkipButtonEnabled = false
-            isReturnButtonEnabled = false
-        } else if currentQuestionNumber == remainQuestionsNumbers.last {
-            isSkipButtonEnabled = false
-            isReturnButtonEnabled = true
+            
         } else if currentQuestionNumber == remainQuestionsNumbers.first {
-            isSkipButtonEnabled = true
             isReturnButtonEnabled = false
-        } else {
-            isSkipButtonEnabled = true
-            isReturnButtonEnabled = true
         }
-        
-        
         
         return TestQuestionViewModel(rows: rows,
                                      currentQuestionNumber: currentQuestionNumber,
                                      questionsCount: questionsCount,
                                      isSkipButtonEnabled: isSkipButtonEnabled,
                                      isReturnButtonEnabled: isReturnButtonEnabled,
-                                     isMistakesShowing: mistake != nil)
+                                     isMistakesShowing: mistake != nil,
+                                     swipeDirection: animateDirection)
     }
 
 }

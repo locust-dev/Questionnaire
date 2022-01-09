@@ -44,4 +44,5 @@ struct TestQuestionViewModel {
     let isSkipButtonEnabled: Bool
     let isReturnButtonEnabled: Bool
     let isMistakesShowing: Bool
+    let swipeDirection: Direction
 }

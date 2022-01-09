@@ -14,7 +14,7 @@ protocol TestQuestionViewInput: Alertable, TabBarPresentable {
 }
 
 final class TestQuestionViewController: UIViewController {
-	
+    
     // MARK: - Public properties
     
 	var presenter: TestQuestionViewOutput?
@@ -88,6 +88,45 @@ final class TestQuestionViewController: UIViewController {
     }
     
     
+    // MARK: - Private methods
+    
+    private func swipeQuestion(_ direction: Direction, completion: @escaping (Direction) -> Void) {
+        
+        let leftCornerPosition = view.frame.maxX
+        let rightCornerPosition = view.frame.minX - containerView.frame.width
+        let firstPosition = direction == .left ? leftCornerPosition : rightCornerPosition
+        let secondPosition = direction == .left ? rightCornerPosition : leftCornerPosition
+        
+        UIView.animate(withDuration: 0.2) {
+            self.containerView.frame.origin.x = firstPosition
+            
+        } completion: { _ in
+            self.containerView.frame.origin.x = secondPosition
+            completion(direction)
+            
+            UIView.animate(withDuration: 0.2) {
+                self.containerView.center.x = self.view.center.x
+            }
+        }
+    }
+    
+    private func updateQuestionInfo(with viewModel: TestQuestionViewModel) {
+        
+        if viewModel.isMistakesShowing {
+            
+            navigationItem.hidesBackButton = false
+            finishTestButton.isHidden = true
+            confirmButton.isHidden = true
+            tableView.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -20)
+        }
+        
+        returnQuestionButton.isEnabled = viewModel.isReturnButtonEnabled
+        skipQuestionButton.isEnabled = viewModel.isSkipButtonEnabled
+        tableViewManager?.update(with: viewModel)
+        title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
+    }
+    
+    
     // MARK: - Actions
     
     @objc private func confirmTap() {
@@ -117,19 +156,9 @@ final class TestQuestionViewController: UIViewController {
 extension TestQuestionViewController: TestQuestionViewInput {
     
     func update(with viewModel: TestQuestionViewModel) {
-        
-        if viewModel.isMistakesShowing {
-            
-            navigationItem.hidesBackButton = false
-            finishTestButton.isHidden = true
-            confirmButton.isHidden = true
-            tableView.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -20)
+        swipeQuestion(viewModel.swipeDirection) { _ in
+            self.updateQuestionInfo(with: viewModel)
         }
-        
-        returnQuestionButton.isEnabled = viewModel.isReturnButtonEnabled
-        skipQuestionButton.isEnabled = viewModel.isSkipButtonEnabled
-        tableViewManager?.update(with: viewModel)
-        title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
     }
     
     func showNotConfirmAlert() {
