@@ -207,6 +207,7 @@
 		19D5C9D82767538C000109F2 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9D72767538C000109F2 /* AlertAction.swift */; };
 		19D5C9DB27679F6B000109F2 /* TestCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9DA27679F6B000109F2 /* TestCategoryModel.swift */; };
 		19D5C9E12767B2D0000109F2 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9E02767B2D0000109F2 /* ErrorModel.swift */; };
+		19E6DF49278B273C00BD677A /* KeyboardShowableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */; };
 		19FD3BBB277A075B0082A102 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FD3BBA277A075B0082A102 /* RegistrationData.swift */; };
 		7F0FA2D73F5CD2AADC74B53E /* Pods_Questionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */; };
 /* End PBXBuildFile section */
@@ -388,6 +389,7 @@
 		19D5C9D72767538C000109F2 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		19D5C9DA27679F6B000109F2 /* TestCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoryModel.swift; sourceTree = "<group>"; };
 		19D5C9E02767B2D0000109F2 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowableViewController.swift; sourceTree = "<group>"; };
 		19FD3BBA277A075B0082A102 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
 		3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Questionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6ABDDB1C71174B43894F241 /* Pods-Questionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Questionnaire.release.xcconfig"; path = "Target Support Files/Pods-Questionnaire/Pods-Questionnaire.release.xcconfig"; sourceTree = "<group>"; };
@@ -1436,6 +1438,7 @@
 				19459888276E1B5200F32033 /* CommonButton.swift */,
 				19A8793C276F546C0086B143 /* CommonTableViewCell.swift */,
 				19A8793A276F4C5A0086B143 /* CommonNavigationController.swift */,
+				19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1804,6 +1807,7 @@
 				1952AA722760FD3D00675931 /* AppDelegate.swift in Sources */,
 				1982B567276398E7003DAB1A /* ProfileAssembly.swift in Sources */,
 				19BB25F12764A8B4004F165B /* DatabaseService.swift in Sources */,
+				19E6DF49278B273C00BD677A /* KeyboardShowableViewController.swift in Sources */,
 				19304D77276897AF00EA403A /* Test.swift in Sources */,
 				19C832D7276C92A80050747F /* String+RemoveWhiteSpaces.swift in Sources */,
 				193D994327624052004ACA7F /* AuthorizationAssembly.swift in Sources */,

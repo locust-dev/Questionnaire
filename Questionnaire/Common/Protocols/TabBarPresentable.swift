@@ -28,26 +28,37 @@ extension TabBarPresentable where Self: UIViewController {
     
     // MARK: - Private methods
     
-    private func setTabBarHidden(_ hidden: Bool, animated: Bool = true, duration: TimeInterval = 0.2) {
+    private func setTabBarHidden(_ hidden: Bool) {
         
-        if animated, let frame = tabBarController?.tabBar.frame {
-            
-            let factor: CGFloat = hidden ? 1 : -1
-            let yOffset = frame.origin.y + (frame.size.height * factor)
-            let endFrame = CGRect(x: frame.origin.x, y: yOffset, width: frame.width, height: frame.height)
-            
-            UIView.animate(withDuration: duration, animations: {
-                self.tabBarController?.tabBar.frame = endFrame
-                (self.tabBarController as? MainScreenViewController)?.setCustomViewFrame(endFrame)
-            })
-            
+        guard let tabBarController = tabBarController else {
             return
         }
         
-        tabBarController?.tabBar.isHidden = hidden
-        (tabBarController as? MainScreenViewController)?.setCustomViewFrame(.zero)
+        let tabBar = tabBarController.tabBar
+        let offsetY = hidden ? tabBar.frame.height : -tabBar.frame.height
+        let endFrame = tabBar.frame.offsetBy(dx: 0, dy: offsetY)
+        let selectedIndex = tabBarController.selectedIndex
+        let targetViewController = tabBarController.viewControllers?[selectedIndex]
+        var newInsets = targetViewController?.additionalSafeAreaInsets
+        newInsets?.bottom -= offsetY
+        
+        if hidden, let insets = newInsets {
+            targetViewController?.additionalSafeAreaInsets = insets
+            targetViewController?.view.setNeedsLayout()
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            tabBar.frame = endFrame
+            (tabBarController as? MainScreenViewController)?.setCustomViewFrame(endFrame)
+            
+        }) { _ in
+            if !hidden, let insets = newInsets {
+                targetViewController?.additionalSafeAreaInsets = insets
+                targetViewController?.view.setNeedsLayout()
+            }
+        }
     }
+    
 }
-
 
 extension UIViewController: TabBarPresentable { }

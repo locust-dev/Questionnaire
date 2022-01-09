@@ -14,13 +14,11 @@ protocol AuthorizationViewInput: Alertable, Loadable {
     func showErrorAlert(message: String)
 }
 
-final class AuthorizationViewController: UIViewController {
-	
+final class AuthorizationViewController: KeyboardShowableViewController {
+    
     // MARK: - Properties
     
-	var presenter: AuthorizationViewOutput?
-    
-    private var activeTextField: UITextField?
+    var presenter: AuthorizationViewOutput?
     
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -29,24 +27,15 @@ final class AuthorizationViewController: UIViewController {
     private let confirmButton = CommonButton(style: .filled)
     private let registerButton = CommonButton(style: .shadow)
     private let forgotPasswordButton = UIButton()
-    private let notifitacionCenter = NotificationCenter.default
-  
+    
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notifitacionCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notifitacionCenter.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         drawSelf()
         presenter?.viewIsReady()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
     }
     
     
@@ -106,7 +95,7 @@ final class AuthorizationViewController: UIViewController {
         view.addSubview(appIconContainer)
         appIconContainer.addSubview(appIconImageView)
         stackContainer.addSubview(stackView)
-
+        
         stackContainer.autoPinEdgesToSuperviewSafeArea(with: UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10), excludingEdge: .top)
         stackView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 40, left: 20, bottom: 20, right: 20))
         
@@ -121,7 +110,7 @@ final class AuthorizationViewController: UIViewController {
         
         loginTextField.autoSetDimension(.height, toSize: 50)
         passwordTextField.autoSetDimension(.height, toSize: 50)
-
+        
         forgotPasswordButton.autoSetDimension(.height, toSize: 20)
         forgotPasswordButton.autoPinEdge(.right, to: .right, of: passwordTextField)
         forgotPasswordButton.autoPinEdge(.top, to: .bottom, of: passwordTextField, withOffset: 6)
@@ -143,27 +132,6 @@ final class AuthorizationViewController: UIViewController {
         showAlert(title: "Забыли пароль?", message: "Пожалуйста, обратитесь к @turin_ilya")
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey],
-              let keyboardSize = (keyboardFrame as? NSValue)?.cgRectValue,
-              let activeTextField = activeTextField
-        else {
-            return
-        }
-        
-        let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: view).maxY
-        let topOfKeyboard = view.frame.height - keyboardSize.height
-        
-        if bottomOfTextField > topOfKeyboard {
-            view.frame.origin.y = -(bottomOfTextField - topOfKeyboard + 20)
-        }
-    }
-
-    @objc private func keyboardWillHide() {
-        view.frame.origin.y = 0
-    }
-
 }
 
 
@@ -182,18 +150,4 @@ extension AuthorizationViewController: AuthorizationViewInput {
         registerButton.setTitle("Зарегистрироваться", for: .normal)
         forgotPasswordButton.setTitle(viewModel.forgotPassButtonTitle, for: .normal)
     }
-}
-
-
-// MARK: - UITextFieldDelegate
-extension AuthorizationViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        activeTextField = nil
-    }
-    
 }

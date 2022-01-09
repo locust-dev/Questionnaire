@@ -55,7 +55,7 @@ final class BottomLineTextField: NLTextField {
     // MARK: - Actions
     
     @objc private func switchPasswordHiding() {
-        
+        // TODO: - Иконка раскрытия пароля в текс филде
     }
 
     

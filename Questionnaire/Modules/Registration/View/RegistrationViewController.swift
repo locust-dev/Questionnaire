@@ -14,13 +14,11 @@ protocol RegistrationViewInput: Alertable, Loadable {
     func updateViewLabels(_ email: String?)
 }
 
-final class RegistrationViewController: UIViewController {
+final class RegistrationViewController: KeyboardShowableViewController {
     
     // MARK: - Public properties
     
     var presenter: RegistrationViewOutput?
-    
-    private var activeTextField: UITextField?
     
     private let mainLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -30,7 +28,6 @@ final class RegistrationViewController: UIViewController {
     private let passwordTextField = BottomLineTextField()
     private let registerButton = CommonButton()
     private let stack = UIStackView()
-    private let notifitacionCenter = NotificationCenter.default
     
     
     // MARK: - Life cycle
@@ -38,19 +35,11 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notifitacionCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notifitacionCenter.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         drawSelf()
         presenter?.viewIsReady()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
-    }
-    
-    
+
     // MARK: - Drawning
     
     private func drawSelf() {
@@ -149,27 +138,6 @@ final class RegistrationViewController: UIViewController {
         presenter?.didTapRegisterButton(registrationData: registrationData)
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey],
-              let keyboardSize = (keyboardFrame as? NSValue)?.cgRectValue,
-              let activeTextField = activeTextField
-        else {
-            return
-        }
-        
-        let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: view).maxY
-        let topOfKeyboard = view.frame.height - keyboardSize.height
-        
-        if bottomOfTextField > topOfKeyboard {
-            view.frame.origin.y = -(bottomOfTextField - topOfKeyboard + 20)
-        }
-    }
-
-    @objc private func keyboardWillHide() {
-        view.frame.origin.y = 0
-    }
-    
     
     // MARK: - Private methods
     
@@ -199,18 +167,4 @@ extension RegistrationViewController: RegistrationViewInput {
         showAlert(title: "Ура!", message: "Вы зарегистрированы. Теперь вы можете проходить тесты.")
     }
 
-}
-
-
-// MARK: - UITextFieldDelegate
-extension RegistrationViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        activeTextField = nil
-    }
-    
 }
