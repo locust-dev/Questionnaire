@@ -28,6 +28,12 @@ class CommonButton: NLButton {
         }
     }
     
+    override var isHighlighted: Bool {
+        didSet {
+            isHighlighted ? (alpha = 0.7) : (alpha = 1)
+        }
+    }
+    
     
     // MARK: - Init
     
