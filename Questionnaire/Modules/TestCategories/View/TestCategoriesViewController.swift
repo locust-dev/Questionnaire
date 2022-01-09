@@ -49,7 +49,7 @@ final class TestCategoriesViewController: UIViewController {
         tableView.refreshModuleOutput = presenter
         
         view.addSubview(tableView)
-        tableView.autoPinEdgesToSuperviewSafeArea()
+        tableView.autoPinEdgesToSuperviewEdges()
     }
     
     

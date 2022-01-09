@@ -38,12 +38,14 @@ extension RefreshControl: RefreshControlModuleInput {
     
     func setupWith(view: UIScrollView, moduleOutput: RefreshControlModuleOutput?) {
         outputModule = moduleOutput
-        view.addSubview(self)
-        addTarget(self, action: #selector(RefreshControl.didRefresh), for: .valueChanged)
+        view.refreshControl = self
+        addTarget(self, action: #selector(didRefresh), for: .valueChanged)
     }
     
     func finishedLoading() {
-        endRefreshing()
+        mainQueue(delay: 1) {
+            self.endRefreshing()
+        }
     }
     
 }

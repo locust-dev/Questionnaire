@@ -48,7 +48,7 @@ final class TestListViewController: UIViewController {
         tableView.refreshModuleOutput = presenter
         
         view.addSubview(tableView)
-        tableView.autoPinEdgesToSuperviewSafeArea()
+        tableView.autoPinEdgesToSuperviewEdges()
     }
     
 }

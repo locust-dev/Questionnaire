@@ -25,7 +25,6 @@ final class CommonTableView: UITableView {
     
     weak var refreshModuleOutput: RefreshControlModuleOutput? {
         didSet {
-            addSubview(customRefreshControl)
             customRefreshControl.tintColor = .white
             customRefreshControl.setupWith(view: self, moduleOutput: refreshModuleOutput)
         }
