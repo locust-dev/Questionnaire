@@ -9,12 +9,14 @@ import UIKit
 
 extension UINavigationController {
     
-    func setBackButtonDesign() {
+    func largeNavBarTitleAppearance(_ color: UIColor, fontName: String, size: CGFloat) {
         
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().backIndicatorImage = Images.arrowReversed()
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = Images.arrowReversed()
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -5), for: .default)
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: color,
+            NSAttributedString.Key.font: UIFont(name: fontName, size: size)
+        ]
+        
+        navigationBar.largeTitleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
     
 }

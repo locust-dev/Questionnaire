@@ -65,18 +65,11 @@ extension TestResultMistakesCell: Configurable {
     struct Model {
         
         let mistakesCount: Int
+        let titleText: String
     }
     
     func configure(with model: Model) {
-        
-        if model.mistakesCount == 0 {
-            titleLabel.text = "Вы не совершили ни одной ошибки."
-            
-        } else {
-            // TODO: - склонить
-            titleLabel.text = "Вы совершили ошибки в \(model.mistakesCount) вопросах"
-        }
-        
+        titleLabel.text = model.titleText
     }
     
 }

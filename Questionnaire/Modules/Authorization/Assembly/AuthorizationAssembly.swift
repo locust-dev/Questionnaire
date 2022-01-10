@@ -38,7 +38,7 @@ final class AuthorizationAssembly: Assembly {
         view.tabBarItem.title = model.defaultTabBarTitle
         view.tabBarItem.image = Images.tabbar_profile()
         
-        return CommonNavigationController(rootViewController: view)
+        return UINavigationController(rootViewController: view)
     }
 
 }

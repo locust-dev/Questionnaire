@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MainScreenViewInput: AnyObject {
-    func set(viewControllers: [UIViewController]?)
+    func setViewControllers(isAuthorized: Bool?)
     func updateProfileTabUsername(_ username: String)
 }
 
@@ -18,8 +18,6 @@ final class MainScreenViewController: UITabBarController {
     // MARK: - Properties
     
     var presenter: MainScreenViewOutput?
-    
-    private var isFirstLoaded = true
     
     private let customTabBarView = UIView()
     
@@ -41,10 +39,7 @@ final class MainScreenViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isFirstLoaded {
-            presenter?.viewWillAppear()
-            isFirstLoaded = false
-        }
+        presenter?.viewWillAppear()
     }
     
     
@@ -85,21 +80,38 @@ final class MainScreenViewController: UITabBarController {
 // MARK: - MainScreenViewInput
 extension MainScreenViewController: MainScreenViewInput {
     
-    func set(viewControllers: [UIViewController]?) {
-        self.viewControllers = viewControllers
+    func setViewControllers(isAuthorized: Bool?) {
+        
+        let userModule: UIViewController
+        
+        if isAuthorized == true {
+            let profileModel = ProfileAssembly.Model(moduleOutput: presenter as? ProfileModuleOutput,
+                                                     defaulTabBarTitle: "Профиль")
+            
+            userModule = ProfileAssembly.assembleModule(with: profileModel)
+            
+        } else {
+            // TODO: - From config
+            let authModel = AuthorizationAssembly.Model(moduleOutput: presenter as? AuthorizationModuleOutput,
+                                                        defaultTabBarTitle: "Профиль")
+            
+            userModule = AuthorizationAssembly.assembleModule(with: authModel)
+        }
+        
+        // TODO: - From config
+        let testsModel = TestCategoriesAssembly.Model(tabBarTitle: "Тесты")
+        let testsModule = TestCategoriesAssembly.assembleModule(with: testsModel)
+        
+        self.viewControllers = [testsModule, userModule]
     }
     
     func updateProfileTabUsername(_ username: String) {
-        
-        guard let viewControllers = viewControllers else {
-            return
+   
+        let profileVC = viewControllers?.first {
+            ($0 as? UINavigationController)?.topViewController is ProfileViewController
         }
         
-        for viewController in viewControllers {
-            let navigationVC = viewController as? UINavigationController
-            let profileVC = navigationVC?.topViewController as? ProfileViewController
-            profileVC?.tabBarItem.title = username
-        }
+        profileVC?.tabBarItem.title = username
     }
     
 }

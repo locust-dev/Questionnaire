@@ -58,25 +58,12 @@ extension TestResultCircleProgressCell: Configurable {
     struct Model {
         
         let progressPercent: Double
+        let titleText: String
     }
     
     func configure(with model: Model) {
-        // TODO: - Дурейшон
         progressCircleView.start(duration: 2, percentage: model.progressPercent)
-        
-        switch model.progressPercent {
-            
-        case ..<0.26:
-            titleLabel.text = "Похоже, вам стоит немного подтянуть эту тему :("
-            
-        case 0.26...0.75:
-            titleLabel.text = "Хороший результат, так держать!"
-            
-        case 0.76...:
-            titleLabel.text = "Отлично! Вы в числе лидеров! :)"
-            
-        default:
-            break
-        }
+        titleLabel.text = model.titleText
     }
+    
 }

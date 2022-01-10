@@ -20,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().backIndicatorImage = Images.arrowReversed()
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = Images.arrowReversed()
+        
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -5), for: .default)
+        
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: MainFont.medium, size: 10)], for: .normal)
         
         FirebaseApp.configure()

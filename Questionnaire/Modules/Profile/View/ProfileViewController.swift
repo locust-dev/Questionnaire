@@ -38,7 +38,7 @@ final class ProfileViewController: UIViewController {
     private func drawSelf() {
         
         view.backgroundColor = .white
-        setupNavBarAppearance()
+        navigationController?.largeNavBarTitleAppearance(.black, fontName: MainFont.extraBold, size: 34)
         
         tableViewManager?.setup(tableView: tableView)
         
@@ -57,14 +57,6 @@ final class ProfileViewController: UIViewController {
     
     @objc private func logOutTap() {
         presenter?.didTapLogOutButton()
-    }
-    
-    
-    // MARK: - Private methods
-    
-    private func setupNavBarAppearance() {
-        let navigationController = navigationController as? CommonNavigationController
-        navigationController?.largeNavBarTitleAppearance(.black, fontName: MainFont.extraBold, size: 34)
     }
     
 }

@@ -30,7 +30,20 @@ final class CommonTableView: UITableView {
         }
     }
     
-    private var isLoading = false
+    private var isLoading = false {
+        didSet {
+            if isLoading {
+                emptyLabel.removeFromSuperview()
+                addSubview(loaderView)
+                loaderView.autoCenterInSuperview()
+                
+            } else {
+                loaderView.removeFromSuperview()
+                addEmptyLabel()
+                customRefreshControl.finishedLoading()
+            }
+        }
+    }
     
     private let customRefreshControl = RefreshControl()
     private let loaderView = ProgressHUD()
@@ -84,16 +97,10 @@ final class CommonTableView: UITableView {
     
     func showLoader() {
         isLoading = true
-        emptyLabel.removeFromSuperview()
-        addSubview(loaderView)
-        loaderView.autoCenterInSuperview()
     }
     
     func hideLoader() {
         isLoading = false
-        loaderView.removeFromSuperview()
-        addEmptyLabel()
-        customRefreshControl.finishedLoading()
     }
     
 

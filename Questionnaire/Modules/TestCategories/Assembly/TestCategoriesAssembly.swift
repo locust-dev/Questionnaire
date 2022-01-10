@@ -41,7 +41,7 @@ final class TestCategoriesAssembly: Assembly {
         view.tabBarItem.title = model.tabBarTitle
         view.tabBarItem.image = Images.tabbar_tests()
         
-        return CommonNavigationController(rootViewController: view)
+        return UINavigationController(rootViewController: view)
     }
 
 }

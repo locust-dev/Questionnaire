@@ -13,7 +13,7 @@ protocol MainScreenInteractorInput {
     var isAuthorized: Bool { get }
     
     func logOut()
-    func getUserFullname()
+    func requestUserFullname()
 }
 
 final class MainScreenInteractor {
@@ -49,7 +49,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
         authService.logOut()
     }
     
-    func getUserFullname() {
+    func requestUserFullname() {
         
         guard let userToken = authService.currentUserToken else {
             return

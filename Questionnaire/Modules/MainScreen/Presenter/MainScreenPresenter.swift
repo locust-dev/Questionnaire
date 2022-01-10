@@ -22,29 +22,7 @@ final class MainScreenPresenter {
     
     var interactor: MainScreenInteractorInput?
     
-    
-    // MARK: - Private methods
-
-    private func createViewControllers() -> [UIViewController] {
-        
-        let userModule: Module
-        
-        if interactor?.isAuthorized == true {
-            let profileModel = ProfileAssembly.Model(moduleOutput: self , defaulTabBarTitle: "Профиль")
-            userModule = ProfileAssembly.assembleModule(with: profileModel)
-            
-        } else {
-            // TODO: - From config
-            let authModel = AuthorizationAssembly.Model(moduleOutput: self, defaultTabBarTitle: "Профиль")
-            userModule = AuthorizationAssembly.assembleModule(with: authModel)
-        }
-        
-        // TODO: - From config
-        let testsModel = TestCategoriesAssembly.Model(tabBarTitle: "Тесты")
-        let testsModule = TestCategoriesAssembly.assembleModule(with: testsModel)
-        
-        return [testsModule, userModule]
-    }
+    private var isFirstLoaded = true
 
 }
 
@@ -53,8 +31,11 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenViewOutput {
     
     func viewWillAppear() {
-        view?.set(viewControllers: createViewControllers())
-        interactor?.getUserFullname()
+        if isFirstLoaded {
+            view?.setViewControllers(isAuthorized: interactor?.isAuthorized)
+            interactor?.requestUserFullname()
+            isFirstLoaded = false
+        }
     }
 }
 
@@ -73,7 +54,7 @@ extension MainScreenPresenter: MainScreenInteractorOutput {
 extension MainScreenPresenter: AuthorizationModuleOutput {
     
     func didSuccessAuthorized() {
-        view?.set(viewControllers: createViewControllers())
+        view?.setViewControllers(isAuthorized: interactor?.isAuthorized)
     }
 }
 
@@ -83,7 +64,7 @@ extension MainScreenPresenter: ProfileModuleOutput {
     
     func didTapLogOutButton() {
         interactor?.logOut()
-        view?.set(viewControllers: createViewControllers())
+        view?.setViewControllers(isAuthorized: interactor?.isAuthorized)
     }
 }
 
@@ -92,6 +73,6 @@ extension MainScreenPresenter: ProfileModuleOutput {
 extension MainScreenPresenter: RegistrationModuleOutput {
     
     func didSuccessToSaveNewUser() {
-        view?.set(viewControllers: createViewControllers())
+        view?.setViewControllers(isAuthorized: interactor?.isAuthorized)
     }
 }

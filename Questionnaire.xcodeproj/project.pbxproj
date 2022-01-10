@@ -121,7 +121,6 @@
 		1992E7FA2771ECB50068FFFF /* TabBarPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */; };
 		1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */; };
 		1992E801277223AB0068FFFF /* ProfileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E800277223AB0068FFFF /* ProfileListCell.swift */; };
-		19A8793B276F4C5A0086B143 /* CommonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8793A276F4C5A0086B143 /* CommonNavigationController.swift */; };
 		19A8793D276F546C0086B143 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8793C276F546C0086B143 /* CommonTableViewCell.swift */; };
 		19BB25F12764A8B4004F165B /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F02764A8B4004F165B /* DatabaseService.swift */; };
 		19BB25F92764CC18004F165B /* DatabasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F82764CC18004F165B /* DatabasePath.swift */; };
@@ -304,7 +303,6 @@
 		1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresentable.swift; sourceTree = "<group>"; };
 		1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewManager.swift; sourceTree = "<group>"; };
 		1992E800277223AB0068FFFF /* ProfileListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListCell.swift; sourceTree = "<group>"; };
-		19A8793A276F4C5A0086B143 /* CommonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNavigationController.swift; sourceTree = "<group>"; };
 		19A8793C276F546C0086B143 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		19BB25F02764A8B4004F165B /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		19BB25F82764CC18004F165B /* DatabasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePath.swift; sourceTree = "<group>"; };
@@ -1440,7 +1438,6 @@
 				19D5C9C3276738FA000109F2 /* CommonTableView.swift */,
 				19459888276E1B5200F32033 /* CommonButton.swift */,
 				19A8793C276F546C0086B143 /* CommonTableViewCell.swift */,
-				19A8793A276F4C5A0086B143 /* CommonNavigationController.swift */,
 				19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */,
 			);
 			path = Views;
@@ -1739,7 +1736,6 @@
 				19861D99276A353800D3C041 /* RegistrationPresenter.swift in Sources */,
 				19C832D4276C92A80050747F /* Date+Components.swift in Sources */,
 				19C83224276C906D0050747F /* NLView.swift in Sources */,
-				19A8793B276F4C5A0086B143 /* CommonNavigationController.swift in Sources */,
 				19C832D1276C92A80050747F /* Double+String.swift in Sources */,
 				1982B546276335F1003DAB1A /* DispatchQueue.swift in Sources */,
 				19C83222276C906D0050747F /* NLViewController.swift in Sources */,

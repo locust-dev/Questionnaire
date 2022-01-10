@@ -41,7 +41,8 @@ final class TestCategoriesViewController: UIViewController {
         
         title = "Категории"
         tabBarItem.title = "Тесты"
-        setupNavBarAppearance()
+        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
+        navigationItem.backButtonTitle = ""
         
         view.backgroundColor = Colors.mainBlueColor()
         
@@ -50,15 +51,6 @@ final class TestCategoriesViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.autoPinEdgesToSuperviewEdges()
-    }
-    
-    
-    // MARK: - Private methods
-    
-    private func setupNavBarAppearance() {
-        let navigationController = navigationController as? CommonNavigationController
-        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
-        navigationItem.backButtonTitle = ""
     }
     
 }

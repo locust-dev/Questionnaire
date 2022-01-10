@@ -29,13 +29,34 @@ final class TestResultDataConverter {
     // MARK: - Private methods
     
     private func createCircleProgressRow(progressPercent: Double) -> Row {
-        let model = TestResultCircleProgressCell.Model(progressPercent: progressPercent)
+        
+        var titleText = "Похоже, вам стоит немного подтянуть эту тему :("
+        
+        switch progressPercent {
+            
+        case 0.26...0.75:
+            titleText = "Хороший результат, так держать!"
+            
+        case 0.76...:
+            titleText = "Отлично! Вы в числе лидеров! :)"
+            
+        default:
+            break
+        }
+        
+        let model = TestResultCircleProgressCell.Model(progressPercent: progressPercent,
+                                                       titleText: titleText)
         let configurator = CircleProgressCellConfigurator(item: model)
         return .circleProgress(configurator)
     }
     
     private func createMistakesRow(mistakesCount: Int) -> Row {
-        let model = TestResultMistakesCell.Model(mistakesCount: mistakesCount)
+        
+        let titleText = mistakesCount == 0
+            ? "Вы не совершили ни одной ошибки."
+            : "Вы совершили ошибки в \(mistakesCount) вопросах"
+    
+        let model = TestResultMistakesCell.Model(mistakesCount: mistakesCount, titleText: titleText)
         let configurator = MistakesCellConfigurator(item: model)
         return .mistakes(configurator)
     }
@@ -53,17 +74,17 @@ final class TestResultDataConverter {
         var missingRightAnswers = [Int]()
         var wrongAnswers = [Int]()
         let isMultiple = rightAnswers.count > 1
-
+        
         for change in userAnswers.difference(from: rightAnswers) {
             
-          switch change {
-              
-          case let .remove(_, oldElement, _):
-              missingRightAnswers.append(oldElement)
-              
-          case let .insert(_, newElement, _):
-              wrongAnswers.append(newElement)
-          }
+            switch change {
+                
+            case let .remove(_, oldElement, _):
+                missingRightAnswers.append(oldElement)
+                
+            case let .insert(_, newElement, _):
+                wrongAnswers.append(newElement)
+            }
         }
         
         if isMultiple {
