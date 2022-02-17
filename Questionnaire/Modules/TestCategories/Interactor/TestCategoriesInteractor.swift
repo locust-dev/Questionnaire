@@ -50,11 +50,7 @@ extension TestCategoriesInteractor: TestCategoriesInteractorInput {
             switch result {
 
             case .success(let categoriesModel):
-                
-                mainQueue(delay: 3) {
-                    
-                    self?.presenter?.didSuccessObtain(categories: categoriesModel)
-                }
+                self?.presenter?.didSuccessObtain(categories: categoriesModel)
 
             case .failure(let error):
                 self?.presenter?.didFailObtainCategories(error: error)
