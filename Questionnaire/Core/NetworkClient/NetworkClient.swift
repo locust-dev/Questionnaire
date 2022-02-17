@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkClientInput {
-    func parse<Model: Decodable>(rawData: Any, type: Model.Type, completion: @escaping (Model?) -> Void)
+    func parse<Model: Decodable>(rawData: Any, type: Model.Type, completion: @escaping (Result<Model, ErrorModel>) -> Void)
 }
 
 final class NetworkClient { }
@@ -17,23 +17,23 @@ final class NetworkClient { }
 // MARK: - NetworkClientInput
 extension NetworkClient: NetworkClientInput {
     
-    func parse<Model: Decodable>(rawData: Any, type: Model.Type, completion: @escaping (Model?) -> Void) {
+    func parse<Model: Decodable>(rawData: Any, type: Model.Type, completion: @escaping (Result<Model, ErrorModel>) -> Void) {
         
         globalQueue {
             
             guard (rawData as? NSNull) == nil else {
-                completion(nil)
+                completion(.failure(.parseError))
                 return
             }
             
             do {
                 let json = try JSONSerialization.data(withJSONObject: rawData)
                 let decodedData = try JSONDecoder().decode(Model.self, from: json)
-                completion(decodedData)
+                completion(.success(decodedData))
                 
             } catch(let error) {
                 print(error.localizedDescription)
-                completion(nil)
+                completion(.failure(.parseError))
             }
         }
     }

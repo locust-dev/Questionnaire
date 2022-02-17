@@ -47,13 +47,16 @@ extension TestCategoriesInteractor: TestCategoriesInteractorInput {
         
         databaseService.getData(.categories, modelType: [TestCategoryModel].self) { [weak self] result in
             
-            switch result {
-
-            case .success(let categoriesModel):
-                self?.presenter?.didSuccessObtain(categories: categoriesModel)
-
-            case .failure(let error):
-                self?.presenter?.didFailObtainCategories(error: error)
+            mainQueue {
+                
+                switch result {
+                    
+                case .success(let categoriesModel):
+                    self?.presenter?.didSuccessObtain(categories: categoriesModel)
+                    
+                case .failure(let error):
+                    self?.presenter?.didFailObtainCategories(error: error)
+                }
             }
         }
     }

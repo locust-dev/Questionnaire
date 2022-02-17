@@ -50,27 +50,11 @@ extension DatabaseService: DatabaseServiceInput {
             self.databaseReference.child(key.stringPath).getData { [weak self] error, data in
                 
                 guard let dataValue = data.value, error == nil else {
-                    
-                    mainQueue {
-                        
-                        completion(.failure(.serverError))
-                    }
+                    completion(.failure(.serverError))
                     return
                 }
                 
-                self?.networkClient.parse(rawData: dataValue, type: modelType) { model in
-                    
-                    mainQueue {
-                        guard let model = model else {
-                            completion(.failure(.parseError))
-                            return
-                        }
-                        
-                        completion(.success(model))
-                    }
-                }
-                
-                
+                self?.networkClient.parse(rawData: dataValue, type: modelType, completion: completion)
             }
         }
         

@@ -36,14 +36,18 @@ extension TestResultInteractor: TestResultInteractorInput {
         
         databaseService.getData(.rightAnswers(testId: testId), modelType: [[Int]].self) { [weak self] result in
             
-            switch result {
+            mainQueue {
                 
-            case .success(let answers):
-                self?.presenter?.didSuccessObtainAnswers(answers)
-                
-            case .failure(let error):
-                self?.presenter?.didFailObtainAnswers(error: error)
+                switch result {
+                    
+                case .success(let answers):
+                    self?.presenter?.didSuccessObtainAnswers(answers)
+                    
+                case .failure(let error):
+                    self?.presenter?.didFailObtainAnswers(error: error)
+                }
             }
         }
     }
+    
 }

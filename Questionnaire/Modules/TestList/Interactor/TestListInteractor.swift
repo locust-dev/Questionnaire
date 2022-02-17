@@ -44,7 +44,7 @@ final class TestListInteractor {
         let path = DatabasePath.allowedTests(token: userToken)
     
         databaseService.getData(path, modelType: [String].self) { [weak self] result in
-
+            
             switch result {
 
             case .success(let allowedTests):

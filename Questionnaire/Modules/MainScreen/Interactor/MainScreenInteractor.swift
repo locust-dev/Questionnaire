@@ -57,13 +57,16 @@ extension MainScreenInteractor: MainScreenInteractorInput {
         
         databaseService.getData(.user(token: userToken), modelType: ProfileModel.self) { [weak self] result in
             
-            switch result {
+            mainQueue {
                 
-            case .success(let profileModel):
-                self?.presenter?.didObtainFullname(profileModel.fullName)
-                
-            case .failure(_):
-                break
+                switch result {
+                    
+                case .success(let profileModel):
+                    self?.presenter?.didObtainFullname(profileModel.fullName)
+                    
+                case .failure(_):
+                    break
+                }
             }
         }
     }

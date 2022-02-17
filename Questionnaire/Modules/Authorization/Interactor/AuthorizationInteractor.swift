@@ -41,14 +41,17 @@ final class AuthorizationInteractor {
         
         databaseService.getData(.user(token: token), modelType: ProfileModel.self) { [weak self] result in
             
-            switch result {
+            mainQueue {
                 
-            case .success(_):
-                self?.authorizationService.setCurrentUserToken(token)
-                self?.presenter?.didSuccessAuthorize()
-                
-            case .failure(_):
-                self?.presenter?.didFailAuthorize(email: email, error: .userNotFoundInDatabase)
+                switch result {
+                    
+                case .success(_):
+                    self?.authorizationService.setCurrentUserToken(token)
+                    self?.presenter?.didSuccessAuthorize()
+                    
+                case .failure(_):
+                    self?.presenter?.didFailAuthorize(email: email, error: .userNotFoundInDatabase)
+                }
             }
         }
     }

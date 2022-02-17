@@ -48,13 +48,16 @@ extension ProfileInteractor: ProfileInteractorInput {
         
         databaseService.getData(.user(token: userToken), modelType: ProfileModel.self) { [weak self] result in
             
-            switch result {
+            mainQueue {
                 
-            case .success(let profileModel):
-                self?.presenter?.didSuccessFetchUserData(profile: profileModel)
-                
-            case .failure(let error):
-                self?.presenter?.didFailFetchUserData(error: error)
+                switch result {
+                    
+                case .success(let profileModel):
+                    self?.presenter?.didSuccessFetchUserData(profile: profileModel)
+                    
+                case .failure(let error):
+                    self?.presenter?.didFailFetchUserData(error: error)
+                }
             }
         }
     }
