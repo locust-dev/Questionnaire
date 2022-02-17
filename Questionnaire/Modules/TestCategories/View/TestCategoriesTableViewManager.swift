@@ -47,7 +47,6 @@ extension TestCategoriesTableViewManager: TestCategoriesTableViewManagerInput {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.contentInset.top = Locals.topContentInset
-        tableView.backgroundColor = .clear
         self.tableView = tableView
     }
     

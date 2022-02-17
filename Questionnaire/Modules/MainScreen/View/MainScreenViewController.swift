@@ -98,11 +98,13 @@ extension MainScreenViewController: MainScreenViewInput {
             userModule = AuthorizationAssembly.assembleModule(with: authModel)
         }
         
-        // TODO: - From config
         let testsModel = TestCategoriesAssembly.Model(tabBarTitle: "Тесты")
         let testsModule = TestCategoriesAssembly.assembleModule(with: testsModel)
         
-        self.viewControllers = [testsModule, userModule]
+        let knowlegdeModel = KnowlegdeBaseAssembly.Model(tabBarTitle: "База знаний")
+        let knowledgeModule = KnowlegdeBaseAssembly.assembleModule(with: knowlegdeModel)
+        
+        self.viewControllers = [testsModule, knowledgeModule, userModule]
     }
     
     func updateProfileTabUsername(_ username: String) {

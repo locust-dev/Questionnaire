@@ -81,6 +81,7 @@ final class CommonTableView: UITableView {
     private func drawSelf() {
         
         loaderColor = .white
+        backgroundColor = .clear
     }
     
     
@@ -101,7 +102,8 @@ final class CommonTableView: UITableView {
 
         if numberOfRows(inSection: 0) == 0, !isLoading {
             addSubview(emptyLabel)
-            emptyLabel.autoCenterInSuperview()
+            emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+            emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
             emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
             emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
             

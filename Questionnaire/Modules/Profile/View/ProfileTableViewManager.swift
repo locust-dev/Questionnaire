@@ -43,7 +43,6 @@ extension ProfileTableViewManager: ProfileTableViewManagerInput {
         tableView.register(ProfileListCell.self)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         self.tableView = tableView
     }

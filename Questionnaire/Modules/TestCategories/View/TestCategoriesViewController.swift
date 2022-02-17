@@ -39,8 +39,7 @@ final class TestCategoriesViewController: UIViewController {
     
     private func drawSelf() {
         
-        title = "Категории"
-        tabBarItem.title = "Тесты"
+        title = "Тесты"
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
         
