@@ -32,16 +32,7 @@ final class CommonTableView: UITableView {
     
     private var isLoading = false {
         didSet {
-            if isLoading {
-                emptyLabel.removeFromSuperview()
-                addSubview(loaderView)
-                loaderView.autoCenterInSuperview()
-                
-            } else {
-                loaderView.removeFromSuperview()
-                addEmptyLabel()
-                customRefreshControl.finishedLoading()
-            }
+            setLoader(isLoading)
         }
     }
     
@@ -120,6 +111,27 @@ final class CommonTableView: UITableView {
     
         } else {
             emptyLabel.removeFromSuperview()
+        }
+    }
+    
+    private func setLoader(_ isLoading: Bool) {
+        
+        guard isLoading else {
+            loaderView.removeFromSuperview()
+            addEmptyLabel()
+            customRefreshControl.finishedLoading()
+            return
+        }
+        
+        mainQueue(delay: 1) {
+            
+            if self.isLoading {
+            
+                self.emptyLabel.removeFromSuperview()
+                self.addSubview(self.loaderView)
+                self.loaderView.autoAlignAxis(.vertical, toSameAxisOf: self.superview ?? self)
+                self.loaderView.autoAlignAxis(.horizontal, toSameAxisOf: self.superview ?? self)
+            }
         }
     }
 
