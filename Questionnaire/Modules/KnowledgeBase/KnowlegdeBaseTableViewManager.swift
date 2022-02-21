@@ -21,7 +21,6 @@ final class KnowlegdeBaseTableViewManager: NSObject {
     
     private enum Locals {
         
-        static let defaultRowHeight: CGFloat = 90
         static let topContentInset: CGFloat = 20
     }
     
@@ -33,6 +32,16 @@ final class KnowlegdeBaseTableViewManager: NSObject {
     private weak var tableView: UITableView?
     
     private var viewModel: KnowlegdeBaseViewModel?
+    private var expandedSections = Set<Int>()
+    
+    
+    // MARK: - Private methods
+    
+    private func rowsIndexForSection(at index: Int) -> [IndexPath]? {
+        viewModel?.sections[safe: index]?.rows.enumerated().map({ rowIndex, _ in
+            IndexPath(row: rowIndex, section: index)
+        })
+    }
     
 }
 
@@ -41,7 +50,7 @@ final class KnowlegdeBaseTableViewManager: NSObject {
 extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
     
     func setup(tableView: UITableView) {
-        
+       
         tableView.register(KnowlegdeHeaderCell.self,
                            forHeaderFooterViewReuseIdentifier: KnowlegdeHeaderCell.className)
         
@@ -50,6 +59,11 @@ extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.contentInset.top = Locals.topContentInset
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        
         self.tableView = tableView
     }
     
@@ -69,7 +83,7 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.sections[safe: section]?.rows.count ?? 0
+        expandedSections.contains(section) ? viewModel?.sections[section].rows.count ?? 0 : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,6 +119,7 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
             return nil
         }
         
+        (view as? KnowlegdeHeaderCell)?.delegate = self
         configurator.configure(cell: view)
         return view
     }
@@ -119,4 +134,27 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
                 
         return configurator.viewHeight
     }
+
+}
+
+
+// MARK: - KnowledgeHeaderCellDelegate
+extension KnowlegdeBaseTableViewManager: KnowledgeHeaderCellDelegate {
+    
+    func didTapHeaderCell(at index: Int) {
+        
+        guard let rowsIndexes = rowsIndexForSection(at: index) else {
+            return
+        }
+        
+        if expandedSections.contains(index) {
+            expandedSections.remove(index)
+            tableView?.deleteRows(at: rowsIndexes, with: .fade)
+            
+        } else {
+            expandedSections.insert(index)
+            tableView?.insertRows(at: rowsIndexes, with: .fade)
+        }
+    }
+
 }

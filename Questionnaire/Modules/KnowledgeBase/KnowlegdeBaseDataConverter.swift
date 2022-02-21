@@ -34,10 +34,10 @@ final class KnowlegdeBaseDataConverter {
     
     // MARK: - Private methods
     
-    private func createCategorySection(_ model: KnowledgeCategoryModel) -> Section {
+    private func createCategorySection(_ model: KnowledgeCategoryModel, sectionIndex: Int) -> Section {
         
         let rows = createTopicRows(model.topics)
-        let headerModel = KnowlegdeHeaderCell.Model(title: model.title)
+        let headerModel = KnowlegdeHeaderCell.Model(title: model.title, sectionIndex: sectionIndex)
         let headerConfigurator = HeaderConfigurator(item: headerModel, viewHeight: Locals.headerHeight)
         
         return Section(headerConfigurator: headerConfigurator, rows: rows)
@@ -60,7 +60,8 @@ final class KnowlegdeBaseDataConverter {
 extension KnowlegdeBaseDataConverter: KnowlegdeBaseDataConverterInput {
     
     func convert(categories: [KnowledgeCategoryModel]) -> KnowlegdeBaseViewModel {
-        let sections = categories.map { createCategorySection($0) }
+        
+        let sections = categories.enumerated().map { createCategorySection($1, sectionIndex: $0) }
         return KnowlegdeBaseViewModel(sections: sections)
     }
     

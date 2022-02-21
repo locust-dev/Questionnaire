@@ -21,7 +21,7 @@ final class KnowlegdeBaseViewController: UIViewController {
 	var presenter: KnowlegdeBaseViewOutput?
     var tableViewManager: KnowlegdeBaseTableViewManagerInput?
     
-    private let tableView = CommonTableView()
+    private let tableView = CommonTableView(frame: .zero, style: .insetGrouped)
     
     
     // MARK: - Life cycle
@@ -39,6 +39,7 @@ final class KnowlegdeBaseViewController: UIViewController {
     private func drawSelf() {
         
         view.backgroundColor = Colors.mainBlueColor()
+
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
         
