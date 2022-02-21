@@ -65,7 +65,7 @@ extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
 extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
    
     func numberOfSections(in tableView: UITableView) -> Int {
-        0
+        viewModel?.sections.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,7 +74,9 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let row = viewModel?.sections[safe: indexPath.section]?.rows[safe: indexPath.row] else {
+        guard let section = viewModel?.sections[safe: indexPath.section],
+              let row = section.rows[safe: indexPath.row]
+        else {
             return UITableViewCell()
         }
         
@@ -89,6 +91,10 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        viewModel?.sections[safe: indexPath.section]?.rows[safe: indexPath.row]?.configurator.cellHeight ?? 50
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             

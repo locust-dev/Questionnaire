@@ -6,11 +6,22 @@
 //  Copyright © 2022 FINCH. All rights reserved.
 //
 
+import CoreGraphics
+
 protocol KnowlegdeBaseDataConverterInput {
     func convert(categories: [KnowledgeCategoryModel]) -> KnowlegdeBaseViewModel
 }
 
 final class KnowlegdeBaseDataConverter {
+    
+    // MARK: - Locals
+    
+    private enum Locals {
+        
+        static let cellHeight: CGFloat = 50
+        static let headerHeight: CGFloat = 50
+    }
+    
     
     // MARK: - Typealiases
     
@@ -27,7 +38,7 @@ final class KnowlegdeBaseDataConverter {
         
         let rows = createTopicRows(model.topics)
         let headerModel = KnowlegdeHeaderCell.Model(title: model.title)
-        let headerConfigurator = HeaderConfigurator(item: headerModel, viewHeight: 44)
+        let headerConfigurator = HeaderConfigurator(item: headerModel, viewHeight: Locals.headerHeight)
         
         return Section(headerConfigurator: headerConfigurator, rows: rows)
     }
@@ -37,7 +48,7 @@ final class KnowlegdeBaseDataConverter {
         return model.map { topic -> Row in
             
             let model = KnowledgeCell.Model(title: topic.title)
-            let configurator = RowConfigurator(item: model, cellHeight: 50, headerHeight: 50)
+            let configurator = RowConfigurator(item: model, cellHeight: Locals.cellHeight)
             return Row(configurator: configurator)
         }
     }
