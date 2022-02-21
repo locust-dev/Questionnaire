@@ -8,7 +8,10 @@
 
 protocol KnowlegdeBaseViewOutput: ViewOutput, RefreshControlModuleOutput {  }
 
-protocol KnowlegdeBaseInteractorOutput: AnyObject {  }
+protocol KnowlegdeBaseInteractorOutput: AnyObject {
+    func didSuccessObtainKnowledgeCategories(_ model: [KnowledgeCategoryModel])
+    func didFailObtainKnowledgeCategories(_ error: ErrorModel)
+}
 
 final class KnowlegdeBasePresenter {
     
@@ -17,6 +20,7 @@ final class KnowlegdeBasePresenter {
     weak var view: KnowlegdeBaseViewInput?
     
     var router: KnowlegdeBaseRouterInput?
+    var interactor: KnowledgeBaseInteractorInput?
 
     private let dataConverter: KnowlegdeBaseDataConverterInput
     
@@ -33,17 +37,33 @@ final class KnowlegdeBasePresenter {
 // MARK: - KnowlegdeBaseViewOutput
 extension KnowlegdeBasePresenter: KnowlegdeBaseViewOutput {
     
-    func viewIsReady() {  }
+    func viewIsReady() {
+        view?.showLoader()
+        interactor?.fetchKnowledgeCategories()
+    }
     
     func didRefresh() {
-        view?.hideLoader()
+        interactor?.fetchKnowledgeCategories()
     }
     
 }
 
 
 // MARK: - KnowlegdeBaseInteractorOutput
-extension KnowlegdeBasePresenter: KnowlegdeBaseInteractorOutput {  }
+extension KnowlegdeBasePresenter: KnowlegdeBaseInteractorOutput {
+    
+    func didSuccessObtainKnowledgeCategories(_ model: [KnowledgeCategoryModel]) {
+        view?.hideLoader()
+        let viewModel = dataConverter.convert(categories: model)
+        view?.update(with: viewModel)
+    }
+    
+    func didFailObtainKnowledgeCategories(_ error: ErrorModel) {
+        view?.hideLoader()
+        view?.showErrorPlaceholder(error)
+    }
+
+}
 
 
 // MARK: - KnowlegdeBaseTableViewManagerDelegate

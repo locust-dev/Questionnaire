@@ -62,7 +62,7 @@ extension TestCategoriesTableViewManager: TestCategoriesTableViewManagerInput {
 extension TestCategoriesTableViewManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.rows.count ?? 0
+        viewModel?.rows.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

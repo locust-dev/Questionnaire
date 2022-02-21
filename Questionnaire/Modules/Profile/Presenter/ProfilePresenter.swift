@@ -48,7 +48,7 @@ final class ProfilePresenter {
 extension ProfilePresenter: ProfileViewOutput {
     
     func viewIsReady() {
-        view?.showHUD()
+        view?.showLoader()
         interactor?.fetchUserData()
     }
     
@@ -63,13 +63,13 @@ extension ProfilePresenter: ProfileViewOutput {
 extension ProfilePresenter: ProfileInteractorOutput {
     
     func didSuccessFetchUserData(profile: ProfileModel) {
-        view?.hideHUD()
+        view?.hideLoader()
         let viewModel = dataConverter.convert(profileModel: profile)
         view?.update(with: viewModel)
     }
     
     func didFailFetchUserData(error: ErrorModel) {
-        view?.hideHUD()
+        view?.hideLoader()
         interactor?.logOut()
         moduleOutput?.didTapLogOutButton()
     }

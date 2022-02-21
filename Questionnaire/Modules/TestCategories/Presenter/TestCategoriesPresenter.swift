@@ -43,7 +43,6 @@ extension TestCategoriesPresenter: TestCategoriesViewOutput {
     }
     
     func didRefresh() {
-        view?.showLoader()
         interactor?.getCategories()
     }
     

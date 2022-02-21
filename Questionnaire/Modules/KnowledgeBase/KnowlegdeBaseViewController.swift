@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol KnowlegdeBaseViewInput: AnyObject {
+protocol KnowlegdeBaseViewInput: ErrorPresentable {
+    func update(with viewModel: KnowlegdeBaseViewModel)
     func showLoader()
     func hideLoader()
 }
@@ -54,6 +55,10 @@ final class KnowlegdeBaseViewController: UIViewController {
 
 // MARK: - KnowlegdeBaseViewInput
 extension KnowlegdeBaseViewController: KnowlegdeBaseViewInput {
+    
+    func update(with viewModel: KnowlegdeBaseViewModel) {
+        tableViewManager?.update(with: viewModel)
+    }
  
     func showLoader() {
         tableView.showLoader()

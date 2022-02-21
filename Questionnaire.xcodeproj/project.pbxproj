@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191D17DE27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D17DD27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift */; };
+		191D17E027C3C28F007A3E4B /* KnowledgeCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D17DF27C3C28F007A3E4B /* KnowledgeCategoryModel.swift */; };
+		191D17E227C3E744007A3E4B /* KnowlegdeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D17E127C3E744007A3E4B /* KnowlegdeHeaderCell.swift */; };
+		191D17E427C3E751007A3E4B /* KnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D17E327C3E751007A3E4B /* KnowledgeCell.swift */; };
 		19221A42276B81DE0061495F /* ErrorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A41276B81DE0061495F /* ErrorPlaceholder.swift */; };
 		19221A44276B84950061495F /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A43276B84950061495F /* ErrorPresentable.swift */; };
 		19304D692768925000EA403A /* TestListDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D622768925000EA403A /* TestListDataConverter.swift */; };
@@ -220,6 +224,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		191D17DD27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeBaseInteractor.swift; sourceTree = "<group>"; };
+		191D17DF27C3C28F007A3E4B /* KnowledgeCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCategoryModel.swift; sourceTree = "<group>"; };
+		191D17E127C3E744007A3E4B /* KnowlegdeHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowlegdeHeaderCell.swift; sourceTree = "<group>"; };
+		191D17E327C3E751007A3E4B /* KnowledgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCell.swift; sourceTree = "<group>"; };
 		19221A41276B81DE0061495F /* ErrorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPlaceholder.swift; sourceTree = "<group>"; };
 		19221A43276B84950061495F /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
 		19304D622768925000EA403A /* TestListDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListDataConverter.swift; sourceTree = "<group>"; };
@@ -1555,6 +1563,10 @@
 				19E1EB0627BEBCD000E3A4FB /* KnowlegdeBaseAssembly.swift */,
 				19E1EB0727BEBCD000E3A4FB /* KnowlegdeBaseViewModel.swift */,
 				19E1EB0827BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift */,
+				191D17DD27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift */,
+				191D17DF27C3C28F007A3E4B /* KnowledgeCategoryModel.swift */,
+				191D17E127C3E744007A3E4B /* KnowlegdeHeaderCell.swift */,
+				191D17E327C3E751007A3E4B /* KnowledgeCell.swift */,
 			);
 			path = KnowledgeBase;
 			sourceTree = "<group>";
@@ -1757,6 +1769,7 @@
 				19436D5B2768DD1E00D2FA0A /* TestResultViewModel.swift in Sources */,
 				1982B55C27635858003DAB1A /* TestCategoriesAssembly.swift in Sources */,
 				1982B54827633B1A003DAB1A /* AuthorizationInteractor.swift in Sources */,
+				191D17E027C3C28F007A3E4B /* KnowledgeCategoryModel.swift in Sources */,
 				19436D592768DD1E00D2FA0A /* TestResultViewController.swift in Sources */,
 				19C832DB276C92A80050747F /* String+HTMLAttributed.swift in Sources */,
 				193D994127624052004ACA7F /* AuthorizationRouter.swift in Sources */,
@@ -1777,6 +1790,7 @@
 				19304D79276897B400EA403A /* Question.swift in Sources */,
 				1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */,
 				19C83228276C906D0050747F /* PlaceholderView.swift in Sources */,
+				191D17E227C3E744007A3E4B /* KnowlegdeHeaderCell.swift in Sources */,
 				19C83253276C927D0050747F /* CollectionDataConverterInput.swift in Sources */,
 				19436D582768DD1E00D2FA0A /* TestResultRouter.swift in Sources */,
 				19D5C9D127674B43000109F2 /* TestCategoriesDataConverter.swift in Sources */,
@@ -1868,6 +1882,7 @@
 				19C832C9276C92A80050747F /* CGFloat+Radians.swift in Sources */,
 				1982B55B27635858003DAB1A /* TestCategoriesViewController.swift in Sources */,
 				19C832CC276C92A80050747F /* UIColor+Hex.swift in Sources */,
+				191D17E427C3E751007A3E4B /* KnowledgeCell.swift in Sources */,
 				19436D432768AB6D00D2FA0A /* AnswerButton.swift in Sources */,
 				193D993527623E60004ACA7F /* MainScreenViewController.swift in Sources */,
 				19C832D0276C92A80050747F /* UIEdgeInsets.swift in Sources */,
@@ -1901,6 +1916,7 @@
 				19C832CD276C92A80050747F /* UICollectionView.swift in Sources */,
 				19304D692768925000EA403A /* TestListDataConverter.swift in Sources */,
 				19BB25F92764CC18004F165B /* DatabasePath.swift in Sources */,
+				191D17DE27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift in Sources */,
 				19C83225276C906D0050747F /* NLCollectionViewCell.swift in Sources */,
 				19C832DF276C92A80050747F /* String+Highlighted.swift in Sources */,
 				19BF738B2770ED8200B95BB1 /* TestResultMistakesCell.swift in Sources */,

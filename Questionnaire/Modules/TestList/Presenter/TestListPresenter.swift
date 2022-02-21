@@ -49,7 +49,6 @@ extension TestListPresenter: TestListViewOutput {
     }
     
     func didRefresh() {
-        view?.showLoader()
         interactor?.fetchTests(by: categoryId)
     }
     

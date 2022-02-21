@@ -17,6 +17,15 @@ protocol KnowlegdeBaseTableViewManagerInput {
 
 final class KnowlegdeBaseTableViewManager: NSObject {
     
+    // MARK: - Locals
+    
+    private enum Locals {
+        
+        static let defaultRowHeight: CGFloat = 90
+        static let topContentInset: CGFloat = 20
+    }
+    
+    
     // MARK: - Properties
     
     weak var delegate: KnowlegdeBaseTableViewManagerDelegate?
@@ -33,13 +42,14 @@ extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
     
     func setup(tableView: UITableView) {
         
-        // Configure your table view here
-        //
-        //        tableView.delegate = self
-        //        tableView.dataSource = self
+        tableView.register(KnowlegdeHeaderCell.self,
+                           forHeaderFooterViewReuseIdentifier: KnowlegdeHeaderCell.className)
         
-        //...
-        
+        tableView.register(KnowledgeCell.self)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.contentInset.top = Locals.topContentInset
         self.tableView = tableView
     }
     
@@ -54,16 +64,53 @@ extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
 // MARK: - UITableViewDataSource
 extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         0
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel?.sections[safe: section]?.rows.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard let row = viewModel?.sections[safe: indexPath.section]?.rows[safe: indexPath.row] else {
+            return UITableViewCell()
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.identifier, for: indexPath)
+        row.configurator.configure(cell: cell)
+        
+        return cell
     }
     
 }
 
 
 // MARK: - UITableViewDelegate
-extension KnowlegdeBaseTableViewManager: UITableViewDelegate {  }
+extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            
+        guard let section = viewModel?.sections[safe: section],
+              let configurator = section.headerConfigurator,
+              let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: type(of: configurator).reuseId)
+        else {
+            return nil
+        }
+        
+        configurator.configure(cell: view)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+       
+        guard let section = viewModel?.sections[safe: section],
+              let configurator = section.headerConfigurator
+        else {
+            return 0
+        }
+                
+        return configurator.viewHeight
+    }
+}

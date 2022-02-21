@@ -8,8 +8,10 @@
 
 import UIKit
 
-protocol ProfileViewInput: Loadable, Alertable  {
+protocol ProfileViewInput: Alertable {
     func update(with viewModel: ProfileViewModel)
+    func showLoader()
+    func hideLoader()
 }
 
 final class ProfileViewController: UIViewController {
@@ -41,7 +43,9 @@ final class ProfileViewController: UIViewController {
         navigationController?.largeNavBarTitleAppearance(.black, fontName: MainFont.extraBold, size: 34)
         
         tableViewManager?.setup(tableView: tableView)
+        tableView.loaderColor = Colors.mainBlueColor()
         
+        logOutButton.setTitle("Выйти", for: .normal)
         logOutButton.addTarget(self, action: #selector(logOutTap), for: .touchUpInside)
         
         view.addSubview(logOutButton)
@@ -66,12 +70,16 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: ProfileViewInput {
     
     func update(with viewModel: ProfileViewModel) {
-        
         title = viewModel.fullName
-    
-        // TODO: - From localized
-        logOutButton.setTitle("Выйти", for: .normal)
         tableViewManager?.update(with: viewModel)
+    }
+    
+    func showLoader() {
+        tableView.showLoader()
+    }
+    
+    func hideLoader() {
+        tableView.hideLoader()
     }
     
 }

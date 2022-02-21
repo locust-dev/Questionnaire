@@ -10,9 +10,7 @@ import SwiftUI
 
 struct KnowlegdeBaseViewModel {
     
-    // MARK: - Properties
-    
-    let sections: [Section]
+    // MARK: - Types
     
     struct Section {
         
@@ -31,8 +29,11 @@ struct KnowlegdeBaseViewModel {
         }
         
         var configurator: TableCellConfiguratorProtocol
-        
-        let categoryId: String
     }
+    
+    
+    // MARK: - Properties
+    
+    let sections: [Section]
     
 }

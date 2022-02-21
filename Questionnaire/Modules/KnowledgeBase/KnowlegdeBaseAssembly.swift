@@ -14,9 +14,13 @@ final class KnowlegdeBaseAssembly: Assembly {
             fatalError("Wrong model for KnowledgeBase module")
         }
         
+        let networkClient = NetworkClient()
+        let databaseService = DatabaseService(networkClient: networkClient)
+        
         let tableViewManager = KnowlegdeBaseTableViewManager()
         let dataConverter = KnowlegdeBaseDataConverter()
         
+        let interactor = KnowledgeBaseInteractor(databaseService: databaseService)
         let view = KnowlegdeBaseViewController()
         let router = KnowlegdeBaseRouter(transition: view)
         let presenter = KnowlegdeBasePresenter(dataConverter: dataConverter)
@@ -28,6 +32,9 @@ final class KnowlegdeBaseAssembly: Assembly {
         
         presenter.view = view
         presenter.router = router
+        presenter.interactor = interactor
+        
+        interactor.presenter = presenter
         
         view.tabBarItem.title = model.tabBarTitle
         view.tabBarItem.image = Images.tabbar_knowledge()

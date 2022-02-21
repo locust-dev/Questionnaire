@@ -99,21 +99,21 @@ final class CommonTableView: UITableView {
     // MARK: - Private methods
 
     private func addEmptyLabel() {
-
-        if numberOfRows(inSection: 0) == 0, !isLoading {
-            addSubview(emptyLabel)
-            emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-            emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
-            emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
-            emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
-            
-            mainQueue(delay: 0.5) {
-                self.emptyLabel.isHidden = false
-            }
-    
-        } else {
-            emptyLabel.removeFromSuperview()
-        }
+        
+//        if numberOfRows(inSection: 0) == 0, !isLoading {
+//            addSubview(emptyLabel)
+//            emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+//            emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
+//            emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
+//            emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
+//
+//            mainQueue(delay: 0.5) {
+//                self.emptyLabel.isHidden = false
+//            }
+//
+//        } else {
+//            emptyLabel.removeFromSuperview()
+//        }
     }
     
     private func setLoader(_ isLoading: Bool) {
@@ -125,16 +125,10 @@ final class CommonTableView: UITableView {
             return
         }
         
-        mainQueue(delay: 1) {
-            
-            if self.isLoading {
-            
-                self.emptyLabel.removeFromSuperview()
-                self.addSubview(self.loaderView)
-                self.loaderView.autoAlignAxis(.vertical, toSameAxisOf: self.superview ?? self)
-                self.loaderView.autoAlignAxis(.horizontal, toSameAxisOf: self.superview ?? self)
-            }
-        }
+        emptyLabel.removeFromSuperview()
+        addSubview(loaderView)
+        loaderView.autoAlignAxis(.vertical, toSameAxisOf: superview ?? self)
+        loaderView.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
     }
 
 }
