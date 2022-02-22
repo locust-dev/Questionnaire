@@ -22,7 +22,7 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     
     var isExpanded = false {
         didSet {
-            setCornerRadiusForLastSection()
+           setCornerRadiusForLastSection()
         }
     }
     
@@ -51,14 +51,20 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     private func drawSelf() {
         
         backgroundColor = .clear
-        tintColor = .clear
         
         contentView.backgroundColor = .white
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.2
-        contentView.layer.shadowOffset = CGSize(width: 5, height: 5)
-        contentView.layer.shadowRadius = 5
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 0.2
+//        contentView.layer.shadowOffset = CGSize(width: 5, height: 5)
+//        contentView.layer.shadowRadius = 5
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
+        
+        if #available(iOS 14.0, *) {
+            backgroundConfiguration = UIBackgroundConfiguration.clear()
+            
+        } else {
+            tintColor = .clear
+        }
         
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont(name: MainFont.bold, size: 18)
@@ -90,6 +96,15 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         delegate?.didTapHeaderCell(at: index)
     }
     
+    func makeBottomCurved() {
+        contentView.layer.cornerRadius = 10
+        contentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
+    
+    func makeTopCurved() {
+        contentView.layer.cornerRadius = 10
+        contentView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
     
     // MARK: - Private methods
     
@@ -125,13 +140,6 @@ extension KnowlegdeHeaderCell: Configurable {
         titleLabel.text = model.title
         sectionIndex = model.sectionIndex
         numberOfSections = model.numberOfSections
-        
-        if sectionIndex == 0 {
-            contentView.layer.cornerRadius = 10
-            contentView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-            
-        } else if sectionIndex == model.numberOfSections - 1 {
-            setCornerRadiusForLastSection()
-        }
+        contentView.layer.cornerRadius = 0
     }
 }

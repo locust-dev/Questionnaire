@@ -61,6 +61,7 @@ extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.contentInset.top = Locals.topContentInset
+        tableView.contentInset.bottom = Locals.topContentInset
         
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
@@ -90,7 +91,8 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let section = viewModel?.sections[safe: indexPath.section],
+        guard let viewModel = viewModel,
+              let section = viewModel.sections[safe: indexPath.section],
               let row = section.rows[safe: indexPath.row]
         else {
             return UITableViewCell()
@@ -98,7 +100,12 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: row.identifier, for: indexPath)
         cell.selectionStyle = .none
+        
         row.configurator.configure(cell: cell)
+        
+        if row.isBottomCurved {
+            (cell as? KnowledgeCell)?.makeBottomCurved()
+        }
         
         return cell
     }
@@ -133,6 +140,8 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
             return nil
         }
         
+        configurator.configure(cell: view)
+        
         if let cell = view as? KnowlegdeHeaderCell {
             cell.delegate = self
             
@@ -141,10 +150,14 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
             } else {
                 cell.isExpanded = false
             }
+            
+            if currentSection.isBottomCurved {
+                cell.makeBottomCurved()
+            } else if currentSection.isTopCurved {
+                cell.makeTopCurved()
+            }
         }
         
-        (view as? KnowlegdeHeaderCell)?.delegate = self
-        configurator.configure(cell: view)
         return view
     }
     

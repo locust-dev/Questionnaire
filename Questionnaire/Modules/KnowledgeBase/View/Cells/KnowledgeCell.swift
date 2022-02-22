@@ -49,6 +49,11 @@ final class KnowledgeCell: NLTableViewCell {
         titleLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
     }
     
+    func makeBottomCurved() {
+        contentView.layer.cornerRadius = 10
+        contentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
+    
 }
 
 extension KnowledgeCell: Configurable {
@@ -60,5 +65,6 @@ extension KnowledgeCell: Configurable {
     
     func configure(with model: Model) {
         titleLabel.text = model.title
+        contentView.layer.cornerRadius = 0
     }
 }

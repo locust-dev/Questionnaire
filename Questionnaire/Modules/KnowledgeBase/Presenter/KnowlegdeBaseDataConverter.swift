@@ -38,23 +38,30 @@ final class KnowlegdeBaseDataConverter {
                                        sectionIndex: Int,
                                        numberOfSections: Int) -> Section {
         
-        let rows = createTopicRows(model.topics)
+        let isTopCurved = sectionIndex == 0
+        let isBottomCurved = sectionIndex == numberOfSections - 1
+        
+        let rows = createTopicRows(model.topics, isLastSection: isBottomCurved)
         let headerModel = KnowlegdeHeaderCell.Model(title: model.title,
                                                     sectionIndex: sectionIndex,
                                                     numberOfSections: numberOfSections)
         
         let headerConfigurator = HeaderConfigurator(item: headerModel, viewHeight: Locals.headerHeight)
         
-        return Section(headerConfigurator: headerConfigurator, rows: rows)
+        return Section(isTopCurved: isTopCurved,
+                       isBottomCurved: isBottomCurved,
+                       headerConfigurator: headerConfigurator,
+                       rows: rows)
     }
     
-    private func createTopicRows(_ model: [KnowledgeTopic]) -> [Row] {
+    private func createTopicRows(_ model: [KnowledgeTopic], isLastSection: Bool) -> [Row] {
         
-        return model.map { topic -> Row in
+        return model.enumerated().map { (rowIndex, topic) -> Row in
             
-            let model = KnowledgeCell.Model(title: topic.title)
-            let configurator = RowConfigurator(item: model, cellHeight: Locals.cellHeight)
-            return Row(configurator: configurator, topic: topic)
+            let isBottomCurved = rowIndex == model.count - 1 && isLastSection
+            let cellModel = KnowledgeCell.Model(title: topic.title)
+            let configurator = RowConfigurator(item: cellModel, cellHeight: Locals.cellHeight)
+            return Row(configurator: configurator, topic: topic, isBottomCurved: isBottomCurved)
         }
     }
         

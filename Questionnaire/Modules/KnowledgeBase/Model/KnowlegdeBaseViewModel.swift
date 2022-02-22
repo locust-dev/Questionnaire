@@ -16,6 +16,8 @@ struct KnowlegdeBaseViewModel {
         
         // MARK: - Properties
         
+        let isTopCurved: Bool
+        let isBottomCurved: Bool
         let headerConfigurator: TableHeaderFooterConfiguratorProtocol?
         let rows: [Row]
     }
@@ -31,6 +33,7 @@ struct KnowlegdeBaseViewModel {
         var configurator: TableCellConfiguratorProtocol
         
         let topic: KnowledgeTopic
+        let isBottomCurved: Bool
     }
     
     
