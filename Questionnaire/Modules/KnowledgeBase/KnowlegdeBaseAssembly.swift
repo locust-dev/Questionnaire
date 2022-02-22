@@ -6,6 +6,8 @@
 //  Copyright © 2022 FINCH. All rights reserved.
 //
 
+import UIKit
+
 final class KnowlegdeBaseAssembly: Assembly {
     
     static func assembleModule(with model: TransitionModel) -> Module {
@@ -39,7 +41,7 @@ final class KnowlegdeBaseAssembly: Assembly {
         view.tabBarItem.title = model.tabBarTitle
         view.tabBarItem.image = Images.tabbar_knowledge()
         
-        return view
+        return UINavigationController(rootViewController: view)
     }
 
 }

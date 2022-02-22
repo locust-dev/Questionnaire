@@ -21,7 +21,7 @@ final class KnowlegdeBaseViewController: UIViewController {
 	var presenter: KnowlegdeBaseViewOutput?
     var tableViewManager: KnowlegdeBaseTableViewManagerInput?
     
-    private let tableView = CommonTableView(frame: .zero, style: .insetGrouped)
+    private let tableView = CommonTableView()
     
     
     // MARK: - Life cycle
@@ -42,6 +42,7 @@ final class KnowlegdeBaseViewController: UIViewController {
 
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
+        title = "База знаний"
         
         tableViewManager?.setup(tableView: tableView)
         tableView.refreshModuleOutput = presenter

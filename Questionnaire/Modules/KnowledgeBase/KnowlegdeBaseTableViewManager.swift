@@ -95,6 +95,7 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: row.identifier, for: indexPath)
+        cell.selectionStyle = .none
         row.configurator.configure(cell: cell)
         
         return cell
@@ -112,11 +113,21 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             
-        guard let section = viewModel?.sections[safe: section],
-              let configurator = section.headerConfigurator,
+        guard let currentSection = viewModel?.sections[safe: section],
+              let configurator = currentSection.headerConfigurator,
               let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: type(of: configurator).reuseId)
         else {
             return nil
+        }
+        
+        if let cell = view as? KnowlegdeHeaderCell {
+            cell.delegate = self
+            
+            if expandedSections.contains(section) {
+                cell.isExpanded = true
+            } else {
+                cell.isExpanded = false
+            }
         }
         
         (view as? KnowlegdeHeaderCell)?.delegate = self

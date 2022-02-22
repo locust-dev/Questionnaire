@@ -22,13 +22,31 @@ final class KnowledgeCell: NLTableViewCell {
     }
     
     
+    // MARK: - Life cycle
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15))
+    }
+    
+    
     // MARK: - Drawing
     
     private func drawSelf() {
         
+        backgroundColor = .clear
+        
+        contentView.backgroundColor = Colors.mainGrayColor()
+       
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont(name: MainFont.medium, size: 16)
+        titleLabel.textColor = .black
+        
         contentView.addSubview(titleLabel)
         
-        titleLabel.autoPinEdgesToSuperviewEdges()
+        titleLabel.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .left)
+        titleLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
     }
     
 }
@@ -38,9 +56,16 @@ extension KnowledgeCell: Configurable {
     struct Model {
         
         let title: String
+        let isBottomCurved: Bool
     }
     
     func configure(with model: Model) {
+        
+        if model.isBottomCurved {
+            contentView.layer.cornerRadius = 10
+            contentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        }
+        
         titleLabel.text = model.title
     }
 }

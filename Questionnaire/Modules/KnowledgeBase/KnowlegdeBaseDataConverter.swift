@@ -18,8 +18,8 @@ final class KnowlegdeBaseDataConverter {
     
     private enum Locals {
         
-        static let cellHeight: CGFloat = 50
-        static let headerHeight: CGFloat = 50
+        static let cellHeight: CGFloat = 60
+        static let headerHeight: CGFloat = 60
     }
     
     
@@ -34,20 +34,26 @@ final class KnowlegdeBaseDataConverter {
     
     // MARK: - Private methods
     
-    private func createCategorySection(_ model: KnowledgeCategoryModel, sectionIndex: Int) -> Section {
+    private func createCategorySection(_ model: KnowledgeCategoryModel,
+                                       sectionIndex: Int,
+                                       numberOfSections: Int) -> Section {
         
-        let rows = createTopicRows(model.topics)
-        let headerModel = KnowlegdeHeaderCell.Model(title: model.title, sectionIndex: sectionIndex)
+        let rows = createTopicRows(model.topics, isLastSection: sectionIndex == numberOfSections - 1)
+        let headerModel = KnowlegdeHeaderCell.Model(title: model.title,
+                                                    sectionIndex: sectionIndex,
+                                                    numberOfSections: numberOfSections)
+        
         let headerConfigurator = HeaderConfigurator(item: headerModel, viewHeight: Locals.headerHeight)
         
         return Section(headerConfigurator: headerConfigurator, rows: rows)
     }
     
-    private func createTopicRows(_ model: [KnowledgeTopic]) -> [Row] {
+    private func createTopicRows(_ model: [KnowledgeTopic], isLastSection: Bool) -> [Row] {
         
-        return model.map { topic -> Row in
+        return model.enumerated().map { (index, topic) -> Row in
             
-            let model = KnowledgeCell.Model(title: topic.title)
+            let isBottomCurved = isLastSection && index == model.count - 1
+            let model = KnowledgeCell.Model(title: topic.title, isBottomCurved: isBottomCurved)
             let configurator = RowConfigurator(item: model, cellHeight: Locals.cellHeight)
             return Row(configurator: configurator)
         }
@@ -61,7 +67,10 @@ extension KnowlegdeBaseDataConverter: KnowlegdeBaseDataConverterInput {
     
     func convert(categories: [KnowledgeCategoryModel]) -> KnowlegdeBaseViewModel {
         
-        let sections = categories.enumerated().map { createCategorySection($1, sectionIndex: $0) }
+        let sections = categories.enumerated().map {
+            createCategorySection($1, sectionIndex: $0, numberOfSections: categories.count)
+        }
+        
         return KnowlegdeBaseViewModel(sections: sections)
     }
     
