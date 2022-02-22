@@ -22,7 +22,8 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     
     var isExpanded = false {
         didSet {
-           setCornerRadiusForLastSection()
+            setCornerRadiusForLastSection()
+            setShadowOffset()
         }
     }
     
@@ -41,7 +42,7 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15))
     }
     
@@ -53,10 +54,10 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         backgroundColor = .clear
         
         contentView.backgroundColor = .white
-//        contentView.layer.shadowColor = UIColor.black.cgColor
-//        contentView.layer.shadowOpacity = 0.2
-//        contentView.layer.shadowOffset = CGSize(width: 5, height: 5)
-//        contentView.layer.shadowRadius = 5
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.2
+        contentView.layer.shadowOffset = CGSize(width: 5, height: 0)
+        contentView.layer.shadowRadius = 5
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
         if #available(iOS 14.0, *) {
@@ -91,7 +92,7 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         guard let index = sectionIndex else {
             return
         }
-
+        
         isExpanded.toggle()
         delegate?.didTapHeaderCell(at: index)
     }
@@ -109,18 +110,24 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     // MARK: - Private methods
     
     private func setCornerRadiusForLastSection() {
-
+        
         guard let numberOfSections = numberOfSections,
               let sectionIndex = sectionIndex,
               sectionIndex == numberOfSections - 1
         else {
             return
         }
-
+        
         contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         UIView.animate(withDuration: 0.4) {
             self.contentView.layer.cornerRadius = self.isExpanded ? 0 : 10
+        }
+    }
+    
+    private func setShadowOffset() {
+        UIView.animate(withDuration: 0.4) {
+            self.contentView.layer.shadowOffset = CGSize(width: 5, height: self.isExpanded ? 5 : 0)
         }
     }
     

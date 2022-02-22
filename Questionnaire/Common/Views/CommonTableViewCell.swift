@@ -26,8 +26,8 @@ class CommonTableViewCell: NLTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 15, bottom: 6, right: 15))
     }
     
     
