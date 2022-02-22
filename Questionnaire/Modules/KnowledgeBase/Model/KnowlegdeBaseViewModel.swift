@@ -29,6 +29,8 @@ struct KnowlegdeBaseViewModel {
         }
         
         var configurator: TableCellConfiguratorProtocol
+        
+        let topic: KnowledgeTopic
     }
     
     

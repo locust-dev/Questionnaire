@@ -8,7 +8,9 @@
 
 import UIKit
 
-protocol KnowlegdeBaseTableViewManagerDelegate: AnyObject {  }
+protocol KnowlegdeBaseTableViewManagerDelegate: AnyObject {
+    func didSelectTopic(_ topic: KnowledgeTopic)
+}
 
 protocol KnowlegdeBaseTableViewManagerInput {
     func setup(tableView: UITableView)
@@ -107,6 +109,17 @@ extension KnowlegdeBaseTableViewManager: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let section = viewModel?.sections[safe: indexPath.section],
+              let row = section.rows[safe: indexPath.row]
+        else {
+            return
+        }
+        
+        delegate?.didSelectTopic(row.topic)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         viewModel?.sections[safe: indexPath.section]?.rows[safe: indexPath.row]?.configurator.cellHeight ?? 50
     }
@@ -160,11 +173,11 @@ extension KnowlegdeBaseTableViewManager: KnowledgeHeaderCellDelegate {
         
         if expandedSections.contains(index) {
             expandedSections.remove(index)
-            tableView?.deleteRows(at: rowsIndexes, with: .fade)
+            tableView?.deleteRows(at: rowsIndexes, with: .top)
             
         } else {
             expandedSections.insert(index)
-            tableView?.insertRows(at: rowsIndexes, with: .fade)
+            tableView?.insertRows(at: rowsIndexes, with: .top)
         }
     }
 

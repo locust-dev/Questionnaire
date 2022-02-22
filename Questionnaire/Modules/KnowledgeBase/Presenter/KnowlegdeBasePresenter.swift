@@ -67,4 +67,9 @@ extension KnowlegdeBasePresenter: KnowlegdeBaseInteractorOutput {
 
 
 // MARK: - KnowlegdeBaseTableViewManagerDelegate
-extension KnowlegdeBasePresenter: KnowlegdeBaseTableViewManagerDelegate {  }
+extension KnowlegdeBasePresenter: KnowlegdeBaseTableViewManagerDelegate {
+    
+    func didSelectTopic(_ topic: KnowledgeTopic) {
+        router?.openTopicDetail(topic)
+    }
+}

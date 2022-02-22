@@ -51,12 +51,14 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     private func drawSelf() {
         
         backgroundColor = .clear
+        tintColor = .clear
         
         contentView.backgroundColor = .white
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOpacity = 0.2
         contentView.layer.shadowOffset = CGSize(width: 5, height: 5)
         contentView.layer.shadowRadius = 5
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont(name: MainFont.bold, size: 18)
@@ -65,7 +67,6 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         let bottomLine = UIView()
         bottomLine.backgroundColor = Colors.mainGrayColor()
         
-        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         contentView.addSubview(titleLabel)
         contentView.addSubview(bottomLine)
         
@@ -101,8 +102,11 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
             return
         }
 
-        contentView.layer.cornerRadius = isExpanded ? 0 : 10
         contentView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        UIView.animate(withDuration: 0.4) {
+            self.contentView.layer.cornerRadius = self.isExpanded ? 0 : 10
+        }
     }
     
 }

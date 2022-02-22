@@ -219,6 +219,11 @@
 		19E1EB0F27BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1EB0827BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift */; };
 		19E6DF49278B273C00BD677A /* KeyboardShowableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */; };
 		19E6DF6B278B3EE400BD677A /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E6DF6A278B3EE400BD677A /* Direction.swift */; };
+		19F41F5D27C5114100D69EC1 /* KnowledgeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F41F5927C5114100D69EC1 /* KnowledgeDetailPresenter.swift */; };
+		19F41F5E27C5114100D69EC1 /* KnowledgeDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F41F5A27C5114100D69EC1 /* KnowledgeDetailRouter.swift */; };
+		19F41F5F27C5114100D69EC1 /* KnowledgeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F41F5B27C5114100D69EC1 /* KnowledgeDetailViewController.swift */; };
+		19F41F6027C5114100D69EC1 /* KnowledgeDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F41F5C27C5114100D69EC1 /* KnowledgeDetailAssembly.swift */; };
+		19F41F6227C5116C00D69EC1 /* KnowledgeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F41F6127C5116C00D69EC1 /* KnowledgeDetailViewModel.swift */; };
 		19FD3BBB277A075B0082A102 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FD3BBA277A075B0082A102 /* RegistrationData.swift */; };
 		7F0FA2D73F5CD2AADC74B53E /* Pods_Questionnaire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */; };
 /* End PBXBuildFile section */
@@ -412,6 +417,11 @@
 		19E1EB0827BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowlegdeBaseTableViewManager.swift; sourceTree = "<group>"; };
 		19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowableViewController.swift; sourceTree = "<group>"; };
 		19E6DF6A278B3EE400BD677A /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		19F41F5927C5114100D69EC1 /* KnowledgeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailPresenter.swift; sourceTree = "<group>"; };
+		19F41F5A27C5114100D69EC1 /* KnowledgeDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailRouter.swift; sourceTree = "<group>"; };
+		19F41F5B27C5114100D69EC1 /* KnowledgeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailViewController.swift; sourceTree = "<group>"; };
+		19F41F5C27C5114100D69EC1 /* KnowledgeDetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailAssembly.swift; sourceTree = "<group>"; };
+		19F41F6127C5116C00D69EC1 /* KnowledgeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailViewModel.swift; sourceTree = "<group>"; };
 		19FD3BBA277A075B0082A102 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
 		3998792933EDD44090A72F63 /* Pods_Questionnaire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Questionnaire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6ABDDB1C71174B43894F241 /* Pods-Questionnaire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Questionnaire.release.xcconfig"; path = "Target Support Files/Pods-Questionnaire/Pods-Questionnaire.release.xcconfig"; sourceTree = "<group>"; };
@@ -805,6 +815,7 @@
 			children = (
 				193D993927623E65004ACA7F /* MainScreen */,
 				19E1EB0127BEBB8200E3A4FB /* KnowledgeBase */,
+				19F41F5827C50E1200D69EC1 /* KnowledgeDetail */,
 				193D994427624057004ACA7F /* Authorization */,
 				19861D90276A349D00D3C041 /* Registration */,
 				1982B55F27639887003DAB1A /* Profile */,
@@ -1556,19 +1567,87 @@
 		19E1EB0127BEBB8200E3A4FB /* KnowledgeBase */ = {
 			isa = PBXGroup;
 			children = (
-				19E1EB0227BEBCD000E3A4FB /* KnowlegdeBaseDataConverter.swift */,
-				19E1EB0327BEBCD000E3A4FB /* KnowlegdeBasePresenter.swift */,
-				19E1EB0427BEBCD000E3A4FB /* KnowlegdeBaseRouter.swift */,
+				19F41F5527C50DF700D69EC1 /* Assembly */,
+				19F41F5627C50E0000D69EC1 /* Presenter */,
+				19F41F5127C50DDE00D69EC1 /* View */,
+				19F41F5227C50DE500D69EC1 /* Model */,
+				19F41F5327C50DE900D69EC1 /* Interactor */,
+				19F41F5727C50E0400D69EC1 /* Router */,
+			);
+			path = KnowledgeBase;
+			sourceTree = "<group>";
+		};
+		19F41F5127C50DDE00D69EC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19F41F5427C50DF000D69EC1 /* Cells */,
 				19E1EB0527BEBCD000E3A4FB /* KnowlegdeBaseViewController.swift */,
-				19E1EB0627BEBCD000E3A4FB /* KnowlegdeBaseAssembly.swift */,
-				19E1EB0727BEBCD000E3A4FB /* KnowlegdeBaseViewModel.swift */,
 				19E1EB0827BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift */,
-				191D17DD27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19F41F5227C50DE500D69EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19E1EB0727BEBCD000E3A4FB /* KnowlegdeBaseViewModel.swift */,
 				191D17DF27C3C28F007A3E4B /* KnowledgeCategoryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19F41F5327C50DE900D69EC1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				191D17DD27C3C18C007A3E4B /* KnowledgeBaseInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		19F41F5427C50DF000D69EC1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
 				191D17E127C3E744007A3E4B /* KnowlegdeHeaderCell.swift */,
 				191D17E327C3E751007A3E4B /* KnowledgeCell.swift */,
 			);
-			path = KnowledgeBase;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		19F41F5527C50DF700D69EC1 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				19E1EB0627BEBCD000E3A4FB /* KnowlegdeBaseAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		19F41F5627C50E0000D69EC1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				19E1EB0227BEBCD000E3A4FB /* KnowlegdeBaseDataConverter.swift */,
+				19E1EB0327BEBCD000E3A4FB /* KnowlegdeBasePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		19F41F5727C50E0400D69EC1 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				19E1EB0427BEBCD000E3A4FB /* KnowlegdeBaseRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		19F41F5827C50E1200D69EC1 /* KnowledgeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				19F41F5927C5114100D69EC1 /* KnowledgeDetailPresenter.swift */,
+				19F41F5A27C5114100D69EC1 /* KnowledgeDetailRouter.swift */,
+				19F41F5B27C5114100D69EC1 /* KnowledgeDetailViewController.swift */,
+				19F41F5C27C5114100D69EC1 /* KnowledgeDetailAssembly.swift */,
+				19F41F6127C5116C00D69EC1 /* KnowledgeDetailViewModel.swift */,
+			);
+			path = KnowledgeDetail;
 			sourceTree = "<group>";
 		};
 		8A1A208643FF988542AF8E90 /* Pods */ = {
@@ -1783,6 +1862,7 @@
 				19C83222276C906D0050747F /* NLViewController.swift in Sources */,
 				19304D6B2768925000EA403A /* TestListRouter.swift in Sources */,
 				19436D572768DD1E00D2FA0A /* TestResultPresenter.swift in Sources */,
+				19F41F6227C5116C00D69EC1 /* KnowledgeDetailViewModel.swift in Sources */,
 				19C83250276C927D0050747F /* DataConverterInput.swift in Sources */,
 				19D5C9D82767538C000109F2 /* AlertAction.swift in Sources */,
 				19C8322B276C906D0050747F /* FontApplicable.swift in Sources */,
@@ -1861,6 +1941,7 @@
 				19304D6A2768925000EA403A /* TestListPresenter.swift in Sources */,
 				1992E801277223AB0068FFFF /* ProfileListCell.swift in Sources */,
 				193D994D27624BF6004ACA7F /* R.generated.swift in Sources */,
+				19F41F5E27C5114100D69EC1 /* KnowledgeDetailRouter.swift in Sources */,
 				19E1EB0E27BEBCD000E3A4FB /* KnowlegdeBaseViewModel.swift in Sources */,
 				19C83254276C927D0050747F /* Setupable.swift in Sources */,
 				19436D302768A5DB00D2FA0A /* TestQuestionViewController.swift in Sources */,
@@ -1872,6 +1953,7 @@
 				19780CFA27727FB5004287BC /* RefreshControl.swift in Sources */,
 				19436D342768A5DB00D2FA0A /* TestQuestionViewModel.swift in Sources */,
 				19E1EB0F27BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift in Sources */,
+				19F41F5F27C5114100D69EC1 /* KnowledgeDetailViewController.swift in Sources */,
 				19C832D8276C92A80050747F /* String+Sizes.swift in Sources */,
 				19D5C9C1276736D0000109F2 /* TestCategoriesViewModel.swift in Sources */,
 				19C8322C276C906D0050747F /* UIKitComponents + FontApplicable.swift in Sources */,
@@ -1888,6 +1970,7 @@
 				19C832D0276C92A80050747F /* UIEdgeInsets.swift in Sources */,
 				19C83257276C927D0050747F /* TableCellConfigurator.swift in Sources */,
 				19D5C9CF27674098000109F2 /* TestCategoriesInteractor.swift in Sources */,
+				19F41F6027C5114100D69EC1 /* KnowledgeDetailAssembly.swift in Sources */,
 				19C83237276C92580050747F /* TransitionModel.swift in Sources */,
 				19C832F3276C92B40050747F /* InternetConnectionReachabilityCenter.swift in Sources */,
 				19C832F1276C92B40050747F /* InternetConnectionReachability.swift in Sources */,
@@ -1901,6 +1984,7 @@
 				19E1EB0A27BEBCD000E3A4FB /* KnowlegdeBasePresenter.swift in Sources */,
 				19C83251276C927D0050747F /* CellConfigurator.swift in Sources */,
 				1982B5692763998A003DAB1A /* ProfileViewModel.swift in Sources */,
+				19F41F5D27C5114100D69EC1 /* KnowledgeDetailPresenter.swift in Sources */,
 				19436D312768A5DB00D2FA0A /* TestQuestionAssembly.swift in Sources */,
 				19436D5C2768DD1E00D2FA0A /* TestResultTableViewManager.swift in Sources */,
 				193D994027624052004ACA7F /* AuthorizationPresenter.swift in Sources */,

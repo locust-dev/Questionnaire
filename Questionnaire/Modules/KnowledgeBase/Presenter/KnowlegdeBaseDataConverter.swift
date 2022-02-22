@@ -19,7 +19,7 @@ final class KnowlegdeBaseDataConverter {
     private enum Locals {
         
         static let cellHeight: CGFloat = 60
-        static let headerHeight: CGFloat = 60
+        static let headerHeight: CGFloat = 70
     }
     
     
@@ -54,7 +54,7 @@ final class KnowlegdeBaseDataConverter {
             
             let model = KnowledgeCell.Model(title: topic.title)
             let configurator = RowConfigurator(item: model, cellHeight: Locals.cellHeight)
-            return Row(configurator: configurator)
+            return Row(configurator: configurator, topic: topic)
         }
     }
         

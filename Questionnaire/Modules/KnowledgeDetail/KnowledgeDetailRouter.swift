@@ -1,14 +1,14 @@
 //
-//  KnowlegdeBaseRouter.swift
+//  KnowledgeDetailRouter.swift
 //  Questionnaire
 //
-//  Created Ilya Turin on 17.02.2022.
+//  Created Ilya Turin on 22.02.2022.
 //  Copyright © 2022 FINCH. All rights reserved.
 //
 
-protocol KnowlegdeBaseRouterInput {  }
+protocol KnowledgeDetailRouterInput {  }
 
-final class KnowlegdeBaseRouter {
+final class KnowledgeDetailRouter {
     
     // MARK: - Properties
     
@@ -24,5 +24,5 @@ final class KnowlegdeBaseRouter {
 }
 
 
-// MARK: - KnowlegdeBaseRouterInput
-extension KnowlegdeBaseRouter: KnowlegdeBaseRouterInput {  }
+// MARK: - KnowledgeDetailRouterInput
+extension KnowledgeDetailRouter: KnowledgeDetailRouterInput {  }
