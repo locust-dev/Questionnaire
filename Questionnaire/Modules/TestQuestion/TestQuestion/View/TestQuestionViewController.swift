@@ -79,8 +79,8 @@ final class TestQuestionViewController: UIViewController {
         bottomButtonsStack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 20),
                                                       excludingEdge: .top)
         
-        skipQuestionButton.autoSetDimensions(to: CGSize(width: 30, height: 50))
-        returnQuestionButton.autoSetDimensions(to: CGSize(width: 30, height: 50))
+        skipQuestionButton.autoSetDimensions(to: CGSize(width: 35, height: 50))
+        returnQuestionButton.autoSetDimensions(to: CGSize(width: 35, height: 50))
         
         confirmButton.autoPinEdge(.top, to: .bottom, of: tableView, withOffset: 10)
         confirmButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20),
@@ -97,14 +97,14 @@ final class TestQuestionViewController: UIViewController {
         let firstPosition = direction == .left ? leftCornerPosition : rightCornerPosition
         let secondPosition = direction == .left ? rightCornerPosition : leftCornerPosition
         
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.16) {
             self.containerView.frame.origin.x = firstPosition
             
         } completion: { _ in
             self.containerView.frame.origin.x = secondPosition
             completion(direction)
             
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.16) {
                 self.containerView.center.x = self.view.center.x
             }
         }
