@@ -56,16 +56,9 @@ extension KnowledgeCell: Configurable {
     struct Model {
         
         let title: String
-        let isBottomCurved: Bool
     }
     
     func configure(with model: Model) {
-        
-        if model.isBottomCurved {
-            contentView.layer.cornerRadius = 10
-            contentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        }
-        
         titleLabel.text = model.title
     }
 }

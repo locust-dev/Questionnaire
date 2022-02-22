@@ -38,7 +38,7 @@ final class KnowlegdeBaseDataConverter {
                                        sectionIndex: Int,
                                        numberOfSections: Int) -> Section {
         
-        let rows = createTopicRows(model.topics, isLastSection: sectionIndex == numberOfSections - 1)
+        let rows = createTopicRows(model.topics)
         let headerModel = KnowlegdeHeaderCell.Model(title: model.title,
                                                     sectionIndex: sectionIndex,
                                                     numberOfSections: numberOfSections)
@@ -48,12 +48,11 @@ final class KnowlegdeBaseDataConverter {
         return Section(headerConfigurator: headerConfigurator, rows: rows)
     }
     
-    private func createTopicRows(_ model: [KnowledgeTopic], isLastSection: Bool) -> [Row] {
+    private func createTopicRows(_ model: [KnowledgeTopic]) -> [Row] {
         
-        return model.enumerated().map { (index, topic) -> Row in
+        return model.map { topic -> Row in
             
-            let isBottomCurved = isLastSection && index == model.count - 1
-            let model = KnowledgeCell.Model(title: topic.title, isBottomCurved: isBottomCurved)
+            let model = KnowledgeCell.Model(title: topic.title)
             let configurator = RowConfigurator(item: model, cellHeight: Locals.cellHeight)
             return Row(configurator: configurator)
         }
