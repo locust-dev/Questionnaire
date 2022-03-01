@@ -54,7 +54,7 @@ class CommonButton: NLButton {
     
     private func drawSelf() {
         
-        autoSetDimension(.height, toSize: 50)
+        autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         
         switch style {
             

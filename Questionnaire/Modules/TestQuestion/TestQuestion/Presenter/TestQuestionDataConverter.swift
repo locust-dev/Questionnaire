@@ -59,18 +59,8 @@ final class TestQuestionDataConverter {
                                                  stackInsets: Locals.AnswersCell.stackInsets,
                                                  questionMistakeModel: mistake)
         
-        let cellHeight = calculateAnswersCellHeight(count: answers.count)
-        let configurator = AnswerCounterCellConfigurator(item: model, cellHeight: cellHeight)
+        let configurator = AnswerCounterCellConfigurator(item: model)
         return .answerCounter(configurator)
-    }
-    
-    private func calculateAnswersCellHeight(count: Int) -> CGFloat {
-        
-        let answersCount = CGFloat(count)
-        let buttonsHeight = Locals.AnswersCell.buttonHeight * answersCount
-        let stackInsets = Locals.AnswersCell.stackInsets.top * 2
-        let spacing = Locals.AnswersCell.stackSpacing * (answersCount - 1)
-        return CGFloat(buttonsHeight + stackInsets + spacing)
     }
     
 }

@@ -18,6 +18,7 @@ final class AnswerButton: CommonButton {
     }
    
     private let mainTitleLabel = UILabel()
+    private let answerCountLabel = UILabel()
     private let checkmarkImageView = UIImageView()
     
     
@@ -33,9 +34,10 @@ final class AnswerButton: CommonButton {
     
     // MARK: - Init
     
-    init(title: String) {
+    init(answerCount: String, title: String) {
         super.init(frame: .zero)
         mainTitleLabel.text = title
+        answerCountLabel.text = answerCount
         drawSelf()
     }
     
@@ -43,19 +45,24 @@ final class AnswerButton: CommonButton {
     // MARK: - Drawing
     
     private func drawSelf() {
-        
+    
         checkmarkImageView.image = Images.reverserDeselectedCircle()
         checkmarkImageView.contentMode = .scaleAspectFit
         
+        mainTitleLabel.numberOfLines = 0
         mainTitleLabel.font = UIFont(name: MainFont.bold, size: 16)
         mainTitleLabel.textColor = Colors.mainBlueColor()
         
-        let stack = UIStackView(arrangedSubviews: [mainTitleLabel, checkmarkImageView])
-        stack.spacing = 14
+        answerCountLabel.font = UIFont(name: MainFont.bold, size: 16)
+        answerCountLabel.textColor = Colors.mainBlueColor()
+        
+        let stack = UIStackView(arrangedSubviews: [answerCountLabel, mainTitleLabel, checkmarkImageView])
+        stack.spacing = 12
+        stack.alignment = .center
         stack.isUserInteractionEnabled = false
         
         addSubview(stack)
-        stack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20))
+        stack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 12))
         checkmarkImageView.autoSetDimensions(to: CGSize(width: 20, height: 20))
     }
     
@@ -81,6 +88,7 @@ final class AnswerButton: CommonButton {
         
         layer.borderWidth = 0
         mainTitleLabel.textColor = .white
+        answerCountLabel.textColor = .white
     }
     
 
@@ -94,11 +102,13 @@ final class AnswerButton: CommonButton {
             style = .filled
             checkmarkImageView.image = Images.selectedCirlce()
             mainTitleLabel.textColor = .white
+            answerCountLabel.textColor = .white
             
         case false:
             style = .shadow
             checkmarkImageView.image = Images.reverserDeselectedCircle()
             mainTitleLabel.textColor = Colors.mainBlueColor()
+            answerCountLabel.textColor = Colors.mainBlueColor()
         }
     }
     

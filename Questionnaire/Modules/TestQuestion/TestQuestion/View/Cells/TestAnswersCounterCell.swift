@@ -33,7 +33,6 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
         backgroundColor = .clear
         
         answersStack.axis = .vertical
-        answersStack.distribution = .fillEqually
         contentView.addSubview(answersStack)
     }
     
@@ -74,7 +73,7 @@ final class TestAnswersCounterCell: NLTableViewCell, Delegatable {
                               mistakeModel: QuestionMistakeModel?,
                               isMultipleAnswers: Bool) -> AnswerButton {
         
-        let answerButton = AnswerButton(title: "\(answerCount). \(title)")
+        let answerButton = AnswerButton(answerCount: String(answerCount), title: title)
         answerButton.style = .shadow
         answerButton.tag = answerCount
         

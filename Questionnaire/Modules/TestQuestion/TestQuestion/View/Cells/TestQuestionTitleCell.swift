@@ -30,7 +30,7 @@ final class TestQuestionTitleCell: NLTableViewCell {
         contentView.backgroundColor = .clear
     
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: MainFont.regular, size: 18)
+        titleLabel.font = UIFont(name: MainFont.regular, size: 16)
         titleLabel.textColor = .black
         
         contentView.addSubview(titleLabel)
