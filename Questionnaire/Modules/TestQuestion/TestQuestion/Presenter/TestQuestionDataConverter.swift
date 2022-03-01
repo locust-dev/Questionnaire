@@ -38,6 +38,7 @@ final class TestQuestionDataConverter {
     
     typealias TitleCellConfigurator = TableCellConfigurator<TestQuestionTitleCell, TestQuestionTitleCell.Model>
     typealias AnswerCounterCellConfigurator = TableCellConfigurator<TestAnswersCounterCell, TestAnswersCounterCell.Model>
+    typealias CodeSampleCellConfigurator = TableCellConfigurator<CodeSampleCell, CodeSampleCell.Model>
     typealias Row = TestQuestionViewModel.Row
     
     
@@ -63,6 +64,17 @@ final class TestQuestionDataConverter {
         return .answerCounter(configurator)
     }
     
+    private func createCodeSampleRow(with imagePath: String?) -> Row? {
+        
+        guard let imagePath = imagePath else {
+            return nil
+        }
+
+        let model = CodeSampleCell.Model(codeSampleImagePath: imagePath)
+        let configurator = CodeSampleCellConfigurator(item: model)
+        return .codeSample(configurator)
+    }
+    
 }
 
 
@@ -77,11 +89,12 @@ extension TestQuestionDataConverter: TestQuestionDataConverterInput {
                  mistake: QuestionMistakeModel?) -> TestQuestionViewModel {
         
         let titleRow = createTitleRow(title: question.text)
+        let codeSampleRow = createCodeSampleRow(with: question.codeSampleImage)
         let answersCounterRow = createAnswerCounterRow(answers: question.answers,
                                                        isMultipleAnswers: question.isMultipleAnswers,
                                                        mistake: mistake)
         
-        let rows = [titleRow, answersCounterRow]
+        let rows = [titleRow, codeSampleRow, answersCounterRow].compactMap { $0 }
         
         var isSkipButtonEnabled = remainQuestionsNumbers.count != 1
         var isReturnButtonEnabled = remainQuestionsNumbers.count != 1

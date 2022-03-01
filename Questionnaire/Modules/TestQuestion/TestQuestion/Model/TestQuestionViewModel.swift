@@ -15,6 +15,7 @@ struct TestQuestionViewModel {
     enum Row {
         
         case title(TableCellConfiguratorProtocol)
+        case codeSample(TableCellConfiguratorProtocol)
         case answerCounter(TableCellConfiguratorProtocol)
         
         var identifier: String {
@@ -26,9 +27,12 @@ struct TestQuestionViewModel {
         }
         
         var configurator: TableCellConfiguratorProtocol {
+            
             switch self {
+                
             case .title(let configurator),
-                    .answerCounter(let configurator):
+                 .answerCounter(let configurator),
+                 .codeSample(let configurator):
                 
                 return configurator
             }
