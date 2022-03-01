@@ -12,7 +12,7 @@ final class CodeSampleCell: NLTableViewCell {
     
     // MARK: - Properties
     
-    private let codeSampleImage = UIImageView()
+    private let codeSampleImage = ResizableAsyncImageView()
     
     
     // MARK: - Init
@@ -27,14 +27,10 @@ final class CodeSampleCell: NLTableViewCell {
     
     private func drawSelf() {
         
-        contentView.backgroundColor = .purple
-        
         codeSampleImage.contentMode = .scaleAspectFit
-        codeSampleImage.backgroundColor = .black
         
         contentView.addSubview(codeSampleImage)
         codeSampleImage.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
-        codeSampleImage.autoSetDimension(.height, toSize: 200)
     }
     
 }
@@ -49,10 +45,14 @@ extension CodeSampleCell: Configurable {
     }
     
     func configure(with model: Model) {
-        
-        mainQueue(delay: 2) {
-            
-            self.codeSampleImage.sd_setImage(with: URL(string: model.codeSampleImagePath))
+        self.codeSampleImage.sd_setImage(with: URL(string: model.codeSampleImagePath)) { _, _, _, _ in
+
+            // ОБЯЗАТЕЛЬНО ИЗУЧИТЬ
+            if let superview = self.superview as? UITableView {
+                superview.beginUpdates()
+                superview.endUpdates()
+            }
         }
     }
+    
 }

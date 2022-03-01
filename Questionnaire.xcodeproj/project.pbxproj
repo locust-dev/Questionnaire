@@ -15,6 +15,7 @@
 		191D17E427C3E751007A3E4B /* KnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D17E327C3E751007A3E4B /* KnowledgeCell.swift */; };
 		19221A42276B81DE0061495F /* ErrorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A41276B81DE0061495F /* ErrorPlaceholder.swift */; };
 		19221A44276B84950061495F /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A43276B84950061495F /* ErrorPresentable.swift */; };
+		19248F5E27CE810600619518 /* ResizableAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */; };
 		19304D692768925000EA403A /* TestListDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D622768925000EA403A /* TestListDataConverter.swift */; };
 		19304D6A2768925000EA403A /* TestListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D632768925000EA403A /* TestListPresenter.swift */; };
 		19304D6B2768925000EA403A /* TestListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D642768925000EA403A /* TestListRouter.swift */; };
@@ -238,6 +239,7 @@
 		191D17E327C3E751007A3E4B /* KnowledgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCell.swift; sourceTree = "<group>"; };
 		19221A41276B81DE0061495F /* ErrorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPlaceholder.swift; sourceTree = "<group>"; };
 		19221A43276B84950061495F /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
+		19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableAsyncImageView.swift; sourceTree = "<group>"; };
 		19304D622768925000EA403A /* TestListDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListDataConverter.swift; sourceTree = "<group>"; };
 		19304D632768925000EA403A /* TestListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListPresenter.swift; sourceTree = "<group>"; };
 		19304D642768925000EA403A /* TestListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListRouter.swift; sourceTree = "<group>"; };
@@ -1486,6 +1488,7 @@
 				19D5C9C3276738FA000109F2 /* CommonTableView.swift */,
 				19459888276E1B5200F32033 /* CommonButton.swift */,
 				19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */,
+				19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1924,6 +1927,7 @@
 				19C832CE276C92A80050747F /* UIViewController+Modal.swift in Sources */,
 				193D99532762507D004ACA7F /* AuthorizationViewModel.swift in Sources */,
 				19C83223276C906D0050747F /* NLTableViewCell.swift in Sources */,
+				19248F5E27CE810600619518 /* ResizableAsyncImageView.swift in Sources */,
 				19861D9C276A353800D3C041 /* RegistrationAssembly.swift in Sources */,
 				19BF7382277093BF00B95BB1 /* UINavigationController+Appearance.swift in Sources */,
 				19C83255276C927D0050747F /* Delegatable.swift in Sources */,
