@@ -28,9 +28,17 @@ final class CodeSampleCell: NLTableViewCell {
     private func drawSelf() {
         
         codeSampleImage.contentMode = .scaleAspectFit
+        codeSampleImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
         
         contentView.addSubview(codeSampleImage)
         codeSampleImage.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
+    }
+    
+    
+    // MARK: - Actions
+    
+    @objc private func imageTap() {
+        
     }
     
 }

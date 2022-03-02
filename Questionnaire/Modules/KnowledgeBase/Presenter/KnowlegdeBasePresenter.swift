@@ -72,4 +72,8 @@ extension KnowlegdeBasePresenter: KnowlegdeBaseTableViewManagerDelegate {
     func didSelectTopic(_ topic: KnowledgeTopic) {
         router?.openTopicDetail(topic)
     }
+    
+    func didExpandAtLeastOneSection(_ isExpanded: Bool) {
+        view?.setHiddenSectionsButton(!isExpanded)
+    }
 }

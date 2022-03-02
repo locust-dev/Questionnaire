@@ -10,11 +10,13 @@ import UIKit
 
 protocol KnowlegdeBaseTableViewManagerDelegate: AnyObject {
     func didSelectTopic(_ topic: KnowledgeTopic)
+    func didExpandAtLeastOneSection(_ isExpanded: Bool)
 }
 
 protocol KnowlegdeBaseTableViewManagerInput {
     func setup(tableView: UITableView)
     func update(with viewModel: KnowlegdeBaseViewModel)
+    func didTapCloseAllSections()
 }
 
 final class KnowlegdeBaseTableViewManager: NSObject {
@@ -45,11 +47,23 @@ final class KnowlegdeBaseTableViewManager: NSObject {
         })
     }
     
+    private func rowsIndexForAllExpandedSections() -> [IndexPath] {
+        var indexes: [IndexPath]? = []
+        expandedSections.forEach { indexes! += rowsIndexForSection(at: $0) ?? [] }
+        return indexes ?? []
+    }
+    
 }
 
 
 // MARK: - KnowlegdeBaseTableViewManagerInput
 extension KnowlegdeBaseTableViewManager: KnowlegdeBaseTableViewManagerInput {
+    
+    func didTapCloseAllSections() {
+        let sectionsIndexes = rowsIndexForAllExpandedSections()
+        expandedSections.removeAll()
+        tableView?.deleteRows(at: sectionsIndexes, with: .top)
+    }
     
     func setup(tableView: UITableView) {
        
@@ -192,6 +206,8 @@ extension KnowlegdeBaseTableViewManager: KnowledgeHeaderCellDelegate {
             expandedSections.insert(index)
             tableView?.insertRows(at: rowsIndexes, with: .top)
         }
+        
+        delegate?.didExpandAtLeastOneSection(!expandedSections.isEmpty)
     }
 
 }

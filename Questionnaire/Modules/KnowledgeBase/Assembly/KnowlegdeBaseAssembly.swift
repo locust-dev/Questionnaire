@@ -16,6 +16,17 @@ final class KnowlegdeBaseAssembly: Assembly {
             fatalError("Wrong model for KnowledgeBase module")
         }
         
+        let childModule = createChildModule(with: model)
+        let containerModule = KnowledgeBaseContainerViewController(childModule: childModule)
+        
+        containerModule.tabBarItem.title = model.tabBarTitle
+        containerModule.tabBarItem.image = Images.tabbar_knowledge()
+        
+        return UINavigationController(rootViewController: containerModule)
+    }
+    
+    private static func createChildModule(with model: Model) -> Module {
+        
         let networkClient = NetworkClient()
         let databaseService = DatabaseService(networkClient: networkClient)
         
@@ -38,10 +49,7 @@ final class KnowlegdeBaseAssembly: Assembly {
         
         interactor.presenter = presenter
         
-        view.tabBarItem.title = model.tabBarTitle
-        view.tabBarItem.image = Images.tabbar_knowledge()
-        
-        return UINavigationController(rootViewController: view)
+        return view
     }
 
 }

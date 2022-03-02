@@ -23,7 +23,6 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
     var isExpanded = false {
         didSet {
             setCornerRadiusForLastSection()
-            setShadowOffset()
         }
     }
     
@@ -54,10 +53,6 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         backgroundColor = .clear
         
         contentView.backgroundColor = .white
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.2
-        contentView.layer.shadowOffset = CGSize(width: 5, height: 0)
-        contentView.layer.shadowRadius = 5
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
         if #available(iOS 14.0, *) {
@@ -122,12 +117,6 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         
         UIView.animate(withDuration: 0.4) {
             self.contentView.layer.cornerRadius = self.isExpanded ? 0 : 10
-        }
-    }
-    
-    private func setShadowOffset() {
-        UIView.animate(withDuration: 0.4) {
-            self.contentView.layer.shadowOffset = CGSize(width: 5, height: self.isExpanded ? 5 : 0)
         }
     }
     

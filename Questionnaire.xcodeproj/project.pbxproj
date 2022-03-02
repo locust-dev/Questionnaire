@@ -16,6 +16,7 @@
 		19221A42276B81DE0061495F /* ErrorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A41276B81DE0061495F /* ErrorPlaceholder.swift */; };
 		19221A44276B84950061495F /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A43276B84950061495F /* ErrorPresentable.swift */; };
 		19248F5E27CE810600619518 /* ResizableAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */; };
+		19248F6027CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F5F27CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift */; };
 		19304D692768925000EA403A /* TestListDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D622768925000EA403A /* TestListDataConverter.swift */; };
 		19304D6A2768925000EA403A /* TestListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D632768925000EA403A /* TestListPresenter.swift */; };
 		19304D6B2768925000EA403A /* TestListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D642768925000EA403A /* TestListRouter.swift */; };
@@ -240,6 +241,7 @@
 		19221A41276B81DE0061495F /* ErrorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPlaceholder.swift; sourceTree = "<group>"; };
 		19221A43276B84950061495F /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
 		19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableAsyncImageView.swift; sourceTree = "<group>"; };
+		19248F5F27CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeBaseContainerViewController.swift; sourceTree = "<group>"; };
 		19304D622768925000EA403A /* TestListDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListDataConverter.swift; sourceTree = "<group>"; };
 		19304D632768925000EA403A /* TestListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListPresenter.swift; sourceTree = "<group>"; };
 		19304D642768925000EA403A /* TestListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListRouter.swift; sourceTree = "<group>"; };
@@ -1597,8 +1599,9 @@
 			isa = PBXGroup;
 			children = (
 				19F41F5427C50DF000D69EC1 /* Cells */,
-				19E1EB0527BEBCD000E3A4FB /* KnowlegdeBaseViewController.swift */,
 				19E1EB0827BEBCD000E3A4FB /* KnowlegdeBaseTableViewManager.swift */,
+				19E1EB0527BEBCD000E3A4FB /* KnowlegdeBaseViewController.swift */,
+				19248F5F27CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2026,6 +2029,7 @@
 				19BF738B2770ED8200B95BB1 /* TestResultMistakesCell.swift in Sources */,
 				19C8321E276C906D0050747F /* NLButton.swift in Sources */,
 				1945988D276E876500F32033 /* UIViewController+StatusBar.swift in Sources */,
+				19248F6027CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift in Sources */,
 				193D993627623E60004ACA7F /* MainScreenAssembly.swift in Sources */,
 				194E05242773254C00881D30 /* QuestionMistakeModel.swift in Sources */,
 				19C832DC276C92A80050747F /* String+Capitalizing.swift in Sources */,
