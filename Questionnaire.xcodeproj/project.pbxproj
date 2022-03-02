@@ -17,6 +17,7 @@
 		19221A44276B84950061495F /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19221A43276B84950061495F /* ErrorPresentable.swift */; };
 		19248F5E27CE810600619518 /* ResizableAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */; };
 		19248F6027CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F5F27CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift */; };
+		19248F6227CFBBD000619518 /* ImagePanZoomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19248F6127CFBBD000619518 /* ImagePanZoomScrollView.swift */; };
 		19304D692768925000EA403A /* TestListDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D622768925000EA403A /* TestListDataConverter.swift */; };
 		19304D6A2768925000EA403A /* TestListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D632768925000EA403A /* TestListPresenter.swift */; };
 		19304D6B2768925000EA403A /* TestListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19304D642768925000EA403A /* TestListRouter.swift */; };
@@ -242,6 +243,7 @@
 		19221A43276B84950061495F /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
 		19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableAsyncImageView.swift; sourceTree = "<group>"; };
 		19248F5F27CF6ABF00619518 /* KnowledgeBaseContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeBaseContainerViewController.swift; sourceTree = "<group>"; };
+		19248F6127CFBBD000619518 /* ImagePanZoomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePanZoomScrollView.swift; sourceTree = "<group>"; };
 		19304D622768925000EA403A /* TestListDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListDataConverter.swift; sourceTree = "<group>"; };
 		19304D632768925000EA403A /* TestListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListPresenter.swift; sourceTree = "<group>"; };
 		19304D642768925000EA403A /* TestListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListRouter.swift; sourceTree = "<group>"; };
@@ -481,6 +483,15 @@
 				19A8793C276F546C0086B143 /* CommonTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		19248F6327CFBBE500619518 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */,
+				19248F6127CFBBD000619518 /* ImagePanZoomScrollView.swift */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		19304D612768923000EA403A /* TestList */ = {
@@ -1482,6 +1493,7 @@
 		19D5C9C2276738EF000109F2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				19248F6327CFBBE500619518 /* Images */,
 				191BD26B27CE610C003D2929 /* Cells */,
 				19D5C9E22767B5F1000109F2 /* ProgressHUD */,
 				19780CF927727FB5004287BC /* RefreshControl.swift */,
@@ -1490,7 +1502,6 @@
 				19D5C9C3276738FA000109F2 /* CommonTableView.swift */,
 				19459888276E1B5200F32033 /* CommonButton.swift */,
 				19E6DF48278B273C00BD677A /* KeyboardShowableViewController.swift */,
-				19248F5D27CE810600619518 /* ResizableAsyncImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1935,6 +1946,7 @@
 				19BF7382277093BF00B95BB1 /* UINavigationController+Appearance.swift in Sources */,
 				19C83255276C927D0050747F /* Delegatable.swift in Sources */,
 				19436D352768A5DB00D2FA0A /* TestQuestionTableViewManager.swift in Sources */,
+				19248F6227CFBBD000619518 /* ImagePanZoomScrollView.swift in Sources */,
 				1992E7FA2771ECB50068FFFF /* TabBarPresentable.swift in Sources */,
 				19C8321A276C906D0050747F /* NLStackView.swift in Sources */,
 				19C8321D276C906D0050747F /* NLPageViewController.swift in Sources */,

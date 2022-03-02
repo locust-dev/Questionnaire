@@ -27,9 +27,12 @@ final class CodeSampleCell: NLTableViewCell {
     
     private func drawSelf() {
         
+        codeSampleImage.isUserInteractionEnabled = true
         codeSampleImage.contentMode = .scaleAspectFit
         codeSampleImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
         
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         contentView.addSubview(codeSampleImage)
         codeSampleImage.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
     }
@@ -39,6 +42,19 @@ final class CodeSampleCell: NLTableViewCell {
     
     @objc private func imageTap() {
         
+        guard let image = codeSampleImage.image else {
+            return
+        }
+        
+        let scrollViewWithZoom = ImagePanZoomScrollView(image: image)
+        scrollViewWithZoom.alpha = 0
+        scrollViewWithZoom.layer.cornerRadius = 12
+        superview?.superview?.addSubview(scrollViewWithZoom)
+        scrollViewWithZoom.autoPinEdgesToSuperviewEdges()
+        
+        UIView.animate(withDuration: 0.2) {
+            scrollViewWithZoom.alpha = 1
+        }
     }
     
 }
