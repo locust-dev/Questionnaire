@@ -11,6 +11,7 @@ import UIKit
 protocol TestQuestionViewInput: Alertable, TabBarPresentable {
     func update(with viewModel: TestQuestionViewModel)
     func showNotConfirmAlert()
+    func zoomImage(_ image: UIImage)
 }
 
 final class TestQuestionViewController: UIViewController {
@@ -154,6 +155,20 @@ final class TestQuestionViewController: UIViewController {
 
 // MARK: - TestQuestionViewInput
 extension TestQuestionViewController: TestQuestionViewInput {
+    
+    func zoomImage(_ image: UIImage) {
+        
+        let scrollViewWithZoom = ImagePanZoomScrollView(image: image)
+        scrollViewWithZoom.alpha = 0
+        scrollViewWithZoom.layer.cornerRadius = 12
+        
+        containerView.addSubview(scrollViewWithZoom)
+        scrollViewWithZoom.autoPinEdgesToSuperviewEdges()
+        
+        UIView.animate(withDuration: 0.2) {
+            scrollViewWithZoom.alpha = 1
+        }
+    }
     
     func update(with viewModel: TestQuestionViewModel) {
         swipeQuestion(viewModel.swipeDirection) { _ in

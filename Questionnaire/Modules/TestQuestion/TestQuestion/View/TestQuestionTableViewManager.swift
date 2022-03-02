@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TestQuestionTableViewManagerDelegate: AnyObject {
+protocol TestQuestionTableViewManagerDelegate: CodeSampleCellDelegate {
     func didSelectAnswers(_ answers: [Int])
 }
 

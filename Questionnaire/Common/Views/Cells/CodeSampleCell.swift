@@ -8,9 +8,15 @@
 import UIKit
 import SDWebImage
 
-final class CodeSampleCell: NLTableViewCell {
+protocol CodeSampleCellDelegate: AnyObject {
+    func didTapImage(_ image: UIImage)
+}
+
+final class CodeSampleCell: NLTableViewCell, Delegatable {
     
     // MARK: - Properties
+    
+    weak var delegate: AnyObject?
     
     private let codeSampleImage = ResizableAsyncImageView()
     
@@ -46,15 +52,7 @@ final class CodeSampleCell: NLTableViewCell {
             return
         }
         
-        let scrollViewWithZoom = ImagePanZoomScrollView(image: image)
-        scrollViewWithZoom.alpha = 0
-        scrollViewWithZoom.layer.cornerRadius = 12
-        superview?.superview?.addSubview(scrollViewWithZoom)
-        scrollViewWithZoom.autoPinEdgesToSuperviewEdges()
-        
-        UIView.animate(withDuration: 0.2) {
-            scrollViewWithZoom.alpha = 1
-        }
+        (delegate as? CodeSampleCellDelegate)?.didTapImage(image)
     }
     
 }

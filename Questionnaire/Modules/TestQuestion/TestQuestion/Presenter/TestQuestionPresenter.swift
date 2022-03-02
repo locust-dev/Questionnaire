@@ -6,6 +6,8 @@
 //  Copyright © 2021 FINCH. All rights reserved.
 //
 
+import UIKit
+
 protocol TestQuestionViewOutput: ViewOutput {
     func didTapConfirmButton()
     func didTapFinishButton()
@@ -183,5 +185,14 @@ extension TestQuestionPresenter: TestQuestionTableViewManagerDelegate {
     
     func didSelectAnswers(_ answers: [Int]) {
         currentUserAnswers = answers
+    }
+}
+
+
+// MARK: - CodeSampleCellDelegate
+extension TestQuestionPresenter: CodeSampleCellDelegate {
+    
+    func didTapImage(_ image: UIImage) {
+        view?.zoomImage(image)
     }
 }
