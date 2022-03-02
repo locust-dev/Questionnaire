@@ -7,7 +7,7 @@
 //
 
 protocol TestCategoriesRouterInput {
-    func openTests(by categoryId: String)
+    func openTests(by categoryId: String, category: String)
 }
 
 final class TestCategoriesRouter {
@@ -29,8 +29,8 @@ final class TestCategoriesRouter {
 // MARK: - TestCategoriesRouterInput
 extension TestCategoriesRouter: TestCategoriesRouterInput {
     
-    func openTests(by categoryId: String) {
-        let testsModel = TestListAssembly.Model(categoryId: categoryId)
+    func openTests(by categoryId: String, category: String) {
+        let testsModel = TestListAssembly.Model(categoryId: categoryId, category: category)
         transition.push(with: testsModel, openModuleType: TestListAssembly.self)
     }
     

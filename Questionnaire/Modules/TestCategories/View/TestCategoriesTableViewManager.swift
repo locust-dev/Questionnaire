@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TestCategoriesTableViewManagerDelegate: AnyObject {
-    func didSelectItem(by categoryId: String)
+    func didSelectItem(by categoryId: String, category: String)
 }
 
 protocol TestCategoriesTableViewManagerInput {
@@ -93,6 +93,6 @@ extension TestCategoriesTableViewManager: UITableViewDelegate {
             return
         }
         
-        delegate?.didSelectItem(by: row.categoryId)
+        delegate?.didSelectItem(by: row.categoryId, category: row.category)
     }
 }

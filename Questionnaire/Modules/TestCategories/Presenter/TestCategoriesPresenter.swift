@@ -69,14 +69,14 @@ extension TestCategoriesPresenter: TestCategoriesInteractorOutput {
 // MARK: - TestCategoriesTableViewManagerDelegate
 extension TestCategoriesPresenter: TestCategoriesTableViewManagerDelegate {
     
-    func didSelectItem(by categoryId: String) {
+    func didSelectItem(by categoryId: String, category: String) {
         
         guard interactor?.isAuthorized == true else {
             view?.showNonAuthorizedAlert()
             return
         }
         
-        router?.openTests(by: categoryId)
+        router?.openTests(by: categoryId, category: category)
     }
     
 }

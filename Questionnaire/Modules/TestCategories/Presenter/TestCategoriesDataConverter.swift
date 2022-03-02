@@ -26,7 +26,7 @@ final class TestCategoriesDataConverter {
         
         let model = CommonTableViewCell.Model(name: title)
         let configurator = CategoryCellConfigurator(item: model)
-        return TestCategoriesViewModel.Row(configurator: configurator, categoryId: identifier)
+        return TestCategoriesViewModel.Row(configurator: configurator, categoryId: identifier, category: title)
     }
 }
 

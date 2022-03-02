@@ -158,12 +158,7 @@ extension KnowlegdeBaseTableViewManager: UITableViewDelegate {
         
         if let cell = view as? KnowlegdeHeaderCell {
             cell.delegate = self
-            
-            if expandedSections.contains(section) {
-                cell.isExpanded = true
-            } else {
-                cell.isExpanded = false
-            }
+            cell.isExpanded = expandedSections.contains(section)
             
             if currentSection.isBottomCurved {
                 cell.makeBottomCurved()

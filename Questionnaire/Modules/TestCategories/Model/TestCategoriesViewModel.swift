@@ -25,6 +25,7 @@ struct TestCategoriesViewModel {
         var configurator: TableCellConfiguratorProtocol
         
         let categoryId: String
-        
+        let category: String
     }
+    
 }

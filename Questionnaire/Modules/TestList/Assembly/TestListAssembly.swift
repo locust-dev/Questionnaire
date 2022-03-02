@@ -30,6 +30,7 @@ final class TestListAssembly: Assembly {
         
         view.presenter = presenter
         view.tableViewManager = tableViewManager
+        view.title = model.category
         
         presenter.view = view
         presenter.router = router
@@ -49,6 +50,7 @@ extension TestListAssembly {
     struct Model: TransitionModel {
         
         let categoryId: String
+        let category: String
     }
     
 }
