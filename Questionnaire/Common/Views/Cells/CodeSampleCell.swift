@@ -45,13 +45,11 @@ extension CodeSampleCell: Configurable {
     }
     
     func configure(with model: Model) {
-        self.codeSampleImage.sd_setImage(with: URL(string: model.codeSampleImagePath)) { _, _, _, _ in
-
-            // ОБЯЗАТЕЛЬНО ИЗУЧИТЬ
-            if let superview = self.superview as? UITableView {
-                superview.beginUpdates()
-                superview.endUpdates()
-            }
+        
+        self.codeSampleImage.sd_setImage(with: URL(string: model.codeSampleImagePath)) { [superview] _, _, _, _ in
+            let tableView = superview as? UITableView
+            tableView?.beginUpdates()
+            tableView?.endUpdates()
         }
     }
     
