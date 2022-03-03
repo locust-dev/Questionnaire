@@ -30,15 +30,15 @@ final class TestResultDataConverter {
     
     private func createCircleProgressRow(progressPercent: Double) -> Row {
         
-        var titleText = "Похоже, вам стоит немного подтянуть эту тему :("
+        var titleText = Localized.testResultGreat()
         
         switch progressPercent {
             
         case 0.26...0.75:
-            titleText = "Хороший результат, так держать!"
+            titleText = Localized.testResultMedium()
             
         case 0.76...:
-            titleText = "Отлично! Вы в числе лидеров! :)"
+            titleText = Localized.testResultLow()
             
         default:
             break
@@ -51,6 +51,8 @@ final class TestResultDataConverter {
     }
     
     private func createMistakesRow(mistakesCount: Int) -> Row {
+        
+        // TODO: - Localize
         
         let titleText = mistakesCount == 0
             ? "Вы не совершили ни одной ошибки."

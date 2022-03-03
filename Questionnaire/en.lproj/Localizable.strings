@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  Questionnaire
+
+  Created by Ilya Turin on 03.03.2022.
+  
+*/
+
+/* Tab Bar */
+
+"tabBarTests" = "Tests";
+"tabBarKnowledgeBase" = "Documentation";
+"tabBarProfile" = "Profile";
+
+/* Authorization */
+
+"authtorizationMainTitle" = "Welcome!";
+"authtorizationSubtitle" = "Please, sign in";
+"authtorizationForgotPassword" = "Forgot password?";
+"authtorizationEnter" = "Log in";
+"authtorizationRegister" = "Register";
+
+/* Registration */
+
+"registrationMainTitle" = "Registration";
+"registrationButton" = "Register";
+
+/* Profile */
+
+"profileExitButton" = "Sign out";
+
+/* Knowledge base */
+
+"knowledgeBaseFold" = "Fold";
+"knowledgeBaseNavigationTitle" = "Documentation";
+
+/* Tests */
+
+"testsNavigationTitle" = "Tests";
+
+/* Text Field style */
+
+"textFieldEmailPlaceholder" = "Email";
+"textFieldPasswordPlaceholder" = "Password";
+"textFieldFirstNamePlaceholder" = "Name";
+"textFieldLastNamePlaceholder" = "Surname";
+
+/* Alerts */
+
+"alertYouMustBeAuthorized" = "You must be logged in to start the test";
+"alertBeginTestMainTitle" = "Start the test?";
+"alertBeginTestSubtitle" = "Are you sure?";
+"alertFillAllGaps" = "Please, fill all required fields";
+"alertError" = "Error";
+"alertSuccessRegistration" = "You are registered. You can now take the tests.";
+"alertChooseAnswerBeforeContinue" = "You must choose an answer before you can continue.";
+"alertStartAction" = "Start";
+"alertCancelAction" = "Cancel";
+"alertCanNotFindAnyQuestionInTest" = "Looks like they haven't added any questions to this test yet!";
+
+/* Test Question */
+
+"testQuestionWordCount" = "Question";
+"testQuestionAccept" = "Confirm";
+"testQuestionOver" = "Abort the test";
+
+/* Test result */
+
+"testResultOver" = "Abort the test";
+"testResultGreat" = "Well done! You are among the leaders! :)";
+"testResultMedium" = "Good result, keep it up!";
+"testResultLow" = "Sounds like you might want to tighten this topic up a bit :(";
+"testResultMistakeTitle" = "You have made mistakes in";
+"testResultShowMistake" = "Show mistakes";
+"testResultNavigationTitle" = "Results";
+
+/* Common Tableview */
+
+"tableViewEmptyPlaceholder" = "We don't seem to have found anything.\nTry updating by pulling down.";
+
+/* Button "Ok" title */
+
+"buttonOkTitle" = "Ok";
+
+/* Error Model */
+
+"errorSomethingWentWrong" = "Something went wrong.";
+"errorServerError" = "Server error. Please try again later.";
+"errorUserNotAuthorized" = "Can't authorize.";
+"errorUserNotFoundInDatabase" = "We did not find you in the database.\nCreated a default account.";
+"errorToRegisterNewUser" = "Couldn't register a new user.";
+"errorToSaveNewUser" = "Couldn't save the user in the database.";
+"errorToLoadUserInfo" = "Can't load profile information.";
+"errorNotFindAnswers" = "Hmm. Couldn't find the right answers to this test!";
+"errorUserNotFound" = "User not found. Try registering.";
+"errorParseError" = "JSON parsing error.";

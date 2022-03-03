@@ -67,9 +67,7 @@ extension Alertable where Self: UIViewController {
         return alert
     }
     
-    // TODO: - Localized
-    func showAlert(title: String?, message: String? = nil, buttonTitle: String? = "Ok") {
-        
+    func showAlert(title: String?, message: String? = nil, buttonTitle: String? = Localized.buttonOkTitle()) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(.init(title: buttonTitle, style: .cancel))
         present(alert, animated: true)

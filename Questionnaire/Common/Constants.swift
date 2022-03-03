@@ -9,3 +9,4 @@ import UIKit
 
 typealias Colors = R.color
 typealias Images = R.image
+typealias Localized = R.string.localizable

@@ -86,22 +86,21 @@ extension MainScreenViewController: MainScreenViewInput {
         
         if isAuthorized == true {
             let profileModel = ProfileAssembly.Model(moduleOutput: presenter as? ProfileModuleOutput,
-                                                     defaulTabBarTitle: "Профиль")
+                                                     defaulTabBarTitle: Localized.tabBarProfile())
             
             userModule = ProfileAssembly.assembleModule(with: profileModel)
             
         } else {
-            // TODO: - From config
             let authModel = AuthorizationAssembly.Model(moduleOutput: presenter as? AuthorizationModuleOutput,
-                                                        defaultTabBarTitle: "Профиль")
+                                                        defaultTabBarTitle: Localized.tabBarProfile())
             
             userModule = AuthorizationAssembly.assembleModule(with: authModel)
         }
         
-        let testsModel = TestCategoriesAssembly.Model(tabBarTitle: "Тесты")
+        let testsModel = TestCategoriesAssembly.Model(tabBarTitle: Localized.tabBarTests())
         let testsModule = TestCategoriesAssembly.assembleModule(with: testsModel)
         
-        let knowlegdeModel = KnowlegdeBaseAssembly.Model(tabBarTitle: "База знаний")
+        let knowlegdeModel = KnowlegdeBaseAssembly.Model(tabBarTitle: Localized.tabBarKnowledgeBase())
         let knowledgeModule = KnowlegdeBaseAssembly.assembleModule(with: knowlegdeModel)
         
         self.viewControllers = [testsModule, knowledgeModule, userModule]

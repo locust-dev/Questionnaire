@@ -38,7 +38,7 @@ final class TestResultMistakesCell: NLTableViewCell, Delegatable {
         titleLabel.textAlignment = .center
         
         showMistakesButton.addTarget(self, action: #selector(showMistakes), for: .touchUpInside)
-        showMistakesButton.setTitle("Показать ошибки", for: .normal)
+        showMistakesButton.setTitle(Localized.testResultShowMistake(), for: .normal)
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(showMistakesButton)

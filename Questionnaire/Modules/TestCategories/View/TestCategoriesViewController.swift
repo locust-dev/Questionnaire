@@ -39,7 +39,7 @@ final class TestCategoriesViewController: UIViewController {
     
     private func drawSelf() {
         
-        title = "Тесты"
+        title = Localized.testsNavigationTitle()
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.FontName.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
         
@@ -63,8 +63,7 @@ extension TestCategoriesViewController: TestCategoriesViewInput {
     }
     
     func showNonAuthorizedAlert() {
-        // TODO: - From config
-        showAlert(title: "Вы должны авторизоваться, чтобы начать проходить тесты", buttonTitle: "Ok")
+        showAlert(title: Localized.alertYouMustBeAuthorized(), buttonTitle: Localized.buttonOkTitle())
     }
     
     func showLoader() {

@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  Questionnaire
+
+  Created by Ilya Turin on 03.03.2022.
+  
+*/
+
+/* Tab Bar */
+
+"tabBarTests" = "Тесты";
+"tabBarKnowledgeBase" = "База знаний";
+"tabBarProfile" = "Профиль";
+
+/* Authorization */
+
+"authtorizationMainTitle" = "Добро пожаловать!";
+"authtorizationSubtitle" = "Пожалуйста, войдите";
+"authtorizationForgotPassword" = "Забыли пароль?";
+"authtorizationEnter" = "Войти";
+"authtorizationRegister" = "Зарегистрироваться";
+
+/* Registration */
+
+"registrationMainTitle" = "Регистрация";
+"registrationButton" = "Зарегистрироваться";
+
+/* Profile */
+
+"profileExitButton" = "Выйти";
+
+/* Knowledge base */
+
+"knowledgeBaseFold" = "Свернуть";
+"knowledgeBaseNavigationTitle" = "База знаний";
+
+/* Tests */
+
+"testsNavigationTitle" = "Тесты";
+
+/* Text Field style */
+
+"textFieldEmailPlaceholder" = "Email";
+"textFieldPasswordPlaceholder" = "Пароль";
+"textFieldFirstNamePlaceholder" = "Имя";
+"textFieldLastNamePlaceholder" = "Фамилия";
+
+/* Alerts */
+
+"alertYouMustBeAuthorized" = "Вы должны авторизоваться, чтобы начать проходить тесты";
+"alertBeginTestMainTitle" = "Начать тест?";
+"alertBeginTestSubtitle" = "Вы уверены?";
+"alertFillAllGaps" = "Пожалуйста, заполните все необходимые поля.";
+"alertError" = "Ошибка";
+"alertSuccessRegistration" = "Вы зарегистрированы. Теперь вы можете проходить тесты.";
+"alertChooseAnswerBeforeContinue" = "Вы должны выбрать вариант ответа, прежде чем продолжить";
+"alertStartAction" = "Начать";
+"alertCancelAction" = "Отмена";
+"alertCanNotFindAnyQuestionInTest" = "Похоже, в этот тест еще не добавили ни одного вопроса!";
+
+/* Test Question */
+
+"testQuestionWordCount" = "Вопрос";
+"testQuestionAccept" = "Подтвердить";
+"testQuestionOver" = "Завершить тест";
+
+/* Test result */
+
+"testResultOver" = "Завершить тест";
+"testResultGreat" = "Отлично! Вы в числе лидеров! :)";
+"testResultMedium" = "Хороший результат, так держать!";
+"testResultLow" = "Похоже, вам стоит немного подтянуть эту тему :(";
+"testResultMistakeTitle" = "Вы совершили ошибки в";
+"testResultShowMistake" = "Показать ошибки";
+"testResultNavigationTitle" = "Результаты";
+
+/* Common Tableview */
+
+"tableViewEmptyPlaceholder" = "Кажется, мы ничего не нашли\nПопробуйте обновить, потянув вниз";
+
+/* Button "Ok" title */
+
+"buttonOkTitle" = "Oк";
+
+/* Error Model */
+
+"errorSomethingWentWrong" = "Что то пошло не так.";
+"errorServerError" = "Ошибка сервера. Попробуйте позже.";
+"errorUserNotAuthorized" = "Не можем авторизовать";
+"errorUserNotFoundInDatabase" = "Мы не нашли вас в базе.\nСоздали аккаунт по умолчанию";
+"errorToRegisterNewUser" = "Не смогли зарегестрировать нового пользователя";
+"errorToSaveNewUser" = "Не смогли сохранить пользователя в базе";
+"errorToLoadUserInfo" = "Не можем загрузить информацию о профиле";
+"errorNotFindAnswers" = "Хм. Не смогли найти правильные ответы на этот тест!";
+"errorUserNotFound" = "Пользователь не найден. Попробуйте зарегистрироваться.";
+"errorParseError" = "Ошибка парсинга JSON";

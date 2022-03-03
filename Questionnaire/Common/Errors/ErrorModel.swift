@@ -32,39 +32,38 @@ enum ErrorModel: Error {
         
         switch self {
             
-        // TODO: - Localized
         case .nonShowingError:
             return ""
             
         case .somethingWentWrong:
-            return "Что то пошло не так."
+            return Localized.errorSomethingWentWrong()
             
         case .serverError:
-            return "Ошибка сервера. Попробуйте позже."
+            return Localized.errorServerError()
             
         case .userNotAuthorized:
-            return "Не можем авторизовать"
+            return Localized.errorUserNotAuthorized()
             
         case .userNotFoundInDatabase:
-            return "Мы не нашли вас в базе.\nСоздали аккаунт по умолчанию"
+            return Localized.errorUserNotFoundInDatabase()
             
         case .errorToRegisterNewUser:
-            return "Не смогли зарегестрировать нового пользователя"
+            return Localized.errorToRegisterNewUser()
             
         case .errorToSaveNewUser:
-            return "Не смогли сохранить пользователя в базе"
+            return Localized.errorToSaveNewUser()
             
         case .errorToLoadUserInfo:
-            return "Не можем загрузить информацию о профиле"
+            return Localized.errorToLoadUserInfo()
             
         case .notFindAnswers:
-            return "Хм. Не смогли найти правильные ответы на этот тест!"
+            return Localized.errorNotFindAnswers()
             
         case .userNotFound:
-            return "Пользователь не найден. Попробуйте зарегистрироваться."
+            return Localized.errorUserNotFound()
             
         case .parseError:
-            return "Ошибка парсинга JSON"
+            return Localized.errorParseError()
         }
     }
 }

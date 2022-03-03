@@ -44,9 +44,8 @@ final class CommonTableView: UITableView {
         emptyLabel.font = MainFont.medium.withSize(18)
         emptyLabel.numberOfLines = 0
         emptyLabel.textAlignment = .center
-        // TODO: - ...
         emptyLabel.isHidden = true
-        emptyLabel.text = "Кажется, мы ничего не нашли\nПопробуйте обновить, потянув вниз"
+        emptyLabel.text = Localized.tableViewEmptyPlaceholder()
         return emptyLabel
     }()
     

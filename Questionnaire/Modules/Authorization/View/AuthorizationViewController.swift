@@ -128,8 +128,9 @@ final class AuthorizationViewController: KeyboardShowableViewController {
     }
     
     @objc private func forgotPassword() {
-        // TODO: - From localized
-        showAlert(title: "Забыли пароль?", message: "Пожалуйста, обратитесь к @turin_ilya")
+        // TODO: - Допилить message
+        showAlert(title: Localized.authtorizationForgotPassword(),
+                  message: "Пожалуйста, обратитесь к @turin_ilya")
     }
     
 }
@@ -139,15 +140,14 @@ final class AuthorizationViewController: KeyboardShowableViewController {
 extension AuthorizationViewController: AuthorizationViewInput {
     
     func showErrorAlert(message: String) {
-        // TODO: - From localized
-        showAlert(title: "Ошибка", message: message, buttonTitle: "Ok")
+        showAlert(title: Localized.alertError(), message: message, buttonTitle: Localized.buttonOkTitle())
     }
     
     func update(with viewModel: AuthorizationViewModel) {
         titleLabel.text = viewModel.mainTitle
         subtitleLabel.text = viewModel.subtitle
         confirmButton.setTitle(viewModel.confirmButtonTitle, for: .normal)
-        registerButton.setTitle("Зарегистрироваться", for: .normal)
+        registerButton.setTitle(Localized.authtorizationRegister(), for: .normal)
         forgotPasswordButton.setTitle(viewModel.forgotPassButtonTitle, for: .normal)
     }
 }

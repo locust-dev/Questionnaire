@@ -61,20 +61,22 @@ extension TestListViewController: TestListViewInput {
     }
     
     func showAlertIfNoQuestionsInTest() {
-        // TODO: - Config
-        showAlert(title: "Ошибка",
-                  message: "Похоже, в этот тест еще не добавили ни одного вопроса!",
-                  buttonTitle: "Ок")
+        showAlert(title: Localized.alertError(),
+                  message: Localized.alertCanNotFindAnyQuestionInTest(),
+                  buttonTitle: Localized.buttonOkTitle())
     }
     
     func showAlertSureToStartTest(_ test: Test) {
         
-        let okAction = AlertAction(title: "Начать", style: .default) {
+        let okAction = AlertAction(title: Localized.alertStartAction(), style: .default) {
             self.presenter?.didTapStartTest(test)
         }
         
-        let cancelAction = AlertAction(title: "Отменить", style: .cancel)
-        showAlert(title: "Начать тест?", message: "Вы уверены?", actions: [okAction, cancelAction])
+        let cancelAction = AlertAction(title: Localized.alertCancelAction(), style: .cancel)
+        
+        showAlert(title: Localized.alertBeginTestMainTitle(),
+                  message: Localized.alertBeginTestSubtitle(),
+                  actions: [okAction, cancelAction])
     }
     
     func showLoader() {

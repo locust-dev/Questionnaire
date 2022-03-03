@@ -44,8 +44,7 @@ extension MainScreenPresenter: MainScreenViewOutput {
 extension MainScreenPresenter: MainScreenInteractorOutput {
     
     func didObtainFullname(_ fullname: String?) {
-        // TODO: - ...
-        view?.updateProfileTabUsername(fullname ?? "Profile")
+        view?.updateProfileTabUsername(fullname ?? Localized.tabBarProfile())
     }
 }
 

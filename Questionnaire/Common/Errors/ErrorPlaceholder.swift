@@ -43,7 +43,7 @@ final class ErrorPlaceholder: NLView {
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         
-        okButton.setTitle("Oк", for: .normal)
+        okButton.setTitle(Localized.buttonOkTitle(), for: .normal)
         okButton.addTarget(self, action: #selector(okTap), for: .touchUpInside)
         
         addSubview(titleLabel)

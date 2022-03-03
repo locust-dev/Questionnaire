@@ -45,7 +45,7 @@ final class ProfileViewController: UIViewController {
         tableViewManager?.setup(tableView: tableView)
         tableView.loaderColor = Colors.mainBlueColor()
         
-        logOutButton.setTitle("Выйти", for: .normal)
+        logOutButton.setTitle(Localized.profileExitButton(), for: .normal)
         logOutButton.addTarget(self, action: #selector(logOutTap), for: .touchUpInside)
         
         view.addSubview(logOutButton)

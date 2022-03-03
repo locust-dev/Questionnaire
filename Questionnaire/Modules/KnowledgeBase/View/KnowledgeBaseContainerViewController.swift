@@ -45,11 +45,11 @@ final class KnowledgeBaseContainerViewController: NLViewController {
         
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.FontName.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
-        title = "База знаний"
+        title = Localized.knowledgeBaseNavigationTitle()
         
         (childModule as? KnowlegdeBaseViewInput)?.delegate = self
         
-        closeAllSectionsButton.setTitle("Свернуть", for: .normal)
+        closeAllSectionsButton.setTitle(Localized.knowledgeBaseFold(), for: .normal)
         closeAllSectionsButton.titleLabel?.font =  MainFont.bold.withSize(14)
         closeAllSectionsButton.setTitleColor(Colors.mainBlueColor(), for: .normal)
         closeAllSectionsButton.backgroundColor = .white

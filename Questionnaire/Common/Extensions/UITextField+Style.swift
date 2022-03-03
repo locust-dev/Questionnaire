@@ -41,20 +41,20 @@ extension UITextField {
             
         case .email:
             leftIcon.image = Images.email()
-            placeholder = "Email"
+            placeholder = Localized.textFieldEmailPlaceholder()
             
         case .password:
             leftIcon.image = Images.lock()
             isSecureTextEntry = true
-            placeholder = "Пароль"
+            placeholder = Localized.textFieldPasswordPlaceholder()
             
         case .firstName:
             leftIcon.image = Images.pencil()
-            placeholder = "Имя"
+            placeholder = Localized.textFieldFirstNamePlaceholder()
             
         case .lastName:
             leftIcon.image = Images.pencil()
-            placeholder = "Фамилия"
+            placeholder = Localized.textFieldLastNamePlaceholder()
         }
         
         leftIconContainer.addSubview(leftIcon)

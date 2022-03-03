@@ -59,14 +59,13 @@ final class RegistrationViewController: KeyboardShowableViewController {
         mainLabel.font = MainFont.bold.withSize(30)
         mainLabel.textColor = .black
         mainLabel.numberOfLines = 0
-        mainLabel.text = "Регистрация"
+        mainLabel.text = Localized.registrationMainTitle()
         
         subtitleLabel.font = MainFont.regular.withSize(16)
         subtitleLabel.textColor = .black
         subtitleLabel.numberOfLines = 0
         
-        // TODO: - Localized
-        registerButton.setTitle("Зарегистрироваться", for: .normal)
+        registerButton.setTitle(Localized.registrationButton(), for: .normal)
         registerButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         
         let stackContainer = UIView()
@@ -142,8 +141,7 @@ final class RegistrationViewController: KeyboardShowableViewController {
     // MARK: - Private methods
     
     private func showAlertNonOptionalFields() {
-        // TODO: - Localized
-        showAlert(title: "Ошибка!", message: "Пожалуйста, заполните все обязятельные поля.")
+        showAlert(title: Localized.alertError(), message: Localized.alertFillAllGaps())
     }
     
 }
@@ -153,18 +151,18 @@ final class RegistrationViewController: KeyboardShowableViewController {
 extension RegistrationViewController: RegistrationViewInput {
     
     func updateViewLabels(_ email: String?) {
+        
+        // TODO: - ...
         subtitleLabel.text = email == nil ? email : "Вы успешно авторизовались, но, для продолжения, вам необходимо зарегистрироваться"
         emailTextField.text = email
     }
     
     func showSavingAlertError(message: String) {
-        // TODO: - Localized
-        showAlert(title: "Ошибка!", message: message)
+        showAlert(title: Localized.alertError(), message: message)
     }
     
     func showSuccessRegistrationAlert() {
-        // TODO: - Localized
-        showAlert(title: "Ура!", message: "Вы зарегистрированы. Теперь вы можете проходить тесты.")
+        showAlert(title: Localized.alertSuccessRegistration())
     }
 
 }

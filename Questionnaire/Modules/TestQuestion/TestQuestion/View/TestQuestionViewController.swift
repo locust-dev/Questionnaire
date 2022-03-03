@@ -60,10 +60,10 @@ final class TestQuestionViewController: UIViewController {
         skipQuestionButton.addTarget(self, action: #selector(skipQuestion), for: .touchUpInside)
         returnQuestionButton.addTarget(self, action: #selector(returnQuestion), for: .touchUpInside)
         
-        confirmButton.setTitle("Подтвердить", for: .normal)
+        confirmButton.setTitle(Localized.testQuestionAccept(), for: .normal)
         confirmButton.addTarget(self, action: #selector(confirmTap), for: .touchUpInside)
         
-        finishTestButton.setTitle("Завершить тест", for: .normal)
+        finishTestButton.setTitle(Localized.testQuestionOver(), for: .normal)
         finishTestButton.addTarget(self, action: #selector(finishTap), for: .touchUpInside)
     
         tableViewManager?.setup(tableView: tableView)
@@ -125,7 +125,7 @@ final class TestQuestionViewController: UIViewController {
         returnQuestionButton.isEnabled = viewModel.isReturnButtonEnabled
         skipQuestionButton.isEnabled = viewModel.isSkipButtonEnabled
         tableViewManager?.update(with: viewModel)
-        title = "Вопрос \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
+        title = "\(Localized.testQuestionWordCount()) \(viewModel.currentQuestionNumber)/\(viewModel.questionsCount)"
     }
     
     
@@ -158,7 +158,7 @@ final class TestQuestionViewController: UIViewController {
 extension TestQuestionViewController: TestQuestionViewInput {
     
     func setTitle(with questionsCount: Int) {
-        title = "Вопрос 1/\(questionsCount)"
+        title = "\(Localized.testQuestionWordCount()) 1/\(questionsCount)"
     }
     
     func zoomImage(_ image: UIImage) {
@@ -182,8 +182,7 @@ extension TestQuestionViewController: TestQuestionViewInput {
     }
     
     func showNotConfirmAlert() {
-        // TODO: - From localized
-        showAlert(title: "Вы должны выбрать вариант ответа, прежде чем продолжить", buttonTitle: "Oк")
+        showAlert(title: Localized.alertChooseAnswerBeforeContinue(), buttonTitle: Localized.buttonOkTitle())
     }
     
 }

@@ -46,7 +46,7 @@ final class TestResultViewController: UIViewController {
         tableView.layer.cornerRadius = 12
         tableView.loaderColor = Colors.mainBlueColor()
         
-        finishButton.setTitle("Завершить тест", for: .normal)
+        finishButton.setTitle(Localized.testResultOver(), for: .normal)
         finishButton.addTarget(self, action: #selector(finishTest), for: .touchUpInside)
         
         view.addSubview(tableView)
@@ -77,7 +77,7 @@ final class TestResultViewController: UIViewController {
         navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.FontName.extraBold, size: 34)
         navigationItem.hidesBackButton = true
         navigationItem.backButtonTitle = ""
-        title = "Результаты"
+        title = Localized.testResultNavigationTitle()
     }
     
 }
