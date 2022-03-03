@@ -139,6 +139,7 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
         }
         
         view?.hideTabBar()
+        view?.setTitle(with: questions.count)
         updateQuestion(direction: .none)
     }
     

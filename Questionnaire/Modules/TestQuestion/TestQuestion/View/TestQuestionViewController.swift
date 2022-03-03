@@ -10,6 +10,7 @@ import UIKit
 
 protocol TestQuestionViewInput: Alertable, TabBarPresentable {
     func update(with viewModel: TestQuestionViewModel)
+    func setTitle(with questionsCount: Int)
     func showNotConfirmAlert()
     func zoomImage(_ image: UIImage)
 }
@@ -155,6 +156,10 @@ final class TestQuestionViewController: UIViewController {
 
 // MARK: - TestQuestionViewInput
 extension TestQuestionViewController: TestQuestionViewInput {
+    
+    func setTitle(with questionsCount: Int) {
+        title = "Вопрос 1/\(questionsCount)"
+    }
     
     func zoomImage(_ image: UIImage) {
         
