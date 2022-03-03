@@ -100,22 +100,22 @@ final class CommonTableView: UITableView {
 
     private func addEmptyLabel() {
         
-        // MARK: - TODO ...
+        // TODO: - Подумать над логикой показа лейбла и лоадера в каждой отдельной секции
         
-//        if numberOfRows(inSection: 0) == 0, !isLoading {
-//            addSubview(emptyLabel)
-//            emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-//            emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
-//            emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
-//            emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
-//
-//            mainQueue(delay: 0.5) {
-//                self.emptyLabel.isHidden = false
-//            }
-//
-//        } else {
-//            emptyLabel.removeFromSuperview()
-//        }
+        if numberOfSections >= 1, numberOfRows(inSection: 0) == 0, !isLoading {
+            addSubview(emptyLabel)
+            emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+            emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)
+            emptyLabel.autoPinEdge(.left, to: .left, of: self, withOffset: 20)
+            emptyLabel.autoPinEdge(.right, to: .right, of: self, withOffset: 20)
+
+            mainQueue(delay: 0.5) {
+                self.emptyLabel.isHidden = false
+            }
+
+        } else {
+            emptyLabel.removeFromSuperview()
+        }
     }
     
     private func setLoader(_ isLoading: Bool) {
