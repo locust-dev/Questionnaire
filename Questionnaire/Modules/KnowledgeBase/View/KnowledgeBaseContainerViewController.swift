@@ -43,14 +43,14 @@ final class KnowledgeBaseContainerViewController: NLViewController {
     
     private func drawSelf() {
         
-        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
+        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.FontName.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
         title = "База знаний"
         
         (childModule as? KnowlegdeBaseViewInput)?.delegate = self
         
         closeAllSectionsButton.setTitle("Свернуть", for: .normal)
-        closeAllSectionsButton.titleLabel?.font = UIFont(name: MainFont.bold, size: 14)
+        closeAllSectionsButton.titleLabel?.font =  MainFont.bold.withSize(14)
         closeAllSectionsButton.setTitleColor(Colors.mainBlueColor(), for: .normal)
         closeAllSectionsButton.backgroundColor = .white
         

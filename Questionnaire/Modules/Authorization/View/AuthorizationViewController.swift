@@ -74,16 +74,16 @@ final class AuthorizationViewController: KeyboardShowableViewController {
         stackView.setCustomSpacing(60, after: passwordTextField)
         stackView.setCustomSpacing(10, after: confirmButton)
         
-        titleLabel.font = UIFont(name: MainFont.bold, size: 30)
+        titleLabel.font = MainFont.bold.withSize(30)
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
         
-        subtitleLabel.font = UIFont(name: MainFont.regular, size: 16)
+        subtitleLabel.font = MainFont.regular.withSize(16)
         subtitleLabel.textColor = .black
         subtitleLabel.numberOfLines = 0
         
         forgotPasswordButton.setTitleColor(.black, for: .normal)
-        forgotPasswordButton.titleLabel?.font = UIFont(name: MainFont.medium, size: 14)
+        forgotPasswordButton.titleLabel?.font = MainFont.medium.withSize(14)
         forgotPasswordButton.titleLabel?.textAlignment = .right
         
         forgotPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)

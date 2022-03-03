@@ -37,7 +37,8 @@ extension TestQuestionTableViewManager: TestQuestionTableViewManagerInput {
         
         tableView.register([TestQuestionTitleCell.self,
                             TestAnswersCounterCell.self,
-                            CodeSampleCell.self])
+                            CodeSampleCell.self,
+                            TestQuestionExplanationCell.self])
         
         tableView.delegate = self
         tableView.dataSource = self

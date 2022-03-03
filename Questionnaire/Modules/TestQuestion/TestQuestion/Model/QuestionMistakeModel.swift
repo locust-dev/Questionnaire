@@ -11,4 +11,5 @@ struct QuestionMistakeModel {
     let wrongAnswers: [Int]
     let selectedRightAnswers: [Int]
     let missingRightAnswers: [Int]
+    let explanation: String?
 }

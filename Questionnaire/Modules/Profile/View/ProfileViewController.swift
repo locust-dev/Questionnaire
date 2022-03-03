@@ -40,7 +40,7 @@ final class ProfileViewController: UIViewController {
     private func drawSelf() {
         
         view.backgroundColor = .white
-        navigationController?.largeNavBarTitleAppearance(.black, fontName: MainFont.extraBold, size: 34)
+        navigationController?.largeNavBarTitleAppearance(.black, fontName: MainFont.FontName.extraBold, size: 34)
         
         tableViewManager?.setup(tableView: tableView)
         tableView.loaderColor = Colors.mainBlueColor()

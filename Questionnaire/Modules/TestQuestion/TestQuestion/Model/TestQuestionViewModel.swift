@@ -17,6 +17,7 @@ struct TestQuestionViewModel {
         case title(TableCellConfiguratorProtocol)
         case codeSample(TableCellConfiguratorProtocol)
         case answerCounter(TableCellConfiguratorProtocol)
+        case explanation(TableCellConfiguratorProtocol)
         
         var identifier: String {
             type(of: configurator).reuseId
@@ -32,7 +33,8 @@ struct TestQuestionViewModel {
                 
             case .title(let configurator),
                  .answerCounter(let configurator),
-                 .codeSample(let configurator):
+                 .codeSample(let configurator),
+                 .explanation(let configurator):
                 
                 return configurator
             }

@@ -51,7 +51,7 @@ class CommonTableViewCell: NLTableViewCell {
         contentView.layer.shadowRadius = 5
         
         nameLabel.numberOfLines = 0
-        nameLabel.font = UIFont(name: MainFont.bold, size: 18)
+        nameLabel.font = MainFont.bold.withSize(18)
         nameLabel.textColor = Colors.mainBlueColor()
         
         contentView.addSubview(stack)

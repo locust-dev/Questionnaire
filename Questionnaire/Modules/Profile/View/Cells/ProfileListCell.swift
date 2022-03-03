@@ -30,7 +30,7 @@ final class ProfileListCell: NLTableViewCell {
         contentView.backgroundColor = .clear
         backgroundColor = .clear
         
-        titleLabel.font = UIFont(name: MainFont.medium, size: 18)
+        titleLabel.font = MainFont.medium.withSize(18)
         titleLabel.textColor = .black
         
         contentView.addSubview(titleLabel)

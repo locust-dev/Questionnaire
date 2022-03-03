@@ -56,12 +56,12 @@ final class RegistrationViewController: KeyboardShowableViewController {
         firstNameTextField.setStyle(.firstName)
         lastNameTextField.setStyle(.lastName)
         
-        mainLabel.font = UIFont(name: MainFont.bold, size: 30)
+        mainLabel.font = MainFont.bold.withSize(30)
         mainLabel.textColor = .black
         mainLabel.numberOfLines = 0
         mainLabel.text = "Регистрация"
         
-        subtitleLabel.font = UIFont(name: MainFont.regular, size: 16)
+        subtitleLabel.font = MainFont.regular.withSize(16)
         subtitleLabel.textColor = .black
         subtitleLabel.numberOfLines = 0
         

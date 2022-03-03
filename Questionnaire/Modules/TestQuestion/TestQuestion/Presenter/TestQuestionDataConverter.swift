@@ -36,6 +36,7 @@ final class TestQuestionDataConverter {
     
     // MARK: - Typealias
     
+    typealias ExplanationCellConfigurator = TableCellConfigurator<TestQuestionExplanationCell, TestQuestionExplanationCell.Model>
     typealias TitleCellConfigurator = TableCellConfigurator<TestQuestionTitleCell, TestQuestionTitleCell.Model>
     typealias AnswerCounterCellConfigurator = TableCellConfigurator<TestAnswersCounterCell, TestAnswersCounterCell.Model>
     typealias CodeSampleCellConfigurator = TableCellConfigurator<CodeSampleCell, CodeSampleCell.Model>
@@ -48,6 +49,17 @@ final class TestQuestionDataConverter {
         let model = TestQuestionTitleCell.Model(title: title)
         let configurator = TitleCellConfigurator(item: model)
         return .title(configurator)
+    }
+    
+    private func createExplanationRow(text: String?) -> Row? {
+        
+        guard let text = text else {
+            return nil
+        }
+
+        let model = TestQuestionExplanationCell.Model(explanationText: text)
+        let configurator = ExplanationCellConfigurator(item: model)
+        return .explanation(configurator)
     }
     
     private func createAnswerCounterRow(answers: [String],
@@ -90,11 +102,12 @@ extension TestQuestionDataConverter: TestQuestionDataConverterInput {
         
         let titleRow = createTitleRow(title: question.text)
         let codeSampleRow = createCodeSampleRow(with: question.codeSampleImage)
+        let explanationRow = createExplanationRow(text: mistake?.explanation)
         let answersCounterRow = createAnswerCounterRow(answers: question.answers,
                                                        isMultipleAnswers: question.isMultipleAnswers,
                                                        mistake: mistake)
         
-        let rows = [titleRow, codeSampleRow, answersCounterRow].compactMap { $0 }
+        let rows = [titleRow, codeSampleRow, answersCounterRow, explanationRow].compactMap { $0 }
         
         var isSkipButtonEnabled = remainQuestionsNumbers.count != 1
         var isReturnButtonEnabled = remainQuestionsNumbers.count != 1

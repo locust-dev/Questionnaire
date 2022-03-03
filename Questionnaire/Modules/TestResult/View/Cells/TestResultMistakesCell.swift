@@ -33,7 +33,7 @@ final class TestResultMistakesCell: NLTableViewCell, Delegatable {
         backgroundColor = .clear
         
         titleLabel.textColor = .black
-        titleLabel.font = UIFont(name: MainFont.regular, size: 16)
+        titleLabel.font = MainFont.regular.withSize(16)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         

@@ -94,7 +94,7 @@ final class CircularProgressBarView: NLView {
         percentageCenterLabel.autoCenterInSuperview()
         percentageCenterLabel.textColor = .black
         percentageCenterLabel.text = "0%"
-        percentageCenterLabel.font = UIFont(name: MainFont.extraBold, size: 24)
+        percentageCenterLabel.font = MainFont.extraBold.withSize(24)
         percentageCenterLabel.textColor = Colors.mainBlueColor()
     }
     

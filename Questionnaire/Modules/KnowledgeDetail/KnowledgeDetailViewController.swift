@@ -41,7 +41,7 @@ final class KnowledgeDetailViewController: UIViewController {
         textView.layer.cornerRadius = 10
         textView.isEditable = false
         textView.textColor = .black
-        textView.font = UIFont(name: MainFont.regular, size: 14)
+        textView.font = MainFont.regular.withSize(14)
         
         view.addSubview(textView)
         textView.autoPinEdgesToSuperviewSafeArea(with: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5))

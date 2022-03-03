@@ -34,7 +34,7 @@ extension TestResultInteractor: TestResultInteractorInput {
     
     func getRightAnswers(by testId: String) {
         
-        databaseService.getData(.rightAnswers(testId: testId), modelType: [[Int]].self) { [weak self] result in
+        databaseService.getData(.rightAnswers(testId: testId), modelType: [RightAnswerModel].self) { [weak self] result in
             
             mainQueue {
                 

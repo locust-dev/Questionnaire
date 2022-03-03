@@ -40,7 +40,7 @@ final class KnowledgeCell: NLTableViewCell {
         contentView.backgroundColor = Colors.mainGrayColor()
        
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: MainFont.medium, size: 16)
+        titleLabel.font = MainFont.medium.withSize(16)
         titleLabel.textColor = .black
         
         contentView.addSubview(titleLabel)

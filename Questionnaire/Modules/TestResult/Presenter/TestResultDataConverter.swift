@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TestResultDataConverterInput {
-    func convert(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> TestResultViewModel
+    func convert(rightAnswers: [RightAnswerModel], userAnswers: [UserAnswerModel]) -> TestResultViewModel
 }
 
 final class TestResultDataConverter {
@@ -68,7 +68,8 @@ final class TestResultDataConverter {
     
     private func findMistakesIn(userAnswers: [Int],
                                 rightAnswers: [Int],
-                                questionNumber: Int) -> QuestionMistakeModel {
+                                questionNumber: Int,
+                                explanation: String?) -> QuestionMistakeModel {
         
         var selectedRightAnswers = [Int]()
         var missingRightAnswers = [Int]()
@@ -98,10 +99,11 @@ final class TestResultDataConverter {
         return QuestionMistakeModel(questionNumber: questionNumber,
                                     wrongAnswers: wrongAnswers,
                                     selectedRightAnswers: selectedRightAnswers,
-                                    missingRightAnswers: missingRightAnswers)
+                                    missingRightAnswers: missingRightAnswers,
+                                    explanation: explanation)
     }
     
-    private func calculateResults(rightAnswers: [[Int]],
+    private func calculateResults(rightAnswers: [RightAnswerModel],
                                   userAnswers: [UserAnswerModel]) -> ResultsModel {
         
         var matches = 0
@@ -111,20 +113,21 @@ final class TestResultDataConverter {
             
             let rightAnswer = rightAnswers[userAnswer.questionNumber - 1]
             
-            if rightAnswer != userAnswer.answers {
+            if rightAnswer.answers != userAnswer.answers {
                 let mistake = findMistakesIn(userAnswers: userAnswer.answers,
-                                             rightAnswers: rightAnswer,
-                                             questionNumber: userAnswer.questionNumber)
+                                             rightAnswers: rightAnswer.answers,
+                                             questionNumber: userAnswer.questionNumber,
+                                             explanation: rightAnswer.explanation)
                 
                 matches += mistake.selectedRightAnswers.count
                 questionWithMistakes.append(mistake)
                 
             } else {
-                matches += rightAnswer.count
+                matches += rightAnswer.answers.count
             }
         }
         
-        let allAnswers = rightAnswers.flatMap { $0 }
+        let allAnswers = rightAnswers.compactMap { $0 }
         let progressPercent = Double(matches) / Double(allAnswers.count)
         let resultsModel = ResultsModel(progressPercent: progressPercent,
                                         mistakes: questionWithMistakes)
@@ -138,7 +141,7 @@ final class TestResultDataConverter {
 // MARK: - TestResultDataConverterInput
 extension TestResultDataConverter: TestResultDataConverterInput {
     
-    func convert(rightAnswers: [[Int]], userAnswers: [UserAnswerModel]) -> TestResultViewModel {
+    func convert(rightAnswers: [RightAnswerModel], userAnswers: [UserAnswerModel]) -> TestResultViewModel {
         
         var rows: [Row] = []
         

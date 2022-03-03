@@ -37,7 +37,7 @@ final class ErrorPlaceholder: NLView {
         
         backgroundColor = .white
         
-        titleLabel.font = UIFont(name: MainFont.medium, size: 18)
+        titleLabel.font =  MainFont.medium.withSize(18)
         titleLabel.textColor = .black
         titleLabel.text = error.description
         titleLabel.textAlignment = .center
@@ -50,6 +50,7 @@ final class ErrorPlaceholder: NLView {
         addSubview(okButton)
         okButton.autoPinEdgesToSuperviewSafeArea(with: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20), excludingEdge: .top)
         okButton.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 20)
+        okButton.autoSetDimension(.height, toSize: 50)
         titleLabel.autoPinEdgesToSuperviewSafeArea(with: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), excludingEdge: .bottom)
     }
     

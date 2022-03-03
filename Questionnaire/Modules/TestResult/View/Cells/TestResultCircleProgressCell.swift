@@ -34,7 +34,7 @@ final class TestResultCircleProgressCell: NLTableViewCell {
         backgroundColor = .clear
         
         titleLabel.textColor = .black
-        titleLabel.font = UIFont(name: MainFont.regular, size: 20)
+        titleLabel.font =  MainFont.regular.withSize(20)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         

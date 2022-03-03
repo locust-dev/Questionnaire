@@ -41,7 +41,7 @@ final class CommonTableView: UITableView {
     private let emptyLabel: UILabel = {
         let emptyLabel = UILabel()
         emptyLabel.textColor = .white
-        emptyLabel.font = UIFont(name: MainFont.medium, size: 18)
+        emptyLabel.font = MainFont.medium.withSize(18)
         emptyLabel.numberOfLines = 0
         emptyLabel.textAlignment = .center
         // TODO: - ...

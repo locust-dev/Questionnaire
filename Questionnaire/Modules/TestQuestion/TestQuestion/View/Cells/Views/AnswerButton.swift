@@ -50,10 +50,10 @@ final class AnswerButton: CommonButton {
         checkmarkImageView.contentMode = .scaleAspectFit
         
         mainTitleLabel.numberOfLines = 0
-        mainTitleLabel.font = UIFont(name: MainFont.bold, size: 16)
+        mainTitleLabel.font =  MainFont.bold.withSize(16)
         mainTitleLabel.textColor = Colors.mainBlueColor()
         
-        answerCountLabel.font = UIFont(name: MainFont.bold, size: 16)
+        answerCountLabel.font =  MainFont.bold.withSize(16)
         answerCountLabel.textColor = Colors.mainBlueColor()
         
         let stack = UIStackView(arrangedSubviews: [answerCountLabel, mainTitleLabel, checkmarkImageView])

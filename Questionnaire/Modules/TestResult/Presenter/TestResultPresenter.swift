@@ -12,7 +12,7 @@ protocol TestResultViewOutput: ViewOutput {
 }
 
 protocol TestResultInteractorOutput: AnyObject {
-    func didSuccessObtainAnswers(_ answers: [[Int]])
+    func didSuccessObtainAnswers(_ answers: [RightAnswerModel])
     func didFailObtainAnswers(error: ErrorModel)
 }
 
@@ -25,7 +25,7 @@ final class TestResultPresenter {
     var router: TestResultRouterInput?
     var interactor: TestResultInteractorInput?
     
-    private var rightAnswers: [[Int]]?
+    private var rightAnswers: [RightAnswerModel]?
     private var mistakes: [QuestionMistakeModel]?
 
     private let dataConverter: TestResultDataConverterInput
@@ -73,7 +73,7 @@ extension TestResultPresenter: TestResultViewOutput {
 // MARK: - TestResultInteractorOutput
 extension TestResultPresenter: TestResultInteractorOutput {
     
-    func didSuccessObtainAnswers(_ answers: [[Int]]) {
+    func didSuccessObtainAnswers(_ answers: [RightAnswerModel]) {
         view?.hideLoader()
         rightAnswers = answers
         let viewModel = dataConverter.convert(rightAnswers: answers, userAnswers: userAnswers)

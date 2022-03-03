@@ -63,7 +63,7 @@ final class KnowlegdeHeaderCell: NLTableViewHeaderFooterView {
         }
         
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: MainFont.bold, size: 18)
+        titleLabel.font =  MainFont.bold.withSize(18)
         titleLabel.textColor = Colors.mainBlueColor()
         
         let bottomLine = UIView()

@@ -40,7 +40,7 @@ final class TestCategoriesViewController: UIViewController {
     private func drawSelf() {
         
         title = "Тесты"
-        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.extraBold, size: 34)
+        navigationController?.largeNavBarTitleAppearance(.white, fontName: MainFont.FontName.extraBold, size: 34)
         navigationItem.backButtonTitle = ""
         
         view.backgroundColor = Colors.mainBlueColor()

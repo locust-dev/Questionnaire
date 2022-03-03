@@ -64,7 +64,6 @@
 		1945987E276E0C4600F32033 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1945986E276E0C4500F32033 /* Nunito-ExtraBold.ttf */; };
 		1945987F276E0C4600F32033 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1945986F276E0C4500F32033 /* Nunito-Regular.ttf */; };
 		19459882276E0C4600F32033 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19459872276E0C4600F32033 /* Nunito-Bold.ttf */; };
-		19459885276E0E8A00F32033 /* UIFont+DefaultFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19459884276E0E8A00F32033 /* UIFont+DefaultFont.swift */; };
 		19459887276E147D00F32033 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19459886276E147D00F32033 /* BottomLineTextField.swift */; };
 		19459889276E1B5200F32033 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19459888276E1B5200F32033 /* CommonButton.swift */; };
 		1945988D276E876500F32033 /* UIViewController+StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1945988C276E876500F32033 /* UIViewController+StatusBar.swift */; };
@@ -133,7 +132,7 @@
 		19A8793D276F546C0086B143 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8793C276F546C0086B143 /* CommonTableViewCell.swift */; };
 		19BB25F12764A8B4004F165B /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F02764A8B4004F165B /* DatabaseService.swift */; };
 		19BB25F92764CC18004F165B /* DatabasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F82764CC18004F165B /* DatabasePath.swift */; };
-		19BB7CDB2775CFEA00315232 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB7CDA2775CFEA00315232 /* Fonts.swift */; };
+		19BB7CDB2775CFEA00315232 /* MainFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB7CDA2775CFEA00315232 /* MainFont.swift */; };
 		19BB7CDD2775D0BA00315232 /* ProgressHUDContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB7CDC2775D0BA00315232 /* ProgressHUDContainer.swift */; };
 		19BB7CDF2775DFB000315232 /* UITextField+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB7CDE2775DFB000315232 /* UITextField+Style.swift */; };
 		19BF7382277093BF00B95BB1 /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF7381277093BF00B95BB1 /* UINavigationController+Appearance.swift */; };
@@ -160,8 +159,6 @@
 		19C83227276C906D0050747F /* String + Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83210276C906D0050747F /* String + Size.swift */; };
 		19C83228276C906D0050747F /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83212276C906D0050747F /* PlaceholderView.swift */; };
 		19C83229276C906D0050747F /* PlaceholderAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C83213276C906D0050747F /* PlaceholderAssets.xcassets */; };
-		19C8322B276C906D0050747F /* FontApplicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83216276C906D0050747F /* FontApplicable.swift */; };
-		19C8322C276C906D0050747F /* UIKitComponents + FontApplicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83217276C906D0050747F /* UIKitComponents + FontApplicable.swift */; };
 		19C83235276C92580050747F /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C8322F276C92580050747F /* Assembly.swift */; };
 		19C83236276C92580050747F /* ModuleTransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83230276C92580050747F /* ModuleTransitionHandler.swift */; };
 		19C83237276C92580050747F /* TransitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C83231276C92580050747F /* TransitionModel.swift */; };
@@ -204,6 +201,8 @@
 		19C832F2276C92B40050747F /* InternetConnectionReachabilityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C832E5276C92B40050747F /* InternetConnectionReachabilityHandler.swift */; };
 		19C832F3276C92B40050747F /* InternetConnectionReachabilityCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C832E6276C92B40050747F /* InternetConnectionReachabilityCenter.swift */; };
 		19C832FA276C92B40050747F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C832EF276C92B40050747F /* Notifications.swift */; };
+		19C99A7027D0B79100D9EE1A /* RightAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A6F27D0B79100D9EE1A /* RightAnswerModel.swift */; };
+		19C99A7227D0BFB300D9EE1A /* TestQuestionExplanationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7127D0BFB300D9EE1A /* TestQuestionExplanationCell.swift */; };
 		19D5C9BE27673692000109F2 /* TestCategoriesTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9BD27673692000109F2 /* TestCategoriesTableViewManager.swift */; };
 		19D5C9C1276736D0000109F2 /* TestCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9C0276736D0000109F2 /* TestCategoriesViewModel.swift */; };
 		19D5C9C4276738FA000109F2 /* CommonTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9C3276738FA000109F2 /* CommonTableView.swift */; };
@@ -290,7 +289,6 @@
 		1945986E276E0C4500F32033 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		1945986F276E0C4500F32033 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		19459872276E0C4600F32033 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		19459884276E0E8A00F32033 /* UIFont+DefaultFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+DefaultFont.swift"; sourceTree = "<group>"; };
 		19459886276E147D00F32033 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
 		19459888276E1B5200F32033 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		1945988C276E876500F32033 /* UIViewController+StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StatusBar.swift"; sourceTree = "<group>"; };
@@ -335,7 +333,7 @@
 		19A8793C276F546C0086B143 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		19BB25F02764A8B4004F165B /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		19BB25F82764CC18004F165B /* DatabasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePath.swift; sourceTree = "<group>"; };
-		19BB7CDA2775CFEA00315232 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		19BB7CDA2775CFEA00315232 /* MainFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFont.swift; sourceTree = "<group>"; };
 		19BB7CDC2775D0BA00315232 /* ProgressHUDContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDContainer.swift; sourceTree = "<group>"; };
 		19BB7CDE2775DFB000315232 /* UITextField+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Style.swift"; sourceTree = "<group>"; };
 		19BF7381277093BF00B95BB1 /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
@@ -362,8 +360,6 @@
 		19C83210276C906D0050747F /* String + Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + Size.swift"; sourceTree = "<group>"; };
 		19C83212276C906D0050747F /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		19C83213276C906D0050747F /* PlaceholderAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PlaceholderAssets.xcassets; sourceTree = "<group>"; };
-		19C83216276C906D0050747F /* FontApplicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontApplicable.swift; sourceTree = "<group>"; };
-		19C83217276C906D0050747F /* UIKitComponents + FontApplicable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKitComponents + FontApplicable.swift"; sourceTree = "<group>"; };
 		19C8322F276C92580050747F /* Assembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 		19C83230276C92580050747F /* ModuleTransitionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleTransitionHandler.swift; sourceTree = "<group>"; };
 		19C83231276C92580050747F /* TransitionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionModel.swift; sourceTree = "<group>"; };
@@ -406,6 +402,8 @@
 		19C832E5276C92B40050747F /* InternetConnectionReachabilityHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetConnectionReachabilityHandler.swift; sourceTree = "<group>"; };
 		19C832E6276C92B40050747F /* InternetConnectionReachabilityCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetConnectionReachabilityCenter.swift; sourceTree = "<group>"; };
 		19C832EF276C92B40050747F /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		19C99A6F27D0B79100D9EE1A /* RightAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightAnswerModel.swift; sourceTree = "<group>"; };
+		19C99A7127D0BFB300D9EE1A /* TestQuestionExplanationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionExplanationCell.swift; sourceTree = "<group>"; };
 		19D5C9BD27673692000109F2 /* TestCategoriesTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoriesTableViewManager.swift; sourceTree = "<group>"; };
 		19D5C9C0276736D0000109F2 /* TestCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoriesViewModel.swift; sourceTree = "<group>"; };
 		19D5C9C3276738FA000109F2 /* CommonTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableView.swift; sourceTree = "<group>"; };
@@ -674,7 +672,6 @@
 				19436D4C2768DA7C00D2FA0A /* UIStackView.swift */,
 				19D5C9C927673EBA000109F2 /* NSObject.swift */,
 				19D5C9C727673B21000109F2 /* UITableVIew+RegisterCell.swift */,
-				19459884276E0E8A00F32033 /* UIFont+DefaultFont.swift */,
 				1945988C276E876500F32033 /* UIViewController+StatusBar.swift */,
 				19BF7381277093BF00B95BB1 /* UINavigationController+Appearance.swift */,
 				19BB7CDE2775DFB000315232 /* UITextField+Style.swift */,
@@ -741,6 +738,7 @@
 			children = (
 				19436D3D2768A83F00D2FA0A /* TestQuestionTitleCell.swift */,
 				19436D3F2768A85400D2FA0A /* TestAnswersCounterCell.swift */,
+				19C99A7127D0BFB300D9EE1A /* TestQuestionExplanationCell.swift */,
 				19436D412768AB5400D2FA0A /* Views */,
 			);
 			path = Cells;
@@ -878,6 +876,7 @@
 			isa = PBXGroup;
 			children = (
 				19436D542768DD1E00D2FA0A /* TestResultViewModel.swift */,
+				19C99A6F27D0B79100D9EE1A /* RightAnswerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -928,7 +927,7 @@
 		1982B5492763426F003DAB1A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				19BB7CDA2775CFEA00315232 /* Fonts.swift */,
+				19BB7CDA2775CFEA00315232 /* MainFont.swift */,
 				193D994E27624C0C004ACA7F /* Constants.swift */,
 				1982B545276335F1003DAB1A /* DispatchQueue.swift */,
 				194013E7276CCAF600B87E67 /* Extensions */,
@@ -1093,7 +1092,6 @@
 		19C831FC276C906D0050747F /* FinchUI */ = {
 			isa = PBXGroup;
 			children = (
-				19C83215276C906D0050747F /* FontApplicable */,
 				19C831FF276C906D0050747F /* NiblessClasses */,
 				19C8320D276C906D0050747F /* ButtonWithTouchArea */,
 				19C8320F276C906D0050747F /* Extensions */,
@@ -1146,15 +1144,6 @@
 				19C83213276C906D0050747F /* PlaceholderAssets.xcassets */,
 			);
 			path = Placeholder;
-			sourceTree = "<group>";
-		};
-		19C83215276C906D0050747F /* FontApplicable */ = {
-			isa = PBXGroup;
-			children = (
-				19C83216276C906D0050747F /* FontApplicable.swift */,
-				19C83217276C906D0050747F /* UIKitComponents + FontApplicable.swift */,
-			);
-			path = FontApplicable;
 			sourceTree = "<group>";
 		};
 		19C8322D276C92580050747F /* FinchModuleTransitions */ = {
@@ -1882,6 +1871,7 @@
 				1982B54827633B1A003DAB1A /* AuthorizationInteractor.swift in Sources */,
 				191D17E027C3C28F007A3E4B /* KnowledgeCategoryModel.swift in Sources */,
 				19436D592768DD1E00D2FA0A /* TestResultViewController.swift in Sources */,
+				19C99A7027D0B79100D9EE1A /* RightAnswerModel.swift in Sources */,
 				19C832DB276C92A80050747F /* String+HTMLAttributed.swift in Sources */,
 				193D994127624052004ACA7F /* AuthorizationRouter.swift in Sources */,
 				19BF73862770B17C00B95BB1 /* CircularProgressBarView.swift in Sources */,
@@ -1898,7 +1888,6 @@
 				191BD26A27CE60F4003D2929 /* CodeSampleCell.swift in Sources */,
 				19C83250276C927D0050747F /* DataConverterInput.swift in Sources */,
 				19D5C9D82767538C000109F2 /* AlertAction.swift in Sources */,
-				19C8322B276C906D0050747F /* FontApplicable.swift in Sources */,
 				19BF73892770ED7900B95BB1 /* TestResultCircleProgressCell.swift in Sources */,
 				19304D79276897B400EA403A /* Question.swift in Sources */,
 				1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */,
@@ -1908,6 +1897,7 @@
 				19436D582768DD1E00D2FA0A /* TestResultRouter.swift in Sources */,
 				19D5C9D127674B43000109F2 /* TestCategoriesDataConverter.swift in Sources */,
 				19C83236276C92580050747F /* ModuleTransitionHandler.swift in Sources */,
+				19C99A7227D0BFB300D9EE1A /* TestQuestionExplanationCell.swift in Sources */,
 				195B7C862779F0BF0023473F /* ArrowButton.swift in Sources */,
 				19C83219276C906D0050747F /* NLSlider.swift in Sources */,
 				19C8321F276C906D0050747F /* NLControl.swift in Sources */,
@@ -1991,7 +1981,6 @@
 				19F41F5F27C5114100D69EC1 /* KnowledgeDetailViewController.swift in Sources */,
 				19C832D8276C92A80050747F /* String+Sizes.swift in Sources */,
 				19D5C9C1276736D0000109F2 /* TestCategoriesViewModel.swift in Sources */,
-				19C8322C276C906D0050747F /* UIKitComponents + FontApplicable.swift in Sources */,
 				19C83221276C906D0050747F /* NLTableViewHeaderFooterView.swift in Sources */,
 				19C83227276C906D0050747F /* String + Size.swift in Sources */,
 				19436D5A2768DD1E00D2FA0A /* TestResultAssembly.swift in Sources */,
@@ -2010,7 +1999,7 @@
 				19C832F3276C92B40050747F /* InternetConnectionReachabilityCenter.swift in Sources */,
 				19C832F1276C92B40050747F /* InternetConnectionReachability.swift in Sources */,
 				19C832CA276C92A80050747F /* UIScreen+Type.swift in Sources */,
-				19BB7CDB2775CFEA00315232 /* Fonts.swift in Sources */,
+				19BB7CDB2775CFEA00315232 /* MainFont.swift in Sources */,
 				1982B565276398E7003DAB1A /* ProfileRouter.swift in Sources */,
 				1982B56C27639B10003DAB1A /* AuthorizedUserModel.swift in Sources */,
 				19861DAC276A627C00D3C041 /* Encodable+Dictionary.swift in Sources */,
@@ -2054,7 +2043,6 @@
 				19C8324E276C927D0050747F /* CollectionCellConfigurator.swift in Sources */,
 				193D994F27624C0C004ACA7F /* Constants.swift in Sources */,
 				19C39080276B2C76003AFCAE /* ProfileInteractor.swift in Sources */,
-				19459885276E0E8A00F32033 /* UIFont+DefaultFont.swift in Sources */,
 				19C832E0276C92A80050747F /* String+Dictionary.swift in Sources */,
 				19BB7CDD2775D0BA00315232 /* ProgressHUDContainer.swift in Sources */,
 				19304D71276894BC00EA403A /* TestListInteractor.swift in Sources */,

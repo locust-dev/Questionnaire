@@ -81,7 +81,7 @@ class CommonButton: NLButton {
         }
         
         layer.cornerRadius = 10
-        titleLabel?.font = UIFont(name: MainFont.bold, size: 16)
+        titleLabel?.font = MainFont.bold.withSize(16)
     }
     
 }

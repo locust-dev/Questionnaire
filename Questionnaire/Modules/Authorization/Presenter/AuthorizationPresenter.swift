@@ -30,7 +30,7 @@ final class AuthorizationPresenter {
         
         static let tempUserName = "Default"
         static let tempUserSurname = "Username"
-        static let defaultAllowedTest = "GCD1"
+        static let defaultAllowedTest = "Junior1"
     }
     
     // MARK: - Properties

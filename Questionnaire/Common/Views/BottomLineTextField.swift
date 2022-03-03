@@ -73,7 +73,7 @@ final class BottomLineTextField: NLTextField {
         attributedPlaceholder = NSAttributedString(
             string: placeholder ?? "",
             attributes: [
-                NSAttributedString.Key.font: UIFont(name: MainFont.regular, size: 16) as Any,
+                NSAttributedString.Key.font: MainFont.regular.withSize(16) as Any,
                 NSAttributedString.Key.foregroundColor: UIColor.lightGray as Any
             ]
         )
