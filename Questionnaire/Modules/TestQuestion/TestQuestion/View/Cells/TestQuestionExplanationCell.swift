@@ -34,7 +34,7 @@ final class TestQuestionExplanationCell: NLTableViewCell {
         explanationLabel.font = MainFont.regular.withSize(18)
         
         contentView.addSubview(explanationLabel)
-        explanationLabel.autoPinEdgesToSuperviewEdges()
+        explanationLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 30))
     }
     
 }
