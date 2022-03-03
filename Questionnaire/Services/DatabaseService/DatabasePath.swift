@@ -13,6 +13,7 @@ enum DatabasePath {
     case allowedTests(token: String)
     case user(token: String)
     case knowledgeBase
+    case config
     
     var stringPath: String {
         
@@ -35,6 +36,9 @@ enum DatabasePath {
             
         case .knowledgeBase:
             return "knowledgeBase"
+            
+        case .config:
+            return "config"
         }
     }
 }

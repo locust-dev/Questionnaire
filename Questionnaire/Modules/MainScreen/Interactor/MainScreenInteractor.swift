@@ -22,14 +22,14 @@ final class MainScreenInteractor {
     
     weak var presenter: MainScreenInteractorOutput?
     
-    private let databaseService: DatabaseService
-    private let authService: AuthorizationService
+    private let databaseService: DatabaseServiceInput
+    private let authService: AuthorizationServiceInput
     
     
     // MARK: - Init
     
-    init(databaseService: DatabaseService,
-         authService: AuthorizationService) {
+    init(databaseService: DatabaseServiceInput,
+         authService: AuthorizationServiceInput) {
         
         self.databaseService = databaseService
         self.authService = authService

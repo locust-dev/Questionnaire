@@ -51,7 +51,7 @@ extension AuthorizationService: AuthorizationServiceInput {
         globalQueue {
             FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { result, error in
                 
-                mainQueue {
+                mainQueue { 
                     error != nil ? completion(.failure(.userNotFound)) : completion(.success(result?.user.uid))
                 }
             }

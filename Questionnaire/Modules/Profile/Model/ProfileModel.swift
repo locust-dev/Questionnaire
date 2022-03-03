@@ -13,6 +13,6 @@ struct ProfileModel: Decodable {
     let allowedTests: [String]?
     
     var fullName: String {
-        "\(firstName) \(lastName)"
+        "\(lastName) \(firstName)"
     }
 }

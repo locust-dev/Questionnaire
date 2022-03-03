@@ -27,7 +27,7 @@ enum ErrorModel: Error {
     
     // JSON
     case parseError
-
+    
     var description: String {
         
         switch self {

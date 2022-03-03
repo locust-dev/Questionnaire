@@ -203,6 +203,12 @@
 		19C832FA276C92B40050747F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C832EF276C92B40050747F /* Notifications.swift */; };
 		19C99A7027D0B79100D9EE1A /* RightAnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A6F27D0B79100D9EE1A /* RightAnswerModel.swift */; };
 		19C99A7227D0BFB300D9EE1A /* TestQuestionExplanationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7127D0BFB300D9EE1A /* TestQuestionExplanationCell.swift */; };
+		19C99A7527D0D54200D9EE1A /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7427D0D54200D9EE1A /* ConfigService.swift */; };
+		19C99A7727D0D56F00D9EE1A /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7627D0D56F00D9EE1A /* ConfigModel.swift */; };
+		19C99A7C27D0D8A200D9EE1A /* SplashScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7827D0D8A200D9EE1A /* SplashScreenPresenter.swift */; };
+		19C99A7E27D0D8A200D9EE1A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7A27D0D8A200D9EE1A /* SplashScreenViewController.swift */; };
+		19C99A7F27D0D8A200D9EE1A /* SplashScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A7B27D0D8A200D9EE1A /* SplashScreenAssembly.swift */; };
+		19C99A8727D0D90200D9EE1A /* SplashScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C99A8627D0D90200D9EE1A /* SplashScreenInteractor.swift */; };
 		19D5C9BE27673692000109F2 /* TestCategoriesTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9BD27673692000109F2 /* TestCategoriesTableViewManager.swift */; };
 		19D5C9C1276736D0000109F2 /* TestCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9C0276736D0000109F2 /* TestCategoriesViewModel.swift */; };
 		19D5C9C4276738FA000109F2 /* CommonTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D5C9C3276738FA000109F2 /* CommonTableView.swift */; };
@@ -404,6 +410,12 @@
 		19C832EF276C92B40050747F /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		19C99A6F27D0B79100D9EE1A /* RightAnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightAnswerModel.swift; sourceTree = "<group>"; };
 		19C99A7127D0BFB300D9EE1A /* TestQuestionExplanationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionExplanationCell.swift; sourceTree = "<group>"; };
+		19C99A7427D0D54200D9EE1A /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
+		19C99A7627D0D56F00D9EE1A /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		19C99A7827D0D8A200D9EE1A /* SplashScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenPresenter.swift; sourceTree = "<group>"; };
+		19C99A7A27D0D8A200D9EE1A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		19C99A7B27D0D8A200D9EE1A /* SplashScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenAssembly.swift; sourceTree = "<group>"; };
+		19C99A8627D0D90200D9EE1A /* SplashScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenInteractor.swift; sourceTree = "<group>"; };
 		19D5C9BD27673692000109F2 /* TestCategoriesTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoriesTableViewManager.swift; sourceTree = "<group>"; };
 		19D5C9C0276736D0000109F2 /* TestCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCategoriesViewModel.swift; sourceTree = "<group>"; };
 		19D5C9C3276738FA000109F2 /* CommonTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableView.swift; sourceTree = "<group>"; };
@@ -839,6 +851,7 @@
 		1952AA852760FE3700675931 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				19C99A8027D0D8AA00D9EE1A /* SplashScreen */,
 				193D993927623E65004ACA7F /* MainScreen */,
 				19E1EB0127BEBB8200E3A4FB /* KnowledgeBase */,
 				19F41F5827C50E1200D69EC1 /* KnowledgeDetail */,
@@ -1436,6 +1449,58 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		19C99A7327D0D52800D9EE1A /* ConfigService */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A7427D0D54200D9EE1A /* ConfigService.swift */,
+				19C99A7627D0D56F00D9EE1A /* ConfigModel.swift */,
+			);
+			path = ConfigService;
+			sourceTree = "<group>";
+		};
+		19C99A8027D0D8AA00D9EE1A /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A8127D0D8B500D9EE1A /* Assembly */,
+				19C99A8327D0D8BD00D9EE1A /* Presenter */,
+				19C99A8527D0D8EF00D9EE1A /* Interactor */,
+				19C99A8227D0D8BA00D9EE1A /* View */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		19C99A8127D0D8B500D9EE1A /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A7B27D0D8A200D9EE1A /* SplashScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		19C99A8227D0D8BA00D9EE1A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A7A27D0D8A200D9EE1A /* SplashScreenViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		19C99A8327D0D8BD00D9EE1A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A7827D0D8A200D9EE1A /* SplashScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		19C99A8527D0D8EF00D9EE1A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				19C99A8627D0D90200D9EE1A /* SplashScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		19D5C9B727673654000109F2 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -1517,6 +1582,7 @@
 			children = (
 				19BB25F52764C36B004F165B /* AuthorizationService */,
 				19BB25F42764C363004F165B /* DatabaseService */,
+				19C99A7327D0D52800D9EE1A /* ConfigService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1888,11 +1954,13 @@
 				191BD26A27CE60F4003D2929 /* CodeSampleCell.swift in Sources */,
 				19C83250276C927D0050747F /* DataConverterInput.swift in Sources */,
 				19D5C9D82767538C000109F2 /* AlertAction.swift in Sources */,
+				19C99A7527D0D54200D9EE1A /* ConfigService.swift in Sources */,
 				19BF73892770ED7900B95BB1 /* TestResultCircleProgressCell.swift in Sources */,
 				19304D79276897B400EA403A /* Question.swift in Sources */,
 				1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */,
 				19C83228276C906D0050747F /* PlaceholderView.swift in Sources */,
 				191D17E227C3E744007A3E4B /* KnowlegdeHeaderCell.swift in Sources */,
+				19C99A7C27D0D8A200D9EE1A /* SplashScreenPresenter.swift in Sources */,
 				19C83253276C927D0050747F /* CollectionDataConverterInput.swift in Sources */,
 				19436D582768DD1E00D2FA0A /* TestResultRouter.swift in Sources */,
 				19D5C9D127674B43000109F2 /* TestCategoriesDataConverter.swift in Sources */,
@@ -1926,7 +1994,9 @@
 				19C832F2276C92B40050747F /* InternetConnectionReachabilityHandler.swift in Sources */,
 				19FD3BBB277A075B0082A102 /* RegistrationData.swift in Sources */,
 				19BB7CDF2775DFB000315232 /* UITextField+Style.swift in Sources */,
+				19C99A7E27D0D8A200D9EE1A /* SplashScreenViewController.swift in Sources */,
 				19C832FA276C92B40050747F /* Notifications.swift in Sources */,
+				19C99A7727D0D56F00D9EE1A /* ConfigModel.swift in Sources */,
 				19C83226276C906D0050747F /* ButtonWithTouchArea.swift in Sources */,
 				19C832CE276C92A80050747F /* UIViewController+Modal.swift in Sources */,
 				193D99532762507D004ACA7F /* AuthorizationViewModel.swift in Sources */,
@@ -1996,6 +2066,7 @@
 				19D5C9CF27674098000109F2 /* TestCategoriesInteractor.swift in Sources */,
 				19F41F6027C5114100D69EC1 /* KnowledgeDetailAssembly.swift in Sources */,
 				19C83237276C92580050747F /* TransitionModel.swift in Sources */,
+				19C99A7F27D0D8A200D9EE1A /* SplashScreenAssembly.swift in Sources */,
 				19C832F3276C92B40050747F /* InternetConnectionReachabilityCenter.swift in Sources */,
 				19C832F1276C92B40050747F /* InternetConnectionReachability.swift in Sources */,
 				19C832CA276C92A80050747F /* UIScreen+Type.swift in Sources */,
@@ -2012,6 +2083,7 @@
 				19436D312768A5DB00D2FA0A /* TestQuestionAssembly.swift in Sources */,
 				19436D5C2768DD1E00D2FA0A /* TestResultTableViewManager.swift in Sources */,
 				193D994027624052004ACA7F /* AuthorizationPresenter.swift in Sources */,
+				19C99A8727D0D90200D9EE1A /* SplashScreenInteractor.swift in Sources */,
 				19304D74276896DD00EA403A /* TestsModel.swift in Sources */,
 				19D5C9DB27679F6B000109F2 /* TestCategoryModel.swift in Sources */,
 				1982B54F27634582003DAB1A /* ProgressHUDSize.swift in Sources */,

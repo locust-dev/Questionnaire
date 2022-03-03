@@ -102,7 +102,7 @@ final class CommonTableView: UITableView {
         
         // TODO: - Подумать над логикой показа лейбла и лоадера в каждой отдельной секции
         
-        if numberOfSections >= 1, numberOfRows(inSection: 0) == 0, !isLoading {
+        if numberOfSections == 1, numberOfRows(inSection: 0) == 0, !isLoading {
             addSubview(emptyLabel)
             emptyLabel.autoAlignAxis(toSuperviewAxis: .vertical)
             emptyLabel.autoAlignAxis(.horizontal, toSameAxisOf: superview ?? self)

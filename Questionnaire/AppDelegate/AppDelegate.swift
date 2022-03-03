@@ -43,7 +43,7 @@ extension AppDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = MainScreenAssembly.assembleModule()
+        window?.rootViewController = SplashScreenAssembly.assembleModule()
     }
     
 }
