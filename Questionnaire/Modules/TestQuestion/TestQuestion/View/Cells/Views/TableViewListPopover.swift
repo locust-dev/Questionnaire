@@ -51,9 +51,12 @@ final class TableViewListPopover: UITableViewController {
     
     private func drawSelf() {
         
+        view.backgroundColor = .white
+        
         tableView.register(TableViewPopoverCell.self)
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
     }
     
 }
@@ -84,7 +87,7 @@ extension TableViewListPopover {
 extension TableViewListPopover {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        38
+        48
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -25,7 +25,10 @@ final class TableViewPopoverCell: NLTableViewCell {
     // MARK: - Drawing
     
     private func drawSelf() {
+        
+        contentView.backgroundColor = .white
     
+        titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
         titleLabel.font = MainFont.regular.withSize(16)
         
