@@ -9,6 +9,7 @@
 import UIKit
 
 protocol TestQuestionViewOutput: ViewOutput {
+    func didTapMoveToCertainQuestion(_ number: Int)
     func didTapConfirmButton()
     func didTapFinishButton()
     func didTapSkipQuestion()
@@ -136,6 +137,7 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
             currentQuestionNumber = remainQuestionsNumbers.first ?? 1
         } else {
             remainQuestionsNumbers = Array(1...questions.count)
+            view?.setListButton(questionsCount: questions.count)
         }
         
         view?.hideTabBar()
@@ -176,6 +178,29 @@ extension TestQuestionPresenter: TestQuestionViewOutput {
     
     func didTapCloseButtton() {
         router?.closeModule()
+    }
+    
+    func didTapMoveToCertainQuestion(_ number: Int) {
+        
+        /* TODO: -
+         Костыль! Сделать модульность
+         1 модуль - Коллекция (общая)
+         2 модуль - Таблица (внутри ячейки коллекции)
+         Свайпы, переходы через делегаты коллекции
+        */
+        
+        guard number != currentQuestionNumber else {
+            return
+        }
+        
+        if number > currentQuestionNumber {
+            currentQuestionNumber = number
+            updateQuestion(direction: .right)
+           
+        } else {
+            currentQuestionNumber = number
+            updateQuestion(direction: .left)
+        }
     }
     
 }

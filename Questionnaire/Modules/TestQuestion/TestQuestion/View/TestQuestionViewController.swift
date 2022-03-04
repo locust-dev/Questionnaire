@@ -13,13 +13,14 @@ protocol TestQuestionViewInput: Alertable, TabBarPresentable {
     func setTitle(with questionsCount: Int)
     func showNotConfirmAlert()
     func zoomImage(_ image: UIImage)
+    func setListButton(questionsCount: Int?)
 }
 
 final class TestQuestionViewController: UIViewController {
     
     // MARK: - Public properties
     
-	var presenter: TestQuestionViewOutput?
+    var presenter: TestQuestionViewOutput?
     var tableViewManager: TestQuestionTableViewManagerInput?
     
     private let tableView = UITableView()
@@ -28,23 +29,33 @@ final class TestQuestionViewController: UIViewController {
     private let finishTestButton = CommonButton(style: .filled)
     private let skipQuestionButton = ArrowButton(direction: .right)
     private let returnQuestionButton = ArrowButton(direction: .left)
+    private let questionListButton = UIButton()
     
     
     
     // MARK: - Life cycle
     
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
         drawSelf()
         presenter?.viewIsReady()
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if navigationController?.navigationBar.subviews.contains(questionListButton) == true {
+            questionListButton.dissapearWithFade(duration: 0.1) { [weak self] in
+                self?.questionListButton.removeFromSuperview()
+            }
+        }
+    }
+    
     
     // MARK: - Private Methods
     
     private func drawSelf() {
-    
+        
         view.backgroundColor = Colors.mainBlueColor()
         navigationItem.hidesBackButton = true
         
@@ -57,6 +68,9 @@ final class TestQuestionViewController: UIViewController {
         bottomButtonsStack.spacing = 10
         bottomButtonsStack.distribution = .equalCentering
         
+        questionListButton.setImage(Images.questionList(), for: .normal)
+        questionListButton.addTarget(self, action: #selector(openTestListPopover), for: .touchUpInside)
+        
         skipQuestionButton.addTarget(self, action: #selector(skipQuestion), for: .touchUpInside)
         returnQuestionButton.addTarget(self, action: #selector(returnQuestion), for: .touchUpInside)
         
@@ -65,7 +79,7 @@ final class TestQuestionViewController: UIViewController {
         
         finishTestButton.setTitle(Localized.testQuestionOver(), for: .normal)
         finishTestButton.addTarget(self, action: #selector(finishTap), for: .touchUpInside)
-    
+        
         tableViewManager?.setup(tableView: tableView)
         
         view.addSubview(containerView)
@@ -79,7 +93,7 @@ final class TestQuestionViewController: UIViewController {
         
         bottomButtonsStack.autoPinEdge(.top, to: .bottom, of: containerView, withOffset: 10)
         bottomButtonsStack.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 20),
-                                                      excludingEdge: .top)
+                                                        excludingEdge: .top)
         
         skipQuestionButton.autoSetDimensions(to: CGSize(width: 35, height: 50))
         returnQuestionButton.autoSetDimensions(to: CGSize(width: 35, height: 50))
@@ -91,6 +105,23 @@ final class TestQuestionViewController: UIViewController {
     
     
     // MARK: - Private methods
+    
+    private func setQuestionListButton(questionsCount: Int?) {
+        
+        guard let questionsCount = questionsCount,
+              let navBar = navigationController?.navigationBar,
+              questionsCount > 1
+        else {
+            return
+        }
+        
+        navBar.addSubview(questionListButton)
+        
+        questionListButton.autoSetDimensions(to: CGSize(width: 28, height: 28))
+        questionListButton.autoPinEdge(toSuperviewEdge: .right, withInset: 30)
+        questionListButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 12)
+        questionListButton.appearWithFade(duration: 0.4)
+    }
     
     private func swipeQuestion(_ direction: Direction, completion: @escaping (Direction) -> Void) {
         
@@ -131,6 +162,29 @@ final class TestQuestionViewController: UIViewController {
     
     // MARK: - Actions
     
+    @objc private func openTestListPopover() {
+        
+        guard let rowsCount = tableViewManager?.numberOfQuestions else {
+            return
+        }
+        
+        // TODO: - Localize
+        let rows = (1...rowsCount).map { TableViewListPopover.Model.Row(title: "Вопрос №\($0)") }
+        let model = TableViewListPopover.Model(numberOfRows: rowsCount, rows: rows)
+        let popoverVC = TableViewListPopover(viewModel: model)
+        let sourceRect = CGRect(x: questionListButton.center.x, y: questionListButton.frame.maxY + 6, width: 0, height: 0)
+        
+        popoverVC.delegate = self
+        popoverVC.preferredContentSize = CGSize(width: 170, height: view.frame.height / 2)
+        popoverVC.modalPresentationStyle = .popover
+        popoverVC.popoverPresentationController?.permittedArrowDirections = .up
+        popoverVC.popoverPresentationController?.sourceView = navigationController?.navigationBar ?? view
+        popoverVC.popoverPresentationController?.sourceRect = sourceRect
+        popoverVC.popoverPresentationController?.delegate = self
+        
+        present(popoverVC, animated: true)
+    }
+    
     @objc private func confirmTap() {
         presenter?.didTapConfirmButton()
     }
@@ -169,10 +223,7 @@ extension TestQuestionViewController: TestQuestionViewInput {
         
         containerView.addSubview(scrollViewWithZoom)
         scrollViewWithZoom.autoPinEdgesToSuperviewEdges()
-        
-        UIView.animate(withDuration: 0.2) {
-            scrollViewWithZoom.alpha = 1
-        }
+        scrollViewWithZoom.appearWithFade()
     }
     
     func update(with viewModel: TestQuestionViewModel) {
@@ -185,4 +236,27 @@ extension TestQuestionViewController: TestQuestionViewInput {
         showAlert(title: Localized.alertChooseAnswerBeforeContinue(), buttonTitle: Localized.buttonOkTitle())
     }
     
+    func setListButton(questionsCount: Int?) {
+        setQuestionListButton(questionsCount: questionsCount)
+    }
+}
+
+
+// MARK: - UIPopoverPresentationControllerDelegate
+extension TestQuestionViewController: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    
+}
+
+
+// MARK: - TableViewListPopoverDelegate
+extension TestQuestionViewController: TableViewListPopoverDelegate {
+    
+    func didSelectRow(at indexPath: IndexPath) {
+        presenter?.didTapMoveToCertainQuestion(indexPath.row + 1)
+    }
 }

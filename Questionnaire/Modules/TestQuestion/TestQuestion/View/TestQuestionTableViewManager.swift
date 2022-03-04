@@ -13,6 +13,9 @@ protocol TestQuestionTableViewManagerDelegate: CodeSampleCellDelegate {
 }
 
 protocol TestQuestionTableViewManagerInput {
+    
+    var numberOfQuestions: Int? { get }
+    
     func setup(tableView: UITableView)
     func update(with viewModel: TestQuestionViewModel)
 }
@@ -22,6 +25,10 @@ final class TestQuestionTableViewManager: NSObject {
     // MARK: - Properties
     
     weak var delegate: TestQuestionTableViewManagerDelegate?
+    
+    var numberOfQuestions: Int? {
+        viewModel?.questionsCount
+    }
     
     private weak var tableView: UITableView?
     

@@ -129,6 +129,9 @@
 		1992E7FA2771ECB50068FFFF /* TabBarPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */; };
 		1992E7FE2772226C0068FFFF /* ProfileTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */; };
 		1992E801277223AB0068FFFF /* ProfileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1992E800277223AB0068FFFF /* ProfileListCell.swift */; };
+		199D77EE27D24BAC00919EBD /* TableViewListPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D77ED27D24BAC00919EBD /* TableViewListPopover.swift */; };
+		199D77F027D24FEE00919EBD /* TableViewPopoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D77EF27D24FEE00919EBD /* TableViewPopoverCell.swift */; };
+		199D77F227D25FD100919EBD /* UIVIew+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D77F127D25FD100919EBD /* UIVIew+Animations.swift */; };
 		19A8793D276F546C0086B143 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8793C276F546C0086B143 /* CommonTableViewCell.swift */; };
 		19BB25F12764A8B4004F165B /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F02764A8B4004F165B /* DatabaseService.swift */; };
 		19BB25F92764CC18004F165B /* DatabasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BB25F82764CC18004F165B /* DatabasePath.swift */; };
@@ -336,6 +339,9 @@
 		1992E7F92771ECB50068FFFF /* TabBarPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresentable.swift; sourceTree = "<group>"; };
 		1992E7FD2772226C0068FFFF /* ProfileTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewManager.swift; sourceTree = "<group>"; };
 		1992E800277223AB0068FFFF /* ProfileListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListCell.swift; sourceTree = "<group>"; };
+		199D77ED27D24BAC00919EBD /* TableViewListPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewListPopover.swift; sourceTree = "<group>"; };
+		199D77EF27D24FEE00919EBD /* TableViewPopoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPopoverCell.swift; sourceTree = "<group>"; };
+		199D77F127D25FD100919EBD /* UIVIew+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Animations.swift"; sourceTree = "<group>"; };
 		19A8793C276F546C0086B143 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		19BB25F02764A8B4004F165B /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		19BB25F82764CC18004F165B /* DatabasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePath.swift; sourceTree = "<group>"; };
@@ -689,6 +695,7 @@
 				1945988C276E876500F32033 /* UIViewController+StatusBar.swift */,
 				19BF7381277093BF00B95BB1 /* UINavigationController+Appearance.swift */,
 				19BB7CDE2775DFB000315232 /* UITextField+Style.swift */,
+				199D77F127D25FD100919EBD /* UIVIew+Animations.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -763,6 +770,8 @@
 			children = (
 				19436D422768AB6D00D2FA0A /* AnswerButton.swift */,
 				195B7C852779F0BF0023473F /* ArrowButton.swift */,
+				199D77ED27D24BAC00919EBD /* TableViewListPopover.swift */,
+				199D77EF27D24FEE00919EBD /* TableViewPopoverCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2029,7 +2038,9 @@
 				19D5C9BE27673692000109F2 /* TestCategoriesTableViewManager.swift in Sources */,
 				1952AA722760FD3D00675931 /* AppDelegate.swift in Sources */,
 				1982B567276398E7003DAB1A /* ProfileAssembly.swift in Sources */,
+				199D77F227D25FD100919EBD /* UIVIew+Animations.swift in Sources */,
 				19E1EB0C27BEBCD000E3A4FB /* KnowlegdeBaseViewController.swift in Sources */,
+				199D77F027D24FEE00919EBD /* TableViewPopoverCell.swift in Sources */,
 				19BB25F12764A8B4004F165B /* DatabaseService.swift in Sources */,
 				19E6DF49278B273C00BD677A /* KeyboardShowableViewController.swift in Sources */,
 				19304D77276897AF00EA403A /* Test.swift in Sources */,
@@ -2090,6 +2101,7 @@
 				19304D74276896DD00EA403A /* TestsModel.swift in Sources */,
 				19D5C9DB27679F6B000109F2 /* TestCategoryModel.swift in Sources */,
 				1982B54F27634582003DAB1A /* ProgressHUDSize.swift in Sources */,
+				199D77EE27D24BAC00919EBD /* TableViewListPopover.swift in Sources */,
 				1982B544276330B8003DAB1A /* AuthorizationService.swift in Sources */,
 				19C39082276B2F63003AFCAE /* ProfileModel.swift in Sources */,
 				193D993327623E60004ACA7F /* MainScreenPresenter.swift in Sources */,
